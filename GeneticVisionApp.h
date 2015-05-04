@@ -5,6 +5,7 @@
 #ifndef GENETICVISION_GENETICVISIONAPP_H
 #define GENETICVISION_GENETICVISIONAPP_H
 #include <string>
+#include "model/Model.h"
 
 
 using namespace std;
@@ -26,6 +27,8 @@ namespace GeneticVision
         private:
         int guiEnabled;
         string imageSetPath;
+        Model model;
+//        MainView view;
 
     };
 }

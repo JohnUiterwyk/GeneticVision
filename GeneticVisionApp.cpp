@@ -4,31 +4,37 @@
 
 #include "GeneticVisionApp.h"
 #include <iostream>
-#include "util/csv/CSVParser.h"
+#include <opencv2/highgui/highgui.hpp>
 #include "model/ImagePair.h"
+#include "view/OpenCVWindow.h"
+
 
 namespace GeneticVision
 {
 
     GeneticVisionApp::GeneticVisionApp(const string& imageSetPath, int guiEnabled)
     {
+
+
+
+//        this->guiEnabled = guiEnabled;
         this->guiEnabled = guiEnabled;
         this->imageSetPath = imageSetPath;
-        cout << guiEnabled << " : " << imageSetPath << endl;
+        this->model.loadImages(imageSetPath);
 
-        vector< vector<string> > imageSetData;
+        this->model.initSimulation();
 
-        CSVParser csvParser(imageSetPath+"image-set.txt");
-        csvParser.parse();
-        imageSetData = csvParser.getData();
-
-        vector <ImagePair> imagePairs(imageSetData.size());
-
-        for(std::vector<vector<string>>::size_type i = 0; i != imageSetData.size(); i++)
+        if(this->guiEnabled)
         {
-            vector<string> line = imageSetData[i];
-            imagePairs[i].loadFromFilePath(imageSetPath+line[0],imageSetPath+line[1]);
+            OpenCVWindow sourceWindow("Training",100,100);
+            OpenCVWindow truthWindow("Truth",100,100);
 
+            sourceWindow.setPosition(0,0);
+            sourceWindow.showImages(this->model.trainingImages);
+            truthWindow.setPosition(0,sourceWindow.height+20);
+            truthWindow.showImages(this->model.groundTruthImages);
+
+            cv::waitKey();
         }
     }
 
