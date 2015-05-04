@@ -1,0 +1,392 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADFProgramGenerator	ADFProgramGenerator.cpp	/^ADFProgramGenerator::ADFProgramGenerator(GPConfig *conf) : ProgramGenerator(conf)$/;"	f	class:ADFProgramGenerator
+ADFProgramGenerator	ADFProgramGenerator.h	/^class ADFProgramGenerator : public ProgramGenerator$/;"	c
+ADFRoot	ADFRoot.cpp	/^ADFRoot::ADFRoot(GPConfig *conf, int expectedReturnType): Function(expectedReturnType, 2, "ADFRoot", conf)$/;"	f	class:ADFRoot
+ADFRoot	ADFRoot.h	/^class ADFRoot : public Function$/;"	c
+ADFunction	ADFunction.cpp	/^ADFunction::ADFunction(GPConfig *conf) : Function(conf->funcSet.getNodeReturnType(0), 0, "ADFunction", conf)$/;"	f	class:ADFunction
+ADFunction	ADFunction.h	/^class ADFunction : public Function$/;"	c
+CoEvolutionFitness	CoEvolutionFitness.cpp	/^CoEvolutionFitness::CoEvolutionFitness(GPConfig *conf) : Fitness(conf)$/;"	f	class:CoEvolutionFitness
+CoEvolutionFitness	CoEvolutionFitness.h	/^class CoEvolutionFitness : public Fitness$/;"	c
+CoEvolutionPopulation	CoEvolutionPopulation.cpp	/^CoEvolutionPopulation::CoEvolutionPopulation(int size, char *logFileName,$/;"	f	class:CoEvolutionPopulation
+CoEvolutionPopulation	CoEvolutionPopulation.h	/^class CoEvolutionPopulation : public Population $/;"	c
+ConstantParsimony	ConstantParsimony.cpp	/^ConstantParsimony::ConstantParsimony( double kFactor): Parsimony(kFactor)$/;"	f	class:ConstantParsimony
+ConstantParsimony	ConstantParsimony.h	/^class ConstantParsimony : public Parsimony$/;"	c
+Crossover	Crossover.h	/^class Crossover $/;"	c
+Element	NodeVector.h	/^      class Element$/;"	c	class:NodeVector
+Fitness	Fitness.cpp	/^Fitness::Fitness(GPConfig *conf) : config(conf)$/;"	f	class:Fitness
+Fitness	Fitness.h	/^class Fitness $/;"	c
+FuncSet	NodeSet.cpp	/^FuncSet::FuncSet(GPConfig *conf) : config(conf), theSet(NULL)$/;"	f	class:FuncSet
+FuncSet	NodeSet.h	/^class FuncSet$/;"	c
+Function	Function.cpp	/^Function::Function(int type, int numArgs, string n, GPConfig *conf) :$/;"	f	class:Function
+Function	Function.h	/^class Function : public Node$/;"	c
+GPConfig	GPConfig.cpp	/^GPConfig::GPConfig() : minDepth(0), maxDepth(0), $/;"	f	class:GPConfig
+GPConfig	GPConfig.cpp	/^GPConfig::GPConfig(GPConfig &c) : $/;"	f	class:GPConfig
+GPConfig	GPConfig.h	/^class GPConfig$/;"	c
+GeneticProgram	GeneticProgram.cpp	/^GeneticProgram::GeneticProgram(GPConfig *conf) : config(conf), programID(0),$/;"	f	class:GeneticProgram
+GeneticProgram	GeneticProgram.cpp	/^GeneticProgram::GeneticProgram(GeneticProgram &g) :$/;"	f	class:GeneticProgram
+GeneticProgram	GeneticProgram.h	/^class GeneticProgram $/;"	c
+GridPopulation	GridPopulation.cpp	/^GridPopulation::GridPopulation(int xSize, int ySize, int dist,$/;"	f	class:GridPopulation
+GridPopulation	GridPopulation.h	/^class GridPopulation : public Population $/;"	c
+LimitParsimony	LimitParsimony.cpp	/^LimitParsimony::LimitParsimony( double kFactor, int limit): Parsimony(kFactor)$/;"	f	class:LimitParsimony
+LimitParsimony	LimitParsimony.h	/^class LimitParsimony : public Parsimony$/;"	c
+LinearParsimony	LinearParsimony.cpp	/^LinearParsimony::LinearParsimony( double kFactor): Parsimony(kFactor)$/;"	f	class:LinearParsimony
+LinearParsimony	LinearParsimony.h	/^class LinearParsimony : public Parsimony$/;"	c
+Mutation	Mutation.h	/^class Mutation $/;"	c
+NSGA2	NSGA2.h	/^public class NSGA2{$/;"	c
+Node	Node.cpp	/^Node::Node(Node &n) :$/;"	f	class:Node
+Node	Node.cpp	/^Node::Node(int type, int numArgs, string n, GPConfig *conf) :$/;"	f	class:Node
+Node	Node.h	/^class Node$/;"	c
+NodeVector	NodeVector.h	/^      NodeVector() : config(NULL), store(NULL), curSize(0)$/;"	f	class:NodeVector
+NodeVector	NodeVector.h	/^class NodeVector $/;"	c
+Parsimony	Parsimony.cpp	/^Parsimony::Parsimony( double kFactor): k(kFactor)$/;"	f	class:Parsimony
+Parsimony	Parsimony.h	/^class Parsimony $/;"	c
+Point2D	GridPopulation.h	/^      class Point2D$/;"	c	class:GridPopulation
+Population	Population.cpp	/^Population::Population(Population &p) :$/;"	f	class:Population
+Population	Population.cpp	/^Population::Population(int size, char* logFileName, GPConfig *conf) :$/;"	f	class:Population
+Population	Population.cpp	/^Population::Population(int size, int initSize, char* logFileName, GPConfig *conf) :$/;"	f	class:Population
+Population	Population.h	/^class Population $/;"	c
+ProgramGenerator	ProgramGenerator.cpp	/^ProgramGenerator::ProgramGenerator(GPConfig *conf) : config(conf)$/;"	f	class:ProgramGenerator
+ProgramGenerator	ProgramGenerator.h	/^class ProgramGenerator $/;"	c
+Random	Random.cpp	/^Random::Random(int seed)$/;"	f	class:Random
+Random	Random.h	/^class Random $/;"	c
+ReturnData	ReturnData.cpp	/^ReturnData::ReturnData() : typeNum(-1)$/;"	f	class:ReturnData
+ReturnData	ReturnData.h	/^class ReturnData$/;"	c
+Selection	Selection.h	/^class Selection $/;"	c
+SinParsimony	SinParsimony.cpp	/^SinParsimony::SinParsimony( double kFactor): Parsimony(kFactor)$/;"	f	class:SinParsimony
+SinParsimony	SinParsimony.h	/^class SinParsimony : public Parsimony$/;"	c
+TermSet	NodeSet.cpp	/^TermSet::TermSet(GPConfig *conf) : config(conf), theSet(NULL)$/;"	f	class:TermSet
+TermSet	NodeSet.h	/^class TermSet$/;"	c
+Terminal	Terminal.cpp	/^Terminal::Terminal(int type, string n, GPConfig *conf) : Node(type, 0, n, conf)$/;"	f	class:Terminal
+Terminal	Terminal.h	/^class Terminal : public Node $/;"	c
+TournamentSelection	TournamentSelection.cpp	/^TournamentSelection::TournamentSelection(int tournamentSize) $/;"	f	class:TournamentSelection
+TournamentSelection	TournamentSelection.h	/^class TournamentSelection : public Selection$/;"	c
+_ADFPROGRAMGENERATOR_H_	ADFProgramGenerator.h	2;"	d
+_ADFROOT_H_	ADFRoot.h	2;"	d
+_ADFUNCTION_H_	ADFunction.h	2;"	d
+_COEVOLUTIONFITNESS_H_	CoEvolutionFitness.h	2;"	d
+_COEVOLUTIONPOPULATION_H_	CoEvolutionPopulation.h	2;"	d
+_CONSTANTPARSIMONY_H_	ConstantParsimony.h	2;"	d
+_CROSSOVER_H_	Crossover.h	2;"	d
+_FITNESS_H_	Fitness.h	2;"	d
+_FUNCTION_H_	Function.h	2;"	d
+_GENETICPROGRAM_H_	GeneticProgram.h	2;"	d
+_GPCONFIG_H_	GPConfig.h	2;"	d
+_GRIDPOPULATION_H_	GridPopulation.h	2;"	d
+_LIMITPARSIMONY_H_	LimitParsimony.h	2;"	d
+_LINEARPARSIMONY_H_	LinearParsimony.h	2;"	d
+_MUTATION_H_	Mutation.h	2;"	d
+_NODESET_H_	NodeSet.h	2;"	d
+_NODEVECTOR_H_	NodeVector.h	2;"	d
+_NODE_H_	Node.h	2;"	d
+_NSGA2_H_	NSGA2.h	2;"	d
+_PARSIMONY_H_	Parsimony.h	2;"	d
+_POPULATION_H_	Population.h	2;"	d
+_PROGRAMGENERATOR_H_	ProgramGenerator.h	2;"	d
+_RANDOM_H_	Random.h	2;"	d
+_RETURNDATA_H_	ReturnData.h	2;"	d
+_SELECTION_H_	Selection.h	2;"	d
+_SINPARSIMONY_H_	SinParsimony.h	2;"	d
+_TERMINAL_H_	Terminal.h	2;"	d
+_TOURNAMENTSELECTION_H_	TournamentSelection.h	2;"	d
+_UTIL_H_	Util.h	2;"	d
+addElement	NodeVector.h	/^      virtual void addElement(Element elem)$/;"	f	class:NodeVector
+addNodeToSet	NodeSet.cpp	/^void FuncSet::addNodeToSet(int returnType,$/;"	f	class:FuncSet
+addNodeToSet	NodeSet.cpp	/^void TermSet::addNodeToSet(int returnType,$/;"	f	class:TermSet
+addToVector	ADFRoot.cpp	/^void ADFRoot::addToVector(vector<Node *> &vec)$/;"	f	class:ADFRoot
+addToVector	ADFRoot.cpp	/^void ADFRoot::addToVector(vector<Node *> &vec, int typeNum)$/;"	f	class:ADFRoot
+addToVector	Function.cpp	/^void Function::addToVector(vector<Node *> &vec)$/;"	f	class:Function
+addToVector	Function.cpp	/^void Function::addToVector(vector<Node *> &vec, int typeNum)$/;"	f	class:Function
+addToVector	Terminal.cpp	/^void Terminal::addToVector(vector<Node *> &vec)$/;"	f	class:Terminal
+addToVector	Terminal.cpp	/^void Terminal::addToVector(vector<Node *> &vec, int typeNum)$/;"	f	class:Terminal
+adfConf	ADFProgramGenerator.h	/^      GPConfig *adfConf;$/;"	m	class:ADFProgramGenerator
+adjustFitness	GeneticProgram.h	/^      double adjustFitness; \/\/The adjusted fitness $/;"	m	class:GeneticProgram
+adjustFitness	Population.cpp	/^void Population::adjustFitness()$/;"	f	class:Population
+applyNondominanceSort	NSGA2.cpp	/^void NSGA2::applyNondominanceSort(GeneticProgram *mergedpop, GeneticProgram *newpop){$/;"	f	class:NSGA2
+applyParsimony	Parsimony.cpp	/^void Parsimony::applyParsimony(Population *pop)$/;"	f	class:Parsimony
+argReturnTypes	Function.h	/^      int *argReturnTypes;$/;"	m	class:Function
+args	Function.h	/^      Node **args;$/;"	m	class:Function
+assignFitness	CoEvolutionPopulation.cpp	/^void CoEvolutionPopulation::assignFitness()$/;"	f	class:CoEvolutionPopulation
+assignFitness	Population.cpp	/^void Population::assignFitness()$/;"	f	class:Population
+avgDepth	Population.h	/^      double avgDepth;$/;"	m	class:Population
+avgFitness	Population.h	/^      double avgFitness;$/;"	m	class:Population
+avgNormFitness	Population.h	/^      double avgNormFitness;$/;"	m	class:Population
+avgSize	Population.h	/^      double avgSize;$/;"	m	class:Population
+bestFitness	Population.h	/^      double bestFitness;$/;"	m	class:Population
+buildTree	GeneticProgram.cpp	/^Node* GeneticProgram::buildTree(string &programString, string::iterator &si)$/;"	f	class:GeneticProgram
+checkDominance	NSGA2.cpp	/^int NSGA2::checkDominance(GeneticProgram a, GeneticProgram b){$/;"	f	class:NSGA2
+ck	LimitParsimony.h	/^      int ck;$/;"	m	class:LimitParsimony
+cleanUpObjects	GPConfig.cpp	/^void GPConfig::cleanUpObjects()$/;"	f	class:GPConfig
+coVarFitness	Parsimony.cpp	/^double Parsimony::coVarFitness(Population *pop)$/;"	f	class:Parsimony
+coVarLength	Parsimony.cpp	/^double Parsimony::coVarLength(Population *pop)$/;"	f	class:Parsimony
+compressFile	Population.cpp	/^void Population::compressFile(char *fileName)$/;"	f	class:Population
+compressGenerationFiles	Population.cpp	/^void Population::compressGenerationFiles(bool value)$/;"	f	class:Population
+computeDepth	Function.cpp	/^int Function::computeDepth(int curDepth)$/;"	f	class:Function
+computeDepth	Terminal.cpp	/^int Terminal::computeDepth(int curDepth)$/;"	f	class:Terminal
+computeSize	Function.cpp	/^int Function::computeSize()$/;"	f	class:Function
+computeSize	GridPopulation.cpp	/^int GridPopulation::computeSize(int distance) $/;"	f	class:GridPopulation
+computeSize	Terminal.cpp	/^int Terminal::computeSize()$/;"	f	class:Terminal
+computeSizeAndDepth	GeneticProgram.cpp	/^void GeneticProgram::computeSizeAndDepth()$/;"	f	class:GeneticProgram
+computeStatistics	Population.cpp	/^void Population::computeStatistics()$/;"	f	class:Population
+config	Fitness.h	/^      GPConfig *config;$/;"	m	class:Fitness
+config	GeneticProgram.h	/^      GPConfig *config;    \/\/Configuration object for this program$/;"	m	class:GeneticProgram
+config	Node.h	/^      GPConfig *config; \/\/Configuration object;$/;"	m	class:Node
+config	NodeSet.h	/^      GPConfig *config;$/;"	m	class:FuncSet
+config	NodeSet.h	/^      GPConfig *config;$/;"	m	class:TermSet
+config	NodeVector.h	/^      GPConfig *config;$/;"	m	class:NodeVector
+config	Population.h	/^      GPConfig *config; \/\/The configuration of this Population$/;"	m	class:Population
+config	ProgramGenerator.h	/^      GPConfig *config;$/;"	m	class:ProgramGenerator
+copy	ADFRoot.cpp	/^Node* ADFRoot::copy()$/;"	f	class:ADFRoot
+copy	ADFunction.cpp	/^Node* ADFunction::copy()$/;"	f	class:ADFunction
+copy	GeneticProgram.cpp	/^GeneticProgram* GeneticProgram::copy()$/;"	f	class:GeneticProgram
+correctRates	Population.cpp	/^void Population::correctRates()$/;"	f	class:Population
+createFullProgram	ProgramGenerator.cpp	/^Node * ProgramGenerator::createFullProgram(int curDepth, int maxDepth,$/;"	f	class:ProgramGenerator
+createGrowProgram	ProgramGenerator.cpp	/^Node* ProgramGenerator::createGrowProgram(int curDepth, int maxDepth, $/;"	f	class:ProgramGenerator
+crossover	Crossover.cpp	/^void Crossover::crossover(GeneticProgram &gp1, GeneticProgram &gp2, $/;"	f	class:Crossover
+crossoverOperator	GPConfig.h	/^      Crossover *crossoverOperator; $/;"	m	class:GPConfig
+crossoverRate	Population.h	/^      double crossoverRate;$/;"	m	class:Population
+crowdingDist	GeneticProgram.h	/^      double crowdingDist;$/;"	m	class:GeneticProgram
+curSize	NodeVector.h	/^      int curSize;$/;"	m	class:NodeVector
+defaultInit	GPConfig.cpp	/^void GPConfig::defaultInit()$/;"	f	class:GPConfig
+deleteTree	GeneticProgram.cpp	/^void GeneticProgram::deleteTree()$/;"	f	class:GeneticProgram
+deleteTree	GeneticProgram.cpp	/^void GeneticProgram::deleteTree(Node *theRoot)$/;"	f	class:GeneticProgram
+depth	GeneticProgram.h	/^      int depth;           \/\/Depth of this program$/;"	m	class:GeneticProgram
+depth	Node.h	/^      int depth;      \/\/The depth of this node in the program tree$/;"	m	class:Node
+depthLimit	Population.h	/^      int depthLimit;  $/;"	m	class:Population
+desiredFunc	ConstantParsimony.cpp	/^double ConstantParsimony::desiredFunc(int generation, Population *pop)$/;"	f	class:ConstantParsimony
+desiredFunc	LimitParsimony.cpp	/^double LimitParsimony::desiredFunc(int generation, Population *pop)$/;"	f	class:LimitParsimony
+desiredFunc	LinearParsimony.cpp	/^double LinearParsimony::desiredFunc(int generation, Population *pop)$/;"	f	class:LinearParsimony
+desiredFunc	Parsimony.cpp	/^double Parsimony::desiredFunc(int generation, Population *pop)$/;"	f	class:Parsimony
+desiredFunc	SinParsimony.cpp	/^double SinParsimony::desiredFunc(int generation, Population *pop)$/;"	f	class:SinParsimony
+elitismRate	Population.h	/^      double elitismRate; $/;"	m	class:Population
+evalCoefficient	Parsimony.cpp	/^double Parsimony::evalCoefficient(Population *pop, int option)$/;"	f	class:Parsimony
+evaluate	ADFRoot.cpp	/^void ADFRoot::evaluate(ReturnData *out)$/;"	f	class:ADFRoot
+evaluate	ADFunction.cpp	/^void ADFunction::evaluate(ReturnData *out)$/;"	f	class:ADFunction
+evaluate	GeneticProgram.cpp	/^void GeneticProgram::evaluate(ReturnData *out)$/;"	f	class:GeneticProgram
+evaluateADF	ADFRoot.cpp	/^void ADFRoot::evaluateADF(ReturnData *out)$/;"	f	class:ADFRoot
+evaluations	Population.h	/^      long int evaluations;$/;"	m	class:Population
+evolve	GridPopulation.cpp	/^bool GridPopulation::evolve(int numGenerations)$/;"	f	class:GridPopulation
+evolve	Population.cpp	/^bool Population::evolve(int numGenerations)$/;"	f	class:Population
+fallPerGeneration	Population.h	/^      int fallPerGeneration;$/;"	m	class:Population
+fitness	GeneticProgram.h	/^      double fitness;      \/\/The fitness of this program$/;"	m	class:GeneticProgram
+fitnessObject	GPConfig.h	/^      Fitness *fitnessObject;$/;"	m	class:GPConfig
+fullTable	ProgramGenerator.h	/^      NodeVector<Node> *fullTable;$/;"	m	class:ProgramGenerator
+funcGen	NodeSet.h	/^      typedef Function* (*funcGen)(const string&, GPConfig *);$/;"	t	class:FuncSet
+funcSet	GPConfig.h	/^      FuncSet funcSet;$/;"	m	class:GPConfig
+generate	ADFRoot.cpp	/^Function* ADFRoot::generate(const string &name, GPConfig *conf)$/;"	f	class:ADFRoot
+generate	ADFunction.cpp	/^Function* ADFunction::generate(const string &name, GPConfig *conf)$/;"	f	class:ADFunction
+generateFunction	NodeVector.h	/^         Type* (*generateFunction)(const string &, GPConfig *); $/;"	m	class:NodeVector::Element
+generateInitialPopulation	ADFProgramGenerator.cpp	/^void ADFProgramGenerator::generateInitialPopulation(GeneticProgram* pop[],$/;"	f	class:ADFProgramGenerator
+generateInitialPopulation	Population.cpp	/^void Population::generateInitialPopulation()$/;"	f	class:Population
+generateInitialPopulation	ProgramGenerator.cpp	/^void ProgramGenerator::generateInitialPopulation(GeneticProgram* pop[],$/;"	f	class:ProgramGenerator
+generationNumber	Population.h	/^      int generationNumber;$/;"	m	class:Population
+getAdjFitness	GeneticProgram.cpp	/^double GeneticProgram::getAdjFitness() const$/;"	f	class:GeneticProgram
+getArgN	Function.cpp	/^Node* Function::getArgN(int N) const$/;"	f	class:Function
+getArgNReturnType	Function.cpp	/^int Function::getArgNReturnType(int N) const$/;"	f	class:Function
+getAvgDepth	Population.cpp	/^double Population::getAvgDepth()$/;"	f	class:Population
+getAvgFitness	Population.cpp	/^double Population::getAvgFitness()$/;"	f	class:Population
+getAvgNormFitness	Population.cpp	/^double Population::getAvgNormFitness()$/;"	f	class:Population
+getAvgSize	Population.cpp	/^double Population::getAvgSize()$/;"	f	class:Population
+getBest	Population.cpp	/^GeneticProgram* Population::getBest()$/;"	f	class:Population
+getCompressFiles	Population.cpp	/^bool Population::getCompressFiles() const$/;"	f	class:Population
+getCrossoverRate	Population.cpp	/^double Population::getCrossoverRate()$/;"	f	class:Population
+getDepth	GeneticProgram.cpp	/^int GeneticProgram::getDepth() const$/;"	f	class:GeneticProgram
+getDepth	Node.cpp	/^int Node::getDepth() const$/;"	f	class:Node
+getElement	NodeVector.h	/^      virtual Element* getElement(int pos)$/;"	f	class:NodeVector
+getElitismRate	Population.cpp	/^double Population::getElitismRate()$/;"	f	class:Population
+getFitness	GeneticProgram.cpp	/^double GeneticProgram::getFitness() const$/;"	f	class:GeneticProgram
+getGenFunction	NodeSet.cpp	/^FuncSet::funcGen FuncSet::getGenFunction(int position)$/;"	f	class:FuncSet
+getGenFunction	NodeSet.cpp	/^TermSet::termGen TermSet::getGenFunction(int position)$/;"	f	class:TermSet
+getGenerationNumber	Population.cpp	/^int Population::getGenerationNumber() const$/;"	f	class:Population
+getIndividual	Population.cpp	/^GeneticProgram* Population::getIndividual(int individual)$/;"	f	class:Population
+getLogFrequency	Population.cpp	/^int Population::getLogFrequency() const$/;"	f	class:Population
+getMaxArgs	Node.cpp	/^int Node::getMaxArgs() const$/;"	f	class:Node
+getMutationRate	Population.cpp	/^double Population::getMutationRate() $/;"	f	class:Population
+getName	Node.cpp	/^string Node::getName() const$/;"	f	class:Node
+getNeighbours	GridPopulation.cpp	/^int GridPopulation::getNeighbours(int individual, int *indexes,$/;"	f	class:GridPopulation
+getNodeByName	NodeSet.cpp	/^Node* FuncSet::getNodeByName(const string &name)$/;"	f	class:FuncSet
+getNodeByName	NodeSet.cpp	/^Node* TermSet::getNodeByName(const string &name)$/;"	f	class:TermSet
+getNodeByNumber	NodeSet.cpp	/^Node* FuncSet::getNodeByNumber(int position)$/;"	f	class:FuncSet
+getNodeByNumber	NodeSet.cpp	/^Node* TermSet::getNodeByNumber(int position)$/;"	f	class:TermSet
+getNodeReturnType	NodeSet.cpp	/^int FuncSet::getNodeReturnType(int position)$/;"	f	class:FuncSet
+getNodeReturnType	NodeSet.cpp	/^int TermSet::getNodeReturnType(int position)$/;"	f	class:TermSet
+getNormFitness	GeneticProgram.cpp	/^double GeneticProgram::getNormFitness() const$/;"	f	class:GeneticProgram
+getNumForCrossover	Population.cpp	/^int Population::getNumForCrossover()$/;"	f	class:Population
+getNumForElitism	Population.cpp	/^int Population::getNumForElitism()$/;"	f	class:Population
+getNumForMutation	Population.cpp	/^int Population::getNumForMutation()$/;"	f	class:Population
+getNumGenerationBeforeDecimation	Population.cpp	/^int Population::getNumGenerationBeforeDecimation() const$/;"	f	class:Population
+getNumIndividuals	Population.cpp	/^int Population::getNumIndividuals() const$/;"	f	class:Population
+getParent	Node.cpp	/^Node* Node::getParent() const$/;"	f	class:Node
+getParsFitness	GeneticProgram.cpp	/^double GeneticProgram::getParsFitness() const$/;"	f	class:GeneticProgram
+getPopulation	Population.cpp	/^GeneticProgram** Population::getPopulation() const$/;"	f	class:Population
+getProgramID	GeneticProgram.cpp	/^int GeneticProgram::getProgramID() const$/;"	f	class:GeneticProgram
+getRandomElement	NodeVector.h	/^      virtual Type* getRandomElement()$/;"	f	class:NodeVector
+getRandomNode	GeneticProgram.cpp	/^Node* GeneticProgram::getRandomNode()$/;"	f	class:GeneticProgram
+getRandomNode	GeneticProgram.cpp	/^Node* GeneticProgram::getRandomNode(int typeNum)$/;"	f	class:GeneticProgram
+getRandomNode	NodeSet.cpp	/^Function* FuncSet::getRandomNode()$/;"	f	class:FuncSet
+getRandomNode	NodeSet.cpp	/^Function* FuncSet::getRandomNode(int returnType)$/;"	f	class:FuncSet
+getRandomNode	NodeSet.cpp	/^Terminal* TermSet::getRandomNode()$/;"	f	class:TermSet
+getRandomNode	NodeSet.cpp	/^Terminal* TermSet::getRandomNode(int returnType)$/;"	f	class:TermSet
+getRandomTypedElement	NodeVector.h	/^      virtual Type* getRandomTypedElement(int returnType)$/;"	f	class:NodeVector
+getReturnType	GeneticProgram.cpp	/^int GeneticProgram::getReturnType() const$/;"	f	class:GeneticProgram
+getReturnType	Node.cpp	/^int Node::getReturnType() const$/;"	f	class:Node
+getReturnType	Population.cpp	/^int Population::getReturnType() const$/;"	f	class:Population
+getRoot	GeneticProgram.cpp	/^Node * GeneticProgram::getRoot()$/;"	f	class:GeneticProgram
+getRootNode	Node.cpp	/^Node* Node::getRootNode() const$/;"	f	class:Node
+getSize	GeneticProgram.cpp	/^int GeneticProgram::getSize() const$/;"	f	class:GeneticProgram
+getToken	Util.cpp	/^string getToken(string &s, string::iterator &i)$/;"	f
+getTypeNum	ReturnData.cpp	/^int ReturnData::getTypeNum() const$/;"	f	class:ReturnData
+getWorst	Population.cpp	/^GeneticProgram* Population::getWorst()$/;"	f	class:Population
+gridPositions	GridPopulation.h	/^      Point2D *gridPositions; \/\/The positions of each program in the grid$/;"	m	class:GridPopulation
+group	TournamentSelection.h	/^      int *group;$/;"	m	class:TournamentSelection
+growTable	ProgramGenerator.h	/^      NodeVector<Node> *growTable;$/;"	m	class:ProgramGenerator
+height	GridPopulation.h	/^      int height;   \/\/Height of the grid$/;"	m	class:GridPopulation
+inNeighbourhood	GridPopulation.cpp	/^bool GridPopulation::inNeighbourhood(Point2D &point, Point2D &neighbour)$/;"	f	class:GridPopulation
+initNumIndividuals	Population.h	/^      int initNumIndividuals;$/;"	m	class:Population
+initdepthLimit	Population.h	/^      int initdepthLimit;  $/;"	m	class:Population
+initmean	ConstantParsimony.h	/^      double initmean;$/;"	m	class:ConstantParsimony
+initmean	LinearParsimony.h	/^      double initmean;$/;"	m	class:LinearParsimony
+initmean	SinParsimony.h	/^      double initmean;$/;"	m	class:SinParsimony
+isElite	GridPopulation.cpp	/^bool GridPopulation::isElite(GeneticProgram *program, GeneticProgram **best,$/;"	f	class:GridPopulation
+k	Parsimony.h	/^      double k;$/;"	m	class:Parsimony
+last	ADFRoot.cpp	/^int ADFRoot::last = 0;$/;"	m	class:ADFRoot	file:
+last	ADFRoot.h	/^      static int last;$/;"	m	class:ADFRoot
+logFile	Population.h	/^      ofstream logFile;$/;"	m	class:Population
+loggingFrequency	Population.h	/^      int loggingFrequency;$/;"	m	class:Population
+lookAtToken	Util.cpp	/^string lookAtToken(string &s, string::iterator i)$/;"	f
+mainConf	ADFProgramGenerator.h	/^      GPConfig *mainConf;$/;"	m	class:ADFProgramGenerator
+max	Random.cpp	/^long Random::max() const$/;"	f	class:Random
+maxArgs	Node.h	/^      int maxArgs;   \/\/The maximum number of arguments this node$/;"	m	class:Node
+maxDepth	GPConfig.h	/^      int maxDepth;$/;"	m	class:GPConfig
+meanY	Parsimony.h	/^      double meanY;$/;"	m	class:Parsimony
+minDepth	GPConfig.h	/^      int minDepth;$/;"	m	class:GPConfig
+minDepth	Population.h	/^      int minDepth;$/;"	m	class:Population
+mutate	Mutation.cpp	/^void Mutation::mutate(GeneticProgram &gp, GPConfig *config)$/;"	f	class:Mutation
+mutationOperator	GPConfig.h	/^      Mutation *mutationOperator;$/;"	m	class:GPConfig
+mutationRate	Population.h	/^      double mutationRate;$/;"	m	class:Population
+name	Node.h	/^      string name;    \/\/How this node gets printed out in the program code$/;"	m	class:Node
+neighbourhoodDist	GridPopulation.h	/^      int neighbourhoodDist;  \/\/Individuals must be within this distance$/;"	m	class:GridPopulation
+neighbourhoodSize	GridPopulation.h	/^      int neighbourhoodSize;  \/\/The maximum number of individuals in the$/;"	m	class:GridPopulation
+nextGeneration	GridPopulation.cpp	/^void GridPopulation::nextGeneration()$/;"	f	class:GridPopulation
+nextGeneration	Population.cpp	/^void Population::nextGeneration()$/;"	f	class:Population
+noofADFs	ADFRoot.h	/^      int noofADFs;$/;"	m	class:ADFRoot
+normalizedFitness	GeneticProgram.h	/^      double normalizedFitness;      \/\/The normalized fitness of this program$/;"	m	class:GeneticProgram
+numForCrossover	Population.h	/^      int numForCrossover;$/;"	m	class:Population
+numForElitism	Population.h	/^      int numForElitism;$/;"	m	class:Population
+numForMutation	Population.h	/^      int numForMutation;$/;"	m	class:Population
+numGenerationBeforeDecimation	Population.h	/^      int numGenerationBeforeDecimation;$/;"	m	class:Population
+numIndividuals	Population.h	/^      int numIndividuals;$/;"	m	class:Population
+numObjectives	GPConfig.h	/^      int numObjectives;$/;"	m	class:GPConfig
+objValues	GeneticProgram.h	/^      double *objValues; \/\/An array of of objective values which is used in $/;"	m	class:GeneticProgram
+operator <<	Population.cpp	/^ostream& operator << (ostream& o, Population& p)$/;"	f
+operator >>	Population.cpp	/^istream& operator >> (istream& i, Population& p)$/;"	f
+otherPopulation	CoEvolutionPopulation.h	/^      CoEvolutionPopulation *otherPopulation;$/;"	m	class:CoEvolutionPopulation
+parent	Node.h	/^      Node *parent;   \/\/The parent of this node in the program tree$/;"	m	class:Node
+parscoeff	Population.h	/^      double parscoeff;$/;"	m	class:Population
+parseProgram	GeneticProgram.cpp	/^void GeneticProgram::parseProgram(string &programString)$/;"	f	class:GeneticProgram
+parsimonyFitness	GeneticProgram.h	/^      double parsimonyFitness;      \/\/The parsimony fitness of this program$/;"	m	class:GeneticProgram
+parsimonypres	GPConfig.h	/^      Parsimony *parsimonypres; \/\/Added for parsimony pressure functionality$/;"	m	class:GPConfig
+performDecimation	Population.h	/^      bool performDecimation;$/;"	m	class:Population
+pop	Population.h	/^      GeneticProgram **pop; \/\/The population, and array of pointers to programs$/;"	m	class:Population
+popSorted	Population.h	/^      bool popSorted;$/;"	m	class:Population
+populationName	CoEvolutionPopulation.h	/^      string populationName;$/;"	m	class:CoEvolutionPopulation
+print	Function.cpp	/^void Function::print(string &s)$/;"	f	class:Function
+print	GeneticProgram.cpp	/^void GeneticProgram::print(string &s)$/;"	f	class:GeneticProgram
+print	Terminal.cpp	/^void Terminal::print(string &s)$/;"	f	class:Terminal
+programGenerator	GPConfig.h	/^      ProgramGenerator *programGenerator;$/;"	m	class:GPConfig
+programID	GeneticProgram.h	/^      int programID;       \/\/ID number of this program$/;"	m	class:GeneticProgram
+qSort	Population.cpp	/^void Population::qSort (GeneticProgram **individuals, int left, int right)$/;"	f	class:Population
+randNum	Random.cpp	/^long Random::randNum() const$/;"	f	class:Random
+randReal	Random.cpp	/^double Random::randReal() const$/;"	f	class:Random
+randomNumGenerator	GPConfig.h	/^      Random *randomNumGenerator;          $/;"	m	class:GPConfig
+readFromFile	Population.cpp	/^void Population::readFromFile(char *fileName)$/;"	f	class:Population
+resize	NodeVector.h	/^      virtual void resize()$/;"	f	class:NodeVector
+returnType	GeneticProgram.h	/^      int returnType;      \/\/Return type of this program$/;"	m	class:GeneticProgram
+returnType	Node.h	/^      int returnType; \/\/The type number of the return type for this node$/;"	m	class:Node
+returnType	NodeVector.h	/^         int returnType;$/;"	m	class:NodeVector::Element
+returnType	Population.h	/^      int returnType;$/;"	m	class:Population
+root	GeneticProgram.h	/^      Node* root;          \/\/The root node of the program tree $/;"	m	class:GeneticProgram
+select	Selection.cpp	/^int Selection::select(GeneticProgram* pop[], int popSize, GPConfig *config)$/;"	f	class:Selection
+select	TournamentSelection.cpp	/^int TournamentSelection::select(GeneticProgram* pop[], int popSize,$/;"	f	class:TournamentSelection
+selectionOperator	GPConfig.h	/^      Selection *selectionOperator;$/;"	m	class:GPConfig
+setAdjFitness	GeneticProgram.cpp	/^void GeneticProgram::setAdjFitness(double f)$/;"	f	class:GeneticProgram
+setArgN	Function.cpp	/^void Function::setArgN(int N, Node *n) $/;"	f	class:Function
+setArgNReturnType	Function.cpp	/^void Function::setArgNReturnType(int N, int type)$/;"	f	class:Function
+setCrossoverRate	Population.cpp	/^void Population::setCrossoverRate(double rate)$/;"	f	class:Population
+setDepth	Node.cpp	/^void Node::setDepth(const int d)$/;"	f	class:Node
+setDepthLimit	Population.cpp	/^void Population::setDepthLimit(int d)$/;"	f	class:Population
+setElitismRate	Population.cpp	/^void Population::setElitismRate(double rate)$/;"	f	class:Population
+setFitness	GeneticProgram.cpp	/^void GeneticProgram::setFitness(double f)$/;"	f	class:GeneticProgram
+setGPConfig	NodeVector.h	/^      virtual void setGPConfig(GPConfig *conf)$/;"	f	class:NodeVector
+setGenerationNumber	Population.cpp	/^void Population::setGenerationNumber(int num)$/;"	f	class:Population
+setLogFrequency	Population.cpp	/^void Population::setLogFrequency(int freq)$/;"	f	class:Population
+setMinDepth	Population.cpp	/^void Population::setMinDepth(int d)$/;"	f	class:Population
+setMutationRate	Population.cpp	/^void Population::setMutationRate(double rate)$/;"	f	class:Population
+setNormFitness	GeneticProgram.cpp	/^void GeneticProgram::setNormFitness(double f)$/;"	f	class:GeneticProgram
+setNumForCrossover	Population.cpp	/^void Population::setNumForCrossover(int num)$/;"	f	class:Population
+setNumForElitism	Population.cpp	/^void Population::setNumForElitism(int num)$/;"	f	class:Population
+setNumForMutation	Population.cpp	/^void Population::setNumForMutation(int num)$/;"	f	class:Population
+setNumGenerationBeforeDecimation	Population.cpp	/^void Population::setNumGenerationBeforeDecimation(int num)$/;"	f	class:Population
+setNumIndividuals	Population.cpp	/^void Population::setNumIndividuals(int num)$/;"	f	class:Population
+setOtherPopulation	CoEvolutionPopulation.cpp	/^void CoEvolutionPopulation::setOtherPopulation(CoEvolutionPopulation *aPop)$/;"	f	class:CoEvolutionPopulation
+setParent	Node.cpp	/^void Node::setParent(Node *n)$/;"	f	class:Node
+setParsFitness	GeneticProgram.cpp	/^void GeneticProgram::setParsFitness(double f)$/;"	f	class:GeneticProgram
+setPopulation	Population.cpp	/^void Population::setPopulation(GeneticProgram **newPop, int size)$/;"	f	class:Population
+setProgramID	GeneticProgram.cpp	/^void GeneticProgram::setProgramID(int id)$/;"	f	class:GeneticProgram
+setReturnType	GeneticProgram.cpp	/^void GeneticProgram::setReturnType(int type)$/;"	f	class:GeneticProgram
+setReturnType	Population.cpp	/^void Population::setReturnType(int type)$/;"	f	class:Population
+setRoot	GeneticProgram.cpp	/^void GeneticProgram::setRoot(Node *value)$/;"	f	class:GeneticProgram
+setTournamentSize	TournamentSelection.cpp	/^void TournamentSelection::setTournamentSize(int size)$/;"	f	class:TournamentSelection
+setTypeNum	ReturnData.cpp	/^void ReturnData::setTypeNum(int num)$/;"	f	class:ReturnData
+setYArray	Parsimony.cpp	/^void Parsimony::setYArray(Population *pop, double **y)$/;"	f	class:Parsimony
+setinitDepthLimit	Population.cpp	/^void Population::setinitDepthLimit(int d)$/;"	f	class:Population
+size	GeneticProgram.h	/^      int size;            \/\/Size of this program$/;"	m	class:GeneticProgram
+size	NodeSet.cpp	/^int FuncSet::size() const$/;"	f	class:FuncSet
+size	NodeSet.cpp	/^int TermSet::size() const$/;"	f	class:TermSet
+size	NodeVector.h	/^      virtual int size() const$/;"	f	class:NodeVector
+sizeLimit	LimitParsimony.h	/^		int sizeLimit;$/;"	m	class:LimitParsimony
+sortPopulation	Population.cpp	/^void Population::sortPopulation()$/;"	f	class:Population
+store	NodeVector.h	/^      Element* store; $/;"	m	class:NodeVector
+termGen	NodeSet.h	/^      typedef Terminal* (*termGen)(const string&, GPConfig *);$/;"	t	class:TermSet
+termSet	GPConfig.h	/^      TermSet termSet;$/;"	m	class:GPConfig
+theSet	NodeSet.h	/^      NodeVector<Function> *theSet;$/;"	m	class:FuncSet
+theSet	NodeSet.h	/^      NodeVector<Terminal> *theSet;$/;"	m	class:TermSet
+tournSize	TournamentSelection.h	/^      int tournSize;$/;"	m	class:TournamentSelection
+typeNum	ReturnData.h	/^      int typeNum; \/\/The typeid of the class$/;"	m	class:ReturnData
+useCompression	Population.h	/^      bool useCompression;  \/\/Compress gen files$/;"	m	class:Population
+width	GridPopulation.h	/^      int width;    \/\/Width of the grid$/;"	m	class:GridPopulation
+worstFitness	Population.h	/^      double worstFitness;$/;"	m	class:Population
+writeLog	Population.cpp	/^void Population::writeLog()$/;"	f	class:Population
+writeToFile	CoEvolutionPopulation.cpp	/^void CoEvolutionPopulation::writeToFile()$/;"	f	class:CoEvolutionPopulation
+writeToFile	Population.cpp	/^void Population::writeToFile()$/;"	f	class:Population
+x	GridPopulation.h	/^         int x;$/;"	m	class:GridPopulation::Point2D
+y	GridPopulation.h	/^         int y;$/;"	m	class:GridPopulation::Point2D
+~ADFRoot	ADFRoot.cpp	/^ADFRoot::~ADFRoot()$/;"	f	class:ADFRoot
+~ADFunction	ADFunction.cpp	/^ADFunction::~ADFunction()$/;"	f	class:ADFunction
+~CoEvolutionPopulation	CoEvolutionPopulation.cpp	/^CoEvolutionPopulation::~CoEvolutionPopulation()$/;"	f	class:CoEvolutionPopulation
+~ConstantParsimony	ConstantParsimony.cpp	/^ConstantParsimony::~ConstantParsimony()$/;"	f	class:ConstantParsimony
+~Crossover	Crossover.cpp	/^Crossover::~Crossover()$/;"	f	class:Crossover
+~Fitness	Fitness.cpp	/^Fitness::~Fitness()$/;"	f	class:Fitness
+~FuncSet	NodeSet.cpp	/^FuncSet::~FuncSet()$/;"	f	class:FuncSet
+~Function	Function.cpp	/^Function::~Function() $/;"	f	class:Function
+~GPConfig	GPConfig.cpp	/^GPConfig::~GPConfig()$/;"	f	class:GPConfig
+~GeneticProgram	GeneticProgram.cpp	/^GeneticProgram::~GeneticProgram() $/;"	f	class:GeneticProgram
+~GridPopulation	GridPopulation.cpp	/^GridPopulation::~GridPopulation()$/;"	f	class:GridPopulation
+~LimitParsimony	LimitParsimony.cpp	/^LimitParsimony::~LimitParsimony()$/;"	f	class:LimitParsimony
+~LinearParsimony	LinearParsimony.cpp	/^LinearParsimony::~LinearParsimony()$/;"	f	class:LinearParsimony
+~Mutation	Mutation.cpp	/^Mutation::~Mutation()$/;"	f	class:Mutation
+~Node	Node.cpp	/^Node::~Node()$/;"	f	class:Node
+~NodeVector	NodeVector.h	/^      virtual ~NodeVector()$/;"	f	class:NodeVector
+~Parsimony	Parsimony.cpp	/^Parsimony::~Parsimony()$/;"	f	class:Parsimony
+~Population	Population.cpp	/^Population::~Population()$/;"	f	class:Population
+~ProgramGenerator	ProgramGenerator.cpp	/^ProgramGenerator::~ProgramGenerator()$/;"	f	class:ProgramGenerator
+~Random	Random.cpp	/^Random::~Random()$/;"	f	class:Random
+~ReturnData	ReturnData.cpp	/^ReturnData::~ReturnData()$/;"	f	class:ReturnData
+~Selection	Selection.cpp	/^Selection::~Selection()$/;"	f	class:Selection
+~SinParsimony	SinParsimony.cpp	/^SinParsimony::~SinParsimony()$/;"	f	class:SinParsimony
+~TermSet	NodeSet.cpp	/^TermSet::~TermSet()$/;"	f	class:TermSet
+~Terminal	Terminal.cpp	/^Terminal::~Terminal()$/;"	f	class:Terminal
