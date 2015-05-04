@@ -6,17 +6,18 @@
 #define _OPENCV_POC_OPENCVWINDOW_H_
 
 #include "opencv2/core/core.hpp"
-#include "opencv2/highgui/highgui_c.h"
+#include "opencv2/highgui/highgui.hpp"
+#include <vector>
 
 
 using namespace std;
 using namespace cv;
 
 class OpenCVWindow {
-    int width, height, x, y;
     string window_name;
 
 public:
+    int width, height, x, y;
     /*************
      Constructor.
     **************/
@@ -33,9 +34,22 @@ public:
     void setPosition (int,int);
 
     /*********************
+     Set the position of the window
+    *********************/
+
+    void setSize(int , int);
+
+    /*********************
      Show an image in the window
     *********************/
     void showImage(InputArray);
+
+    /************************
+     * Make a canvas
+     */
+    cv::Mat makeCanvas(std::vector<cv::Mat>& , int , int );
+
+    void showImages(std::vector<cv::Mat>& );
 };
 
 
