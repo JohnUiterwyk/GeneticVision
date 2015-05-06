@@ -18,7 +18,6 @@ GpSimulation::GpSimulation() {
 
 void GpSimulation::init() {
     GPConfig runConfig;
-    runConfig.maxDepth = 6;
 
     Population pop(100, "run-log.txt", &runConfig);
 
