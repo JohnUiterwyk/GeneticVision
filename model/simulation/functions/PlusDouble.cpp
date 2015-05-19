@@ -12,10 +12,10 @@
 using namespace std;
 
 #include "PlusDouble.h"
-#include "ReturnDouble.h"
+#include "../types/ReturnDouble.h"
 
 PlusDouble::PlusDouble(GPConfig *conf) :
-                          Function(ReturnDouble::TYPENUM, 2, "d+", conf)
+                          Function(ReturnDouble::TYPENUM, 2, "PlusDouble", conf)
 {
    for (int i=0; i < maxArgs; i++)
    {
@@ -31,7 +31,7 @@ Function* PlusDouble::generate(const string &name, GPConfig *conf)
 {
    if (name == "")
       return new PlusDouble(conf);
-   else if (name == "d+")
+   else if (name == "PlusDouble")
       return new PlusDouble(conf);
 
    return NULL;     

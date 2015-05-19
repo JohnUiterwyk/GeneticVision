@@ -23,6 +23,10 @@ model/simulation/GpSimulation.cpp model/simulation/GpSimulation.h
 model/simulation/types/ReturnImage.cpp model/simulation/types/ReturnImage.h
 model/simulation/functions/ImageThreshold.cpp model/simulation/functions/ImageThreshold.h
 model/simulation/terminals/RandDouble.cpp model/simulation/terminals/RandDouble.h
-model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.h)
+model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.h
+model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
+
+)
+
 target_link_libraries( GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)

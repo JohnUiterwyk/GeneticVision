@@ -14,7 +14,7 @@
 class GPConfig;
 
 #include <string>
-#include "Function.h"
+#include "../../../rmitgp/Function.h"
 
 class PlusDouble : public Function
 {
