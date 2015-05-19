@@ -6,7 +6,23 @@
 #define GENETICVISION_IMAGEGAUSSIANBLUR_H
 
 
-class ImageGaussianBlur {
+#include "../../../rmitgp/Function.h"
+#include <opencv2/core/core.hpp>
+
+class ImageGaussianBlur  : Function {
+private:
+public:
+    ImageGaussianBlur(GPConfig *config);
+
+    virtual ~ImageGaussianBlur();
+
+    static Function* generate(const string &name, GPConfig *config);
+
+    virtual void evaluate(ReturnData *out);
+
+    virtual Node* copy();
+
+protected:
 
 };
 
