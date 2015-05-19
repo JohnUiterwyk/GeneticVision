@@ -4,7 +4,7 @@ project(GeneticVision)
 find_package( OpenCV )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11")
 
 set(SOURCE_FILES main.cpp)
 add_executable(
@@ -25,8 +25,9 @@ model/simulation/functions/ImageThreshold.cpp model/simulation/functions/ImageTh
 model/simulation/terminals/RandDouble.cpp model/simulation/terminals/RandDouble.h
 model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.h
 model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
+model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
 
-)
+model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h)
 
 target_link_libraries( GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)
