@@ -12,6 +12,8 @@
 #include "functions/ImageThreshold.h"
 #include "functions/PlusDouble.h"
 #include "terminals/ImageInput.h"
+#include "VisionFitness.h"
+#include "functions/ImageGaussianBlur.h"
 
 GpSimulation::GpSimulation() {
 
@@ -31,7 +33,7 @@ void GpSimulation::init() {
     pop.setReturnType(ReturnImage::TYPENUM);
 
     //Set the depth limit for the system
-    runConfig.maxDepth = 5;
+    runConfig.maxDepth = 4;
     runConfig.minDepth = 2;
 
     //Set the depth limit for the population
@@ -51,21 +53,54 @@ void GpSimulation::init() {
 
     //Add the functions we need
     runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
+    runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageGaussianBlur::generate);
     runConfig.funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
 
     //Create the program generator
     runConfig.programGenerator = new ProgramGenerator(&runConfig);
 
     //Set the fitness class to be used
-    //runConfig.fitnessObject = new VisionFitness(&runConfig);
+    runConfig.fitnessObject = new VisionFitness(&runConfig);
 
     //Initialise the fitness
-    //runConfig.fitnessObject->initFitness();
-    //init the population
+    runConfig.fitnessObject->initFitness();
 
+    //init the population
     pop.generateInitialPopulation();
     pop.writeToFile();
 
+
+    pop.setLogFrequency(100);
+
+    try
+    {
+        string str1;
+        cout << "evolve" << endl;
+
+        if (pop.evolve(1000))
+        {
+            cout << "Found solution" << endl;
+        }
+        else
+        {
+            cout << "Didn't find solution" << endl;
+        }
+
+        pop.getBest()->print(str1);
+        VisionFitness * fitness = dynamic_cast<VisionFitness*>(runConfig.fitnessObject);
+        fitness->outputProgram(pop.getBest());
+        cout << "Best program" << endl
+        << "Fitness " << pop.getBest()->getFitness() << endl
+        << str1 << endl;
+    }
+    catch (const string & s)
+    {
+        cerr << s <<endl;
+        cerr << "Exiting" << endl;
+        exit(1);
+    }
+
+    waitKey(0);
 //    //clean up
 //    runConfig.cleanUpObjects();
 }
