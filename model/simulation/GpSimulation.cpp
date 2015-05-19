@@ -10,6 +10,7 @@
 #include "types/ReturnDouble.h"
 #include "terminals/RandDouble.h"
 #include "functions/ImageThreshold.h"
+#include "functions/PlusDouble.h"
 #include "terminals/ImageInput.h"
 
 GpSimulation::GpSimulation() {
@@ -30,12 +31,12 @@ void GpSimulation::init() {
     pop.setReturnType(ReturnImage::TYPENUM);
 
     //Set the depth limit for the system
-    runConfig.maxDepth = 3;
-    runConfig.minDepth = 1;
+    runConfig.maxDepth = 5;
+    runConfig.minDepth = 2;
 
     //Set the depth limit for the population
-    pop.setDepthLimit(4);
     pop.setMinDepth(runConfig.minDepth);
+    pop.setDepthLimit(runConfig.maxDepth);
 
     //Write out the population every N generations
     pop.setLogFrequency(10);
@@ -50,6 +51,7 @@ void GpSimulation::init() {
 
     //Add the functions we need
     runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
+    runConfig.funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
 
     //Create the program generator
     runConfig.programGenerator = new ProgramGenerator(&runConfig);
@@ -62,7 +64,7 @@ void GpSimulation::init() {
     //init the population
 
     pop.generateInitialPopulation();
-    //pop.writeToFile();
+    pop.writeToFile();
 
 //    //clean up
 //    runConfig.cleanUpObjects();
