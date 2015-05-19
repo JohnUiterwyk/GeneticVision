@@ -4,6 +4,7 @@
 
 #include <string>
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -51,8 +52,13 @@ void ImageThreshold::evaluate(ReturnData *out)
     ReturnDouble returnDouble;
     ReturnImage returnImage;
 
+    getArgN(0)->evaluate(&returnImage);
+    getArgN(1)->evaluate(&returnDouble);
+
     //and now do some MAGIC!!
-    cv::Mat result = returnImage.getData()  > (int)(fmod(returnDouble.getData(),1) * 255);
+    int threshold = (int)(fmod(returnDouble.getData(),1) * 255);
+
+    cv::Mat result = returnImage.getData() > threshold;
 
     dynamic_cast<ReturnImage *>(out)->setData(result);
 }
