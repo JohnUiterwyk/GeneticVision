@@ -15,11 +15,11 @@ using namespace std;
 #include "../../../rmitgp/GPConfig.h"
 
 #include "RandDouble.h"
-#include "ReturnDouble.h"
+#include "../types/ReturnDouble.h"
 
 RandDouble::RandDouble(GPConfig *conf) :
                            Terminal(ReturnDouble::TYPENUM, "drand", conf),
-                           value(config->randomNumGenerator->randReal() * 100.0)
+                           value(config->randomNumGenerator->randReal())
 {
 }
 

@@ -4,13 +4,13 @@
 
 #include "GpSimulation.h"
 #include "../../rmitgp/GPConfig.h"
-#include "../../rmitgp/ProgramGenerator.h"
 #include "../../rmitgp/Population.h"
-#include "functions/ReturnImage.h"
-#include "functions/RandDouble.h"
-#include "functions/ReturnDouble.h"
-#include "functions/Threshold.h"
-#include "functions/ImageBrightness.h"
+#include "../../rmitgp/ProgramGenerator.h"
+#include "types/ReturnImage.h"
+#include "types/ReturnDouble.h"
+#include "terminals/RandDouble.h"
+#include "functions/ImageThreshold.h"
+#include "terminals/ImageInput.h"
 
 GpSimulation::GpSimulation() {
 
@@ -18,7 +18,6 @@ GpSimulation::GpSimulation() {
 
 void GpSimulation::init() {
     GPConfig runConfig;
-    runConfig.maxDepth = 6;
 
     Population pop(100, "run-log.txt", &runConfig);
 
@@ -47,10 +46,10 @@ void GpSimulation::init() {
 
     //Add the terminals we need
     runConfig.termSet.addNodeToSet(ReturnDouble::TYPENUM, RandDouble::generate);
-    runConfig.termSet.addNodeToSet(ReturnImage::TYPENUM, ImageBrightness::generate);
+    runConfig.termSet.addNodeToSet(ReturnImage::TYPENUM, ImageInput::generate);
 
     //Add the functions we need
-    runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, Threshold::generate);
+    runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
 
     //Create the program generator
     runConfig.programGenerator = new ProgramGenerator(&runConfig);
@@ -62,7 +61,7 @@ void GpSimulation::init() {
     //runConfig.fitnessObject->initFitness();
     //init the population
 
-    //pop.generateInitialPopulation();
+    pop.generateInitialPopulation();
     //pop.writeToFile();
 
 //    //clean up

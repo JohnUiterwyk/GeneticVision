@@ -11,7 +11,7 @@
 
 //Initialise static data
 
-const int ReturnDouble::TYPENUM=2;
+const int ReturnDouble::TYPENUM=1;
 
 ReturnDouble::ReturnDouble() : ReturnData(), data(0.0)
 {

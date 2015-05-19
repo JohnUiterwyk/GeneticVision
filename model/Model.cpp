@@ -24,7 +24,7 @@ namespace GeneticVision
         this->trainingImages.resize(this->imageSetData.size());
         this->groundTruthImages.resize(this->imageSetData.size());
 
-        for(std::vector<vector<string>>::size_type i = 0; i != this->imageSetData.size(); i++)
+        for(std::vector< vector<string> >::size_type i = 0; i != this->imageSetData.size(); i++)
         {
             vector<string> line = this->imageSetData[i];
             imagePairs[i].loadFromFilePath(imageSetPath+line[0],imageSetPath+line[1]);
