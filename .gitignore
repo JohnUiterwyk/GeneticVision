@@ -1,3 +1,4 @@
 *.o
 librmitgp.a
 *.gen
+run-log.txt
