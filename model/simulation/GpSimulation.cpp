@@ -26,8 +26,8 @@ void GpSimulation::init() {
 
     //Set the rates of mutation etc
     pop.setMutationRate(0.26);
-    pop.setCrossoverRate(0.70);
-    pop.setElitismRate(0.04);
+    pop.setCrossoverRate(0.73);
+    pop.setElitismRate(0.01);
 
     //Set the return type for our programs
     pop.setReturnType(ReturnImage::TYPENUM);

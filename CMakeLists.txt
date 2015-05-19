@@ -27,7 +27,7 @@ model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.
 model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
 model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
 
-model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h)
+model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVFunction.h)
 
 target_link_libraries( GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)

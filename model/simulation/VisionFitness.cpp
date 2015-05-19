@@ -55,7 +55,7 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
     int nonzero = cv::countNonZero(diff_mat);
     double score = 100* (size - (double)nonzero)/size;
     prog->setFitness(score);
-    testWindow.showImage(returnImage.getData());
+    //testWindow.showImage(returnImage.getData());
 
 }
 

@@ -17,7 +17,7 @@ namespace GeneticVision
 
 
 
-//        this->guiEnabled = guiEnabled;
+        this->guiEnabled = guiEnabled;
         this->guiEnabled = guiEnabled;
         this->imageSetPath = imageSetPath;
         this->model.loadImages(imageSetPath);
