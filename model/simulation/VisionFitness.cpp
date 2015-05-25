@@ -35,6 +35,8 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
     outputProgram(best);
 
+
+
 }
 void VisionFitness::evalutateProgram(GeneticProgram* prog)
 {
@@ -55,8 +57,9 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
     int nonzero = cv::countNonZero(diff_mat);
     double score = 100* (size - (double)nonzero)/size;
     prog->setFitness(score);
-    testWindow.showImage(returnImage.getData());
-
+//    testWindow.showImage(returnImage.getData());
+//    if( waitKey(1) != -1)
+//        exit(99);
 }
 
 void VisionFitness::outputProgram(GeneticProgram* prog)
