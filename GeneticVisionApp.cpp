@@ -35,11 +35,11 @@ namespace GeneticVision
 
         }
         this->model.initSimulation();
-        for(int i; i < 100;i++)
+        bool solutionFound = false;
+        do
         {
-            this->model.tickSmulation();
-
-        }
+            solutionFound = this->model.tickSmulation();
+        }while(solutionFound == false);
         waitKey(0);
     }
 

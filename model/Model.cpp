@@ -39,9 +39,9 @@ namespace GeneticVision
     {
         this->gpSimulation->init(&this->imagePairs);
     }
-    void Model::tickSmulation()
+    bool Model::tickSmulation()
     {
-        this->gpSimulation->tick(1);
+        return this->gpSimulation->tick(1);
     }
 
     vector<ImagePair> Model::getImagePairCollection() {

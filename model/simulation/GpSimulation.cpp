@@ -3,17 +3,26 @@
 //
 
 #include "GpSimulation.h"
+#include "VisionFitness.h"
+
+#include "types/ReturnImage.h"
+#include "types/ReturnDouble.h"
+
+#include "functions/ImageGaussianBlur.h"
+#include "functions/ImageBlend.h"
+#include "functions/ImageThreshold.h"
+#include "functions/ImageCannyEdge.h"
+#include "functions/PlusDouble.h"
+#include "functions/Mean.h"
+#include "functions/StdDev.h"
+
+#include "terminals/RandDouble.h"
+#include "terminals/ImageInput.h"
+
 #include "../../rmitgp/GPConfig.h"
 #include "../../rmitgp/Population.h"
 #include "../../rmitgp/ProgramGenerator.h"
-#include "types/ReturnImage.h"
-#include "types/ReturnDouble.h"
-#include "terminals/RandDouble.h"
-#include "functions/ImageThreshold.h"
-#include "functions/PlusDouble.h"
-#include "terminals/ImageInput.h"
-#include "VisionFitness.h"
-#include "functions/ImageGaussianBlur.h"
+
 
 GpSimulation::GpSimulation()
 {
@@ -34,11 +43,15 @@ void GpSimulation::init(vector<ImagePair> * imagePairs)
 
     //Add the functions we need
     this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageCannyEdge::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageGaussianBlur::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageBlend::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
 
     //Set the depth limit for the system
-    this->runConfig->maxDepth = 4;
+    this->runConfig->maxDepth = 5;
     this->runConfig->minDepth = 2;
 
 

@@ -81,7 +81,7 @@ bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;
     for (; i<popSize; i++)
     {
-        if (pop[i]->getFitness() <= 0.1)
+        if (pop[i]->getFitness() <= 0.0001)
             return true;
     }
     return false;

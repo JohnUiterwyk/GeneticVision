@@ -26,8 +26,12 @@ model/simulation/terminals/RandDouble.cpp model/simulation/terminals/RandDouble.
 model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.h
 model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
 model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
-
-model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVFunction.h)
+model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h
+model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVFunction.h
+model/simulation/functions/TFunction.h
+model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
+model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
+model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h)
 
 target_link_libraries( GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)

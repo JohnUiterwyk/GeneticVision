@@ -21,6 +21,8 @@ public:
 
     virtual Node* copy();
 
+protected:
+    virtual void evaluate_impl(ReturnData *out) =0;
 };
 
 
