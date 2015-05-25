@@ -6,13 +6,21 @@
 #define GENETICVISION_GPSIMULATION_H
 
 
+#include "../../rmitgp/Population.h"
+#include "../ImagePair.h"
+
 class GpSimulation {
 
+private:
+    vector<ImagePair> * imagePairs;
+    Population * pop;
+    GPConfig * runConfig;
 public:
-    GpSimulation();
-    void init();
 
-    void tick();
+    GpSimulation();
+    void init(vector<ImagePair> *imagePairs);
+    void run();
+    bool tick(int);
 };
 
 

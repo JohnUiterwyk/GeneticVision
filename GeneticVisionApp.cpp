@@ -22,7 +22,6 @@ namespace GeneticVision
         this->imageSetPath = imageSetPath;
         this->model.loadImages(imageSetPath);
 
-        this->model.initSimulation();
 
         if(this->guiEnabled)
         {
@@ -34,8 +33,14 @@ namespace GeneticVision
             truthWindow.setPosition(0,sourceWindow.height+20);
             truthWindow.showImages(this->model.groundTruthImages);
 
-            cv::waitKey();
         }
+        this->model.initSimulation();
+        for(int i; i < 100;i++)
+        {
+            this->model.tickSmulation();
+
+        }
+        waitKey(0);
     }
 
     GeneticVisionApp::~GeneticVisionApp() {

@@ -6,23 +6,22 @@
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
 
-VisionFitness::VisionFitness(GPConfig *conf) : Fitness(conf), outputWindow("Best",100,100), testWindow("Test",100,100)
+VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf), outputWindow("Best",100,100), testWindow("Test",100,100)
 {
-
+    this->imagePairs = imagePairs;
+    this->lastResult.resize(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
 }
 
 VisionFitness::~VisionFitness() { }
 
 void VisionFitness::initFitness()
 {
-  goalValue = 0;
-  testPair.loadFromFilePath("data/mg-300.jpg","data/mg-truth.jpg");
+    goalValue = 0;
 }
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
     int i;
     GeneticProgram* best = pop[0];
-    best->setFitness(1000000);
 
     for(i=0; i<popSize; i++)
     {
@@ -33,7 +32,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
         }
     }
 
-    outputProgram(best);
+    //outputProgram(best);
 
 
 
@@ -44,22 +43,27 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
     string progString;
     prog->print(progString);
     ReturnImage returnImage;
+    ImagePair * testPair;
+    double score = 0;
+    int size = this->imagePairs->at(0).getTrainingImage().cols * this->imagePairs->at(0).getTrainingImage().rows;
 
-    ImageInput::setValue(testPair.getTrainingImage());
 
     prog->setFitness(0.0);
-    prog->evaluate(&returnImage);
+    for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
+    {
+        testPair = &(this->imagePairs->at(i));
+        ImageInput::setValue(testPair->getTrainingImage());
+        prog->evaluate(&returnImage);
+        returnImage.getData().copyTo(lastResult[i]);
 
-    int size = 90000;
+        cv::Mat diff_mat;
+        cv::compare(testPair->getGroundTruth(), returnImage.getData(), diff_mat, cv::CMP_EQ);
+        int nonzero = cv::countNonZero(diff_mat);
+        score += 100* (size - (double)nonzero)/size;
+    }
 
-    cv::Mat diff_mat;
-    cv::compare(testPair.getGroundTruth(), returnImage.getData(), diff_mat, cv::CMP_EQ);
-    int nonzero = cv::countNonZero(diff_mat);
-    double score = 100* (size - (double)nonzero)/size;
-    prog->setFitness(score);
-//    testWindow.showImage(returnImage.getData());
-//    if( waitKey(1) != -1)
-//        exit(99);
+    prog->setFitness(score/(this->imagePairs->size()));
+
 }
 
 void VisionFitness::outputProgram(GeneticProgram* prog)
@@ -67,13 +71,11 @@ void VisionFitness::outputProgram(GeneticProgram* prog)
 
     string progString;
     prog->print(progString);
-    ReturnImage returnImage;
-    ImageInput::setValue(testPair.getTrainingImage());
-    prog->evaluate(&returnImage);
-    outputWindow.showImage(returnImage.getData());
+
+    this->evalutateProgram(prog);
+//
+    outputWindow.showImages(lastResult);
     cout << "Best: " << prog->getFitness() << " " << progString << endl;
-
-
 }
 bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;

@@ -11,6 +11,7 @@ class ImagePair {
 private:
     cv::Mat trainingImage;
     cv::Mat groundTruth;
+    cv::Mat resultImage;
 public:
     ImagePair();
 
@@ -18,6 +19,7 @@ public:
 
     cv::Mat getTrainingImage();
     cv::Mat getGroundTruth();
+    cv::Mat getResultImage();
 
     /*********************
      virtual destructor

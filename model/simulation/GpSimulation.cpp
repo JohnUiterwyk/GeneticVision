@@ -15,96 +15,80 @@
 #include "VisionFitness.h"
 #include "functions/ImageGaussianBlur.h"
 
-GpSimulation::GpSimulation() {
-
+GpSimulation::GpSimulation()
+{
+    this->runConfig = new GPConfig();
+    this->pop = new Population(1000,"output/run-log.txt",this->runConfig);
 }
 
-void GpSimulation::init() {
-    GPConfig runConfig;
-
-    Population pop(100, "run-log.txt", &runConfig);
-
-    //Set the rates of mutation etc
-    pop.setMutationRate(0.26);
-    pop.setCrossoverRate(0.73);
-    pop.setElitismRate(0.01);
-
-    //Set the return type for our programs
-    pop.setReturnType(ReturnImage::TYPENUM);
-
-    //Set the depth limit for the system
-    runConfig.maxDepth = 4;
-    runConfig.minDepth = 2;
-
-    //Set the depth limit for the population
-    pop.setMinDepth(runConfig.minDepth);
-    pop.setDepthLimit(runConfig.maxDepth);
-
-    //Write out the population every N generations
-    pop.setLogFrequency(10);
-
+void GpSimulation::init(vector<ImagePair> * imagePairs)
+{
+    this->imagePairs = imagePairs;
 
     //Do the default initialisation of the configuration
-    runConfig.defaultInit();
+    this->runConfig->defaultInit();
 
     //Add the terminals we need
-    runConfig.termSet.addNodeToSet(ReturnDouble::TYPENUM, RandDouble::generate);
-    runConfig.termSet.addNodeToSet(ReturnImage::TYPENUM, ImageInput::generate);
+    this->runConfig->termSet.addNodeToSet(ReturnDouble::TYPENUM, RandDouble::generate);
+    this->runConfig->termSet.addNodeToSet(ReturnImage::TYPENUM, ImageInput::generate);
 
     //Add the functions we need
-    runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
-    runConfig.funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageGaussianBlur::generate);
-    runConfig.funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageThreshold::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageGaussianBlur::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
+
+    //Set the depth limit for the system
+    this->runConfig->maxDepth = 4;
+    this->runConfig->minDepth = 2;
+
 
     //Create the program generator
-    runConfig.programGenerator = new ProgramGenerator(&runConfig);
+    this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
 
     //Set the fitness class to be used
-    runConfig.fitnessObject = new VisionFitness(&runConfig);
+    this->runConfig->fitnessObject = new VisionFitness(this->runConfig, this->imagePairs);
 
     //Initialise the fitness
-    runConfig.fitnessObject->initFitness();
+    this->runConfig->fitnessObject->initFitness();
+
+    //Set the rates of mutation etc
+    this->pop->setMutationRate(0.28);
+    this->pop->setCrossoverRate(0.70);
+    this->pop->setElitismRate(0.02);
+
+    //Set the return type for our programs
+    this->pop->setReturnType(ReturnImage::TYPENUM);
+
+    //Set the depth limit for the population
+    this->pop->setMinDepth(this->runConfig->minDepth);
+    this->pop->setDepthLimit(this->runConfig->maxDepth);
+
+    //Write out the population every N generations
+    this->pop->setLogFrequency(10);
+
+
+
 
     //init the population
-    pop.generateInitialPopulation();
-    pop.writeToFile();
+    this->pop->generateInitialPopulation();
+    this->pop->writeToFile();
 
 
-    pop.setLogFrequency(100);
+    this->pop->setLogFrequency(100);
 
-    try
-    {
-        string str1;
-        cout << "evolve" << endl;
-
-        if (pop.evolve(1000))
-        {
-            cout << "Found solution" << endl;
-        }
-        else
-        {
-            cout << "Didn't find solution" << endl;
-        }
-
-        pop.getBest()->print(str1);
-        VisionFitness * fitness = dynamic_cast<VisionFitness*>(runConfig.fitnessObject);
-        fitness->outputProgram(pop.getBest());
-        cout << "Best program" << endl
-        << "Fitness " << pop.getBest()->getFitness() << endl
-        << str1 << endl;
-    }
-    catch (const string & s)
-    {
-        cerr << s <<endl;
-        cerr << "Exiting" << endl;
-        exit(1);
-    }
-
-    waitKey(0);
 //    //clean up
-//    runConfig.cleanUpObjects();
+//    this->runConfig->cleanUpObjects();
 }
-void GpSimulation::tick()
-{
 
+bool GpSimulation::tick(int generations)
+{
+    // run x generations
+    bool foundSolution = this->pop->evolve(generations);
+
+    string str1;
+    this->pop->getBest()->print(str1);
+    VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
+    fitness->outputProgram(this->pop->getBest());
+    cout << "Fitness " << this->pop->getBest()->getFitness() << " " << str1 << endl;
+    return foundSolution;
 }

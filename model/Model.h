@@ -22,6 +22,7 @@ namespace GeneticVision
         Model();
         void loadImages(const string& imageSetPath);
         void initSimulation();
+        void tickSmulation();
         vector <ImagePair> getImagePairCollection();
         vector <cv::Mat> getTrainingImages();
         vector <cv::Mat> getGroundTruthImages();
@@ -32,7 +33,8 @@ namespace GeneticVision
 
     private:
         vector< vector<string> > imageSetData;
-        GpSimulation gpSimulation;
+        GpSimulation * gpSimulation;
+
     };
 }
 

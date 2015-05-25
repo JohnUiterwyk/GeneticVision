@@ -27,3 +27,7 @@ cv::Mat ImagePair::getGroundTruth() {
 ImagePair::~ImagePair() {
 
 }
+
+cv::Mat ImagePair::getResultImage() {
+    return this->resultImage;
+}

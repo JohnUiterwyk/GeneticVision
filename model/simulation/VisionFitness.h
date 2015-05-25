@@ -15,14 +15,15 @@ class VisionFitness : public Fitness
 {
     private:
     double goalValue;
-    ImagePair testPair;
+    vector<ImagePair> * imagePairs;
+    vector<cv::Mat> lastResult;
     OpenCVWindow testWindow;
     OpenCVWindow outputWindow;
 
 
     public:
     //Constructor
-    VisionFitness(GPConfig *conf);
+    VisionFitness(GPConfig *conf, vector<ImagePair> * );
     virtual ~VisionFitness();
     virtual void initFitness();
     virtual void assignFitness(GeneticProgram* pop[], int popSize);

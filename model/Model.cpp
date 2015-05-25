@@ -11,7 +11,7 @@ namespace GeneticVision
 
 
     Model::Model() {
-
+        this->gpSimulation = new GpSimulation();
     }
 
     void Model::loadImages(const string &imageSetPath)
@@ -37,7 +37,11 @@ namespace GeneticVision
 
     void Model::initSimulation()
     {
-        this->gpSimulation.init();
+        this->gpSimulation->init(&this->imagePairs);
+    }
+    void Model::tickSmulation()
+    {
+        this->gpSimulation->tick(1);
     }
 
     vector<ImagePair> Model::getImagePairCollection() {
