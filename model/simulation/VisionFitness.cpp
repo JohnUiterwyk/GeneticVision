@@ -55,7 +55,7 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
     int nonzero = cv::countNonZero(diff_mat);
     double score = 100* (size - (double)nonzero)/size;
     prog->setFitness(score);
-    //testWindow.showImage(returnImage.getData());
+    testWindow.showImage(returnImage.getData());
 
 }
 
@@ -93,7 +93,7 @@ bool VisionFitness::isWorse(GeneticProgram *gp1, GeneticProgram *gp2) {
 }
 
 bool VisionFitness::isEqual(GeneticProgram *gp1, GeneticProgram *gp2) {
-    return (gp1->getFitness() > gp2->getFitness());
+    return (gp1->getFitness() == gp2->getFitness());
 }
 
 double VisionFitness::best() {
