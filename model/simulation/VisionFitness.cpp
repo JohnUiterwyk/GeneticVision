@@ -62,7 +62,7 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
         score += 100* (size - (double)nonzero)/size;
     }
 
-    prog->setFitness(score/(this->imagePairs->size()));
+    prog->setFitness((double)(score/(double)(this->imagePairs->size())));
 
 }
 
@@ -81,7 +81,7 @@ bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;
     for (; i<popSize; i++)
     {
-        if (pop[i]->getFitness() <= 0.0001)
+        if (pop[i]->getFitness() <= 0.02)
             return true;
     }
     return false;
