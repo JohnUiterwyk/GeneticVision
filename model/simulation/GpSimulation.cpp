@@ -100,8 +100,9 @@ bool GpSimulation::tick(int generations)
 
     string str1;
     this->pop->getBest()->print(str1);
+
     VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
     fitness->outputProgram(this->pop->getBest());
-    cout << "Fitness " << this->pop->getBest()->getFitness() << " " << str1 << endl;
+
     return foundSolution;
 }
