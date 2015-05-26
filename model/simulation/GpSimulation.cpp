@@ -12,6 +12,9 @@
 #include "functions/ImageBlend.h"
 #include "functions/ImageThreshold.h"
 #include "functions/ImageCannyEdge.h"
+#include "functions/ImageInvert.h"
+#include "functions/ImageErode.h"
+#include "functions/ImageSobel.h"
 #include "functions/PlusDouble.h"
 #include "functions/Mean.h"
 #include "functions/StdDev.h"
@@ -27,7 +30,7 @@
 GpSimulation::GpSimulation()
 {
     this->runConfig = new GPConfig();
-    this->pop = new Population(1000,"output/run-log.txt",this->runConfig);
+    this->pop = new Population(100,"output/run-log.txt",this->runConfig);
 }
 
 void GpSimulation::init(vector<ImagePair> * imagePairs)
@@ -46,6 +49,9 @@ void GpSimulation::init(vector<ImagePair> * imagePairs)
     this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageCannyEdge::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageGaussianBlur::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageBlend::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageInvert::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageErode::generate);
+    this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageSobel::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);

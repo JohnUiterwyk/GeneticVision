@@ -3,26 +3,26 @@
 //
 
 #include <opencv2/imgproc/imgproc.hpp>
-#include "ImageCannyEdge.h"
+#include "ImageInvert.h"
 #include "../types/ReturnImage.h"
 #include "../types/ReturnDouble.h"
 
 
-const string ImageCannyEdge::NAME = "cv_canny_edge";
+const string ImageInvert::NAME = "cv_invert";
 
-ImageCannyEdge::ImageCannyEdge(GPConfig *conf) : TFunction(conf, 3)
+ImageInvert::ImageInvert(GPConfig *conf) : TFunction(conf, 3)
 {
     setArgNReturnType(0, ReturnImage::TYPENUM);
     setArgNReturnType(1, ReturnDouble::TYPENUM);
     setArgNReturnType(2, ReturnDouble::TYPENUM);
 }
 
-ImageCannyEdge::~ImageCannyEdge()
+ImageInvert::~ImageInvert()
 {
 }
 
 
-void ImageCannyEdge::evaluate_impl(ReturnData *out)
+void ImageInvert::evaluate_impl(ReturnData *out)
 {
     ReturnImage arg0;
     ReturnDouble arg1;

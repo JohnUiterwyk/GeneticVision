@@ -7,7 +7,7 @@
 
 cv::Mat ImageInput::value;
 
-ImageInput::ImageInput(GPConfig *config) : Terminal(ReturnImage::TYPENUM, "ImageInput", config)
+ImageInput::ImageInput(GPConfig *config) : Terminal(ReturnImage::TYPENUM, "input_image", config)
 {
 
 }
@@ -16,7 +16,7 @@ ImageInput::~ImageInput() { }
 
 Terminal* ImageInput::generate(const string &name, GPConfig *config)
 {
-    if(name == "" || name == "ImageInput")
+    if(name == "" || name == "input_image")
     {
         return new ImageInput(config);
     }

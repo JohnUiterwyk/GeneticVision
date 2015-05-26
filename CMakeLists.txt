@@ -31,7 +31,7 @@ model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVF
 model/simulation/functions/TFunction.h
 model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
 model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
-model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h)
+model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h)
 
 target_link_libraries( GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)

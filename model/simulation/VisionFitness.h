@@ -17,7 +17,6 @@ class VisionFitness : public Fitness
     double goalValue;
     vector<ImagePair> * imagePairs;
     vector<cv::Mat> lastResult;
-    OpenCVWindow testWindow;
     OpenCVWindow outputWindow;
 
 

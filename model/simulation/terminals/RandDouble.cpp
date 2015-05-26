@@ -18,13 +18,13 @@ using namespace std;
 #include "../types/ReturnDouble.h"
 
 RandDouble::RandDouble(GPConfig *conf) :
-                           Terminal(ReturnDouble::TYPENUM, "drand", conf),
+                           Terminal(ReturnDouble::TYPENUM, "drand_", conf),
                            value(config->randomNumGenerator->randReal())
 {
 }
 
 RandDouble::RandDouble(double initValue, GPConfig *conf) :
-                               Terminal(ReturnDouble::TYPENUM, "drand", conf),
+                               Terminal(ReturnDouble::TYPENUM, "drand_", conf),
                                value(initValue)
 {
 }
@@ -36,7 +36,7 @@ RandDouble::~RandDouble()
 Terminal* RandDouble::generate(const string &name, GPConfig *conf)
 {
    double tmpValue;
-   string tmpName("drand");
+   string tmpName("drand_");
    char copy[20];
 
    strcpy(copy, name.c_str());
@@ -53,7 +53,7 @@ Terminal* RandDouble::generate(const string &name, GPConfig *conf)
    else if (name.compare(0, tmpName.size(), tmpName) == 0)
 #endif
    {
-      sscanf(copy, "drand%lf", &tmpValue);
+      sscanf(copy, "drand_%lf", &tmpValue);
       return new RandDouble(tmpValue, conf);
    }
 

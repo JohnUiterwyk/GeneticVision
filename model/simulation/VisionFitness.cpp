@@ -6,7 +6,7 @@
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
 
-VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf), outputWindow("Best",100,100), testWindow("Test",100,100)
+VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf), outputWindow("Best",100,100)
 {
     this->imagePairs = imagePairs;
     this->lastResult.resize(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
