@@ -4,30 +4,27 @@
 
 #include <iostream>
 #include "Model.h"
-#include "../util/csv/CSVParser.h"
 
+using namespace std;
 namespace GeneticVision
 {
 
 
     Model::Model() {
-        this->gpSimulation = new GpSimulation();
     }
 
-    void Model::loadImages(const string &imageSetPath)
+    void Model::init(AppConfig &appConfig)
     {
-        CSVParser csvParser(imageSetPath+"image-set.csv");
-        csvParser.parse();
-        this->imageSetData = csvParser.getData();
+        this->gpSimulation = new GpSimulation(appConfig);
+        vector<vector<string> > imagePairPaths = appConfig.getImagePairPaths();
+        this->imagePairs.resize(appConfig.getImagePairPaths().size());
+        this->trainingImages.resize(appConfig.getImagePairPaths().size());
+        this->groundTruthImages.resize(appConfig.getImagePairPaths().size());
 
-        this->imagePairs.resize(this->imageSetData.size());
-        this->trainingImages.resize(this->imageSetData.size());
-        this->groundTruthImages.resize(this->imageSetData.size());
-
-        for(std::vector< vector<string> >::size_type i = 0; i != this->imageSetData.size(); i++)
+        for(std::vector< vector<string> >::size_type i = 0; i != appConfig.getImagePairPaths().size(); i++)
         {
-            vector<string> line = this->imageSetData[i];
-            imagePairs[i].loadFromFilePath(imageSetPath+line[0],imageSetPath+line[1]);
+            vector<string> line = appConfig.getImagePairPaths();
+            imagePairs[i].loadFromFilePath(appConfig+line[0],imageSetPath+line[1]);
             this->trainingImages[i] = imagePairs[i].getTrainingImage();
             this->groundTruthImages[i] = imagePairs[i].getGroundTruth();
         }

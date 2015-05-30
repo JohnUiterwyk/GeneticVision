@@ -10,19 +10,19 @@ int main( int argc, char** argv )
 //    readTime = ((double)getTickCount() - readTime)/getTickFrequency();
 
     /// Load the source image
-    std::string imageSetFilePath;
-    int guiEnabled = 0;
-    for(int i=1;i<argc;i++)
+    std::string jsonConfigFilePath;
+    if(argc==2)
     {
-        if(strcmp(argv[i],"-gui") == 0)
-        {
-            guiEnabled = 1;
-        } else
-        {
-            imageSetFilePath.append(argv[i]);
-        }
+        jsonConfigFilePath.append(argv[1]);
+    }
+    else
+    {
+        cerr << "Error: No config file specified" << endl;
+        cerr << "Usage:" << endl;
+        cerr << "GeneticVision path/to/config.json" << endl;
+
     }
 
-    GeneticVisionApp app = GeneticVisionApp(imageSetFilePath, guiEnabled);
+    GeneticVisionApp app = GeneticVisionApp(jsonConfigFilePath);
     return 0;
 }

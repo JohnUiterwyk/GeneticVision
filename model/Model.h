@@ -4,10 +4,10 @@
 
 #ifndef GENETICVISION_MODEL_H
 #define GENETICVISION_MODEL_H
-#import "ImagePair.h"
+#include "ImagePair.h"
 #include "simulation/GpSimulation.h"
-#import <string>
-#import <vector>
+#include <string>
+#include <vector>
 #include <opencv2/highgui/highgui.hpp>
 
 using namespace std;
@@ -20,7 +20,7 @@ namespace GeneticVision
          Constructor.
         **************/
         Model();
-        void loadImages(const string& imageSetPath);
+        void init(AppConfig &appConfig);
         void initSimulation();
         bool  tickSmulation();
         vector <ImagePair> getImagePairCollection();

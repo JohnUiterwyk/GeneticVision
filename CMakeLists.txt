@@ -4,7 +4,7 @@ project(GeneticVision)
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 set(SOURCE_FILES main.cpp)
 add_executable(
@@ -12,8 +12,9 @@ GeneticVision
 ${SOURCE_FILES}
 GeneticVisionApp.cpp
 GeneticVisionApp.h
-util/csv/CSVParser.cpp
-util/csv/CSVParser.h
+util/jsoncpp.cpp
+util/json/json.h
+util/json/json-forwards.h
 model/ImagePair.cpp model/ImagePair.h
 model/Model.cpp model/Model.h
 view/OpenCVWindow.cpp view/OpenCVWindow.h
@@ -31,7 +32,9 @@ model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVF
 model/simulation/functions/TFunction.h
 model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
 model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
-model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h)
+model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h AppConfig.cpp AppConfig.h view/StdOutView.cpp view/StdOutView.h view/ViewController.cpp view/ViewController.h)
 
-target_link_libraries( GeneticVision ${OpenCV_LIBS} )
+add_definitions(-DCV_HIGHGUI_ENABLED)
+
+target_link_libraries(GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)

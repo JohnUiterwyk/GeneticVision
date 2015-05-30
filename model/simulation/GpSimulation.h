@@ -6,6 +6,7 @@
 #define GENETICVISION_GPSIMULATION_H
 
 
+#include "../../AppConfig.h"
 #include "../../rmitgp/Population.h"
 #include "../ImagePair.h"
 
@@ -17,10 +18,10 @@ private:
     GPConfig * runConfig;
 public:
 
-    GpSimulation();
+    GpSimulation(GeneticVision::AppConfig);
     void init(vector<ImagePair> *imagePairs);
-    void run();
     bool tick(int);
+    void cleanUp();
 };
 
 

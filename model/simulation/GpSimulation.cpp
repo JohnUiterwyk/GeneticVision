@@ -27,16 +27,9 @@
 #include "../../rmitgp/ProgramGenerator.h"
 
 
-GpSimulation::GpSimulation()
+GpSimulation::GpSimulation(GeneticVision::AppConfig appConfig)
 {
     this->runConfig = new GPConfig();
-    this->pop = new Population(100,"output/run-log.txt",this->runConfig);
-}
-
-void GpSimulation::init(vector<ImagePair> * imagePairs)
-{
-    this->imagePairs = imagePairs;
-
     //Do the default initialisation of the configuration
     this->runConfig->defaultInit();
 
@@ -56,13 +49,37 @@ void GpSimulation::init(vector<ImagePair> * imagePairs)
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
     this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
 
+
     //Set the depth limit for the system
     this->runConfig->maxDepth = 5;
     this->runConfig->minDepth = 2;
 
-
     //Create the program generator
     this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
+
+
+
+    this->pop = new Population(
+            appConfig.getPopulationSize(),
+            appConfig.getRunLogPath(),
+            this->runConfig);
+
+
+    //Set the rates of mutation etc
+    this->pop->setMinDepth(appConfig.getMinDepth());
+    this->pop->setDepthLimit(appConfig.getMaxDepth());
+    this->pop->setMutationRate(appConfig.getMutation());
+    this->pop->setCrossoverRate(appConfig.getCrossover());
+    this->pop->setElitismRate(appConfig.getElitism());
+    //Set the return type for our programs
+    this->pop->setReturnType(ReturnImage::TYPENUM);
+
+    //this->pop->setLogFrequency(100);
+}
+
+void GpSimulation::init(vector<ImagePair> * imagePairs)
+{
+    this->imagePairs = imagePairs;
 
     //Set the fitness class to be used
     this->runConfig->fitnessObject = new VisionFitness(this->runConfig, this->imagePairs);
@@ -70,33 +87,11 @@ void GpSimulation::init(vector<ImagePair> * imagePairs)
     //Initialise the fitness
     this->runConfig->fitnessObject->initFitness();
 
-    //Set the rates of mutation etc
-    this->pop->setMutationRate(0.28);
-    this->pop->setCrossoverRate(0.70);
-    this->pop->setElitismRate(0.02);
-
-    //Set the return type for our programs
-    this->pop->setReturnType(ReturnImage::TYPENUM);
-
-    //Set the depth limit for the population
-    this->pop->setMinDepth(this->runConfig->minDepth);
-    this->pop->setDepthLimit(this->runConfig->maxDepth);
-
-    //Write out the population every N generations
-    this->pop->setLogFrequency(10);
-
-
-
-
     //init the population
     this->pop->generateInitialPopulation();
-    this->pop->writeToFile();
-
-
-    this->pop->setLogFrequency(100);
+    //this->pop->writeToFile();
 
 //    //clean up
-//    this->runConfig->cleanUpObjects();
 }
 
 bool GpSimulation::tick(int generations)
@@ -111,4 +106,9 @@ bool GpSimulation::tick(int generations)
     fitness->outputProgram(this->pop->getBest());
 
     return foundSolution;
+}
+
+void GpSimulation::cleanUp()
+{
+    this->runConfig->cleanUpObjects();
 }
