@@ -23,8 +23,8 @@ namespace GeneticVision
 
         for(std::vector< vector<string> >::size_type i = 0; i != appConfig.getImagePairPaths().size(); i++)
         {
-            vector<string> line = appConfig.getImagePairPaths();
-            imagePairs[i].loadFromFilePath(appConfig+line[0],imageSetPath+line[1]);
+            vector<string> line = imagePairPaths[i];
+            imagePairs[i].loadFromFilePath(appConfig.getImageDirectoryPath()+line[0],appConfig.getImageDirectoryPath()+line[1]);
             this->trainingImages[i] = imagePairs[i].getTrainingImage();
             this->groundTruthImages[i] = imagePairs[i].getGroundTruth();
         }

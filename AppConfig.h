@@ -23,6 +23,7 @@ namespace GeneticVision
         int logFrequency;
         string runLogPath;
         vector<vector<string> > imagePairPaths;
+        string imageDirectoryPath;
 
     public:
         AppConfig():
@@ -69,7 +70,9 @@ namespace GeneticVision
         const char * getRunLogPath() const {
             return runLogPath.c_str();
         }
-
+        const char * getImageDirectoryPath() const {
+            return imageDirectoryPath.c_str();
+        }
 
     };
 

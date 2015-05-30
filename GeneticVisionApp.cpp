@@ -4,12 +4,8 @@
 
 #include "GeneticVisionApp.h"
 #include <string>
-#include <fstream>
-#include <streambuf>
-#include <iostream>
 #include "model/ImagePair.h"
 #include "view/OpenCVWindow.h"
-#include "util/json/json.h"
 
 #ifdef CV_HIGHGUI_ENABLED
 #include <opencv2/highgui/highgui.hpp>
@@ -21,14 +17,7 @@ namespace GeneticVision
 
     GeneticVisionApp::GeneticVisionApp(const string& jsonConfigFilePath)
     {
-//        std::ifstream in("data/easy-square/easy-square-config.json");
-//        std::string contents((std::istreambuf_iterator<char>(in)),
-//                             std::istreambuf_iterator<char>());
-//        Json::Value root;
-//        Json::Reader reader;
-//        reader.parse(contents, root);
-//        cout << root.get("hello", "error" ).asString() << endl;
-        //see http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html
+
 
 //        JSONValue *value = JSON::Parse(contents.c_str());
 //        if (value == NULL)
@@ -60,14 +49,14 @@ namespace GeneticVision
 //            }
 //        }
 //
+        bool guiEnabled = false;
         #ifdef CV_HIGHGUI_ENABLED
-            this->guiEnabled ;
+            guiEnabled = true;
         #endif
-        this->imageSetPath = imageSetPath;
-        this->model.loadImages(imageSetPath);
+        this->model.init(this->appConfig);
 
 
-        if(this->guiEnabled)
+        if(guiEnabled)
         {
 
         }

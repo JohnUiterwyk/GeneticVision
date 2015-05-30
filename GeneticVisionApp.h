@@ -26,6 +26,7 @@ namespace GeneticVision
 
         private:
         Model model;
+        AppConfig appConfig;
 //        MainView view;
 
     };
