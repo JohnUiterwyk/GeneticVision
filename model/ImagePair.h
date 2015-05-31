@@ -9,13 +9,16 @@
 class ImagePair {
 
 private:
+    std::string trainingImagePath;
+    std::string groundTruthPath;
+
     cv::Mat trainingImage;
     cv::Mat groundTruth;
     cv::Mat resultImage;
 public:
     ImagePair();
-
-    void loadFromFilePath(const std::string& trainingImagePath, const std::string& groundTruthPath);
+    void loadTrainingImage(const std::string &trainingImagePath);
+    void loadGroundTruth(const std::string &groundTruthPath);
 
     cv::Mat getTrainingImage();
     cv::Mat getGroundTruth();

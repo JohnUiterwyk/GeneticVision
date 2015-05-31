@@ -17,7 +17,7 @@ namespace GeneticVision
             /*************
              Constructor.
             **************/
-            GeneticVisionApp(const string& jsonConfigFilePath);
+            GeneticVisionApp(const string * jsonConfigFilePath);
 
             /*********************
              virtual destructor
@@ -25,7 +25,7 @@ namespace GeneticVision
             virtual ~GeneticVisionApp();
 
         private:
-        Model model;
+        GpSimulation * gpSimulation;
         AppConfig appConfig;
 //        MainView view;
 

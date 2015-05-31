@@ -2,6 +2,7 @@
 // Created by John Uiterwyk on 28/03/15.
 //
 
+#ifdef CV_HIGHGUI_ENABLED
 #include "opencv2/highgui/highgui.hpp"
 #include "OpenCVWindow.h"
 #include <opencv2/imgproc/imgproc.hpp>
@@ -93,3 +94,5 @@ cv::Mat OpenCVWindow::makeCanvas(std::vector<cv::Mat>& vecMat, int windowHeight,
     }
     return canvasImage;
 }
+
+#endif //CV_HIGHGUI_ENABLED

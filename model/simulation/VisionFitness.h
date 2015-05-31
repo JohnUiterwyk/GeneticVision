@@ -17,7 +17,6 @@ class VisionFitness : public Fitness
     double goalValue;
     vector<ImagePair> * imagePairs;
     vector<cv::Mat> lastResult;
-    OpenCVWindow outputWindow;
 
 
     public:
@@ -26,7 +25,7 @@ class VisionFitness : public Fitness
     virtual ~VisionFitness();
     virtual void initFitness();
     virtual void assignFitness(GeneticProgram* pop[], int popSize);
-    void evalutateProgram(GeneticProgram* prog);
+    vector<cv::Mat > * evalutateProgram(GeneticProgram* prog);
     virtual bool solutionFound(GeneticProgram* pop[], int popSize);
     virtual bool isBetter(GeneticProgram* gp1, GeneticProgram* gp2);
     virtual bool isWorse(GeneticProgram* gp1, GeneticProgram* gp2);
@@ -35,7 +34,7 @@ class VisionFitness : public Fitness
     virtual double best();
     virtual double worst();
 
-    void outputProgram(GeneticProgram *prog);
+    void getImageResult(GeneticProgram *prog);
 };
 
 #endif //GENETICVISION_FITNESS_H

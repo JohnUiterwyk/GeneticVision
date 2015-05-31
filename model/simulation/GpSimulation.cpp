@@ -27,7 +27,7 @@
 #include "../../rmitgp/ProgramGenerator.h"
 
 
-GpSimulation::GpSimulation(GeneticVision::AppConfig appConfig)
+GpSimulation::GpSimulation(GeneticVision::AppConfig * appConfig)
 {
     this->runConfig = new GPConfig();
     //Do the default initialisation of the configuration
@@ -60,29 +60,25 @@ GpSimulation::GpSimulation(GeneticVision::AppConfig appConfig)
 
 
     this->pop = new Population(
-            appConfig.getPopulationSize(),
-            appConfig.getRunLogPath(),
+            appConfig->getPopulationSize(),
+            appConfig->getRunLogPath(),
             this->runConfig);
 
 
     //Set the rates of mutation etc
-    this->pop->setMinDepth(appConfig.getMinDepth());
-    this->pop->setDepthLimit(appConfig.getMaxDepth());
-    this->pop->setMutationRate(appConfig.getMutation());
-    this->pop->setCrossoverRate(appConfig.getCrossover());
-    this->pop->setElitismRate(appConfig.getElitism());
+    this->pop->setMinDepth(appConfig->getMinDepth());
+    this->pop->setDepthLimit(appConfig->getMaxDepth());
+    this->pop->setMutationRate(appConfig->getMutation());
+    this->pop->setCrossoverRate(appConfig->getCrossover());
+    this->pop->setElitismRate(appConfig->getElitism());
     //Set the return type for our programs
     this->pop->setReturnType(ReturnImage::TYPENUM);
 
     //this->pop->setLogFrequency(100);
-}
 
-void GpSimulation::init(vector<ImagePair> * imagePairs)
-{
-    this->imagePairs = imagePairs;
 
     //Set the fitness class to be used
-    this->runConfig->fitnessObject = new VisionFitness(this->runConfig, this->imagePairs);
+    this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getImagePairs());
 
     //Initialise the fitness
     this->runConfig->fitnessObject->initFitness();
@@ -103,10 +99,13 @@ bool GpSimulation::tick(int generations)
     this->pop->getBest()->print(str1);
 
     VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
-    fitness->outputProgram(this->pop->getBest());
+    fitness->evalutateProgram(this->pop->getBest());
 
     return foundSolution;
 }
+
+
+
 
 void GpSimulation::cleanUp()
 {

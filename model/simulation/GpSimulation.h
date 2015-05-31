@@ -18,8 +18,7 @@ private:
     GPConfig * runConfig;
 public:
 
-    GpSimulation(GeneticVision::AppConfig);
-    void init(vector<ImagePair> *imagePairs);
+    GpSimulation(GeneticVision::AppConfig * appConfig);
     bool tick(int);
     void cleanUp();
 };

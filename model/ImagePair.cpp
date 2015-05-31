@@ -9,10 +9,14 @@ ImagePair::ImagePair() {
 
 }
 
-void ImagePair::loadFromFilePath(const std::string &trainingImagePath, const std::string &groundTruthPath)
+void ImagePair::loadTrainingImage(const std::string &trainingImagePath)
 {
-
+    this->trainingImagePath = trainingImagePath;
     this->trainingImage = cv::imread( trainingImagePath, CV_LOAD_IMAGE_GRAYSCALE );
+}
+void ImagePair::loadGroundTruth(const std::string &groundTruthPath)
+{
+    this->groundTruthPath = groundTruthPath;
     this->groundTruth = cv::imread( groundTruthPath, CV_LOAD_IMAGE_GRAYSCALE );
 }
 

@@ -6,7 +6,7 @@
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
 
-VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf), outputWindow("Best",100,100)
+VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf)
 {
     this->imagePairs = imagePairs;
     this->lastResult.resize(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
@@ -37,7 +37,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
 
 }
-void VisionFitness::evalutateProgram(GeneticProgram* prog)
+vector<cv::Mat > * VisionFitness::evalutateProgram(GeneticProgram* prog)
 {
 
     string progString;
@@ -63,20 +63,10 @@ void VisionFitness::evalutateProgram(GeneticProgram* prog)
     }
 
     prog->setFitness((double)(score/(double)(this->imagePairs->size())));
+    return &this->lastResult;
 
 }
 
-void VisionFitness::outputProgram(GeneticProgram* prog)
-{
-
-    string progString;
-    prog->print(progString);
-
-    this->evalutateProgram(prog);
-//
-    outputWindow.showImages(lastResult);
-    cout << "Best: " << prog->getFitness() << " " << progString << endl;
-}
 bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;
     for (; i<popSize; i++)

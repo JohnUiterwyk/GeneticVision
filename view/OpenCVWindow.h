@@ -2,6 +2,7 @@
 // Created by John Uiterwyk on 28/03/15.
 //
 
+#ifdef CV_HIGHGUI_ENABLED
 #ifndef _OPENCV_POC_OPENCVWINDOW_H_
 #define _OPENCV_POC_OPENCVWINDOW_H_
 
@@ -54,3 +55,4 @@ public:
 
 
 #endif //_OPENCV_POC_OPENCVWINDOW_H_
+#endif // CV_HIGHGUI_ENABLED

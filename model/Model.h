@@ -20,19 +20,11 @@ namespace GeneticVision
          Constructor.
         **************/
         Model();
-        void init(AppConfig &appConfig);
+        void init(AppConfig * appConfig);
         void initSimulation();
         bool  tickSmulation();
-        vector <ImagePair> getImagePairCollection();
-        vector <cv::Mat> getTrainingImages();
-        vector <cv::Mat> getGroundTruthImages();
-
-        vector <ImagePair> imagePairs;
-        vector <cv::Mat> trainingImages;
-        vector <cv::Mat> groundTruthImages;
 
     private:
-        vector< vector<string> > imageSetData;
         GpSimulation * gpSimulation;
 
     };

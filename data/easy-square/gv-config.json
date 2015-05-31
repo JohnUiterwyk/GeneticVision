@@ -1,0 +1,33 @@
+{
+  "runLogPath":"output/run_log.txt",
+  "populationSize": 150,
+  "maxGenerations":1000,
+  "mutation":0.28,
+  "crossover":0.70,
+  "elitism":0.02,
+  "minDepth": 2,
+  "maxDepth":5,
+  "outputDirectory":"",
+  "imagePairPaths": [
+    {"test": "images/easy-square0001.png", "truth":"images/easy-square0001-mask.png"},
+    {"test": "images/easy-square0002.png", "truth":"images/easy-square0002-mask.png"},
+    {"test": "images/easy-square0003.png", "truth":"images/easy-square0003-mask.png"},
+    {"test": "images/easy-square0004.png", "truth":"images/easy-square0004-mask.png"},
+    {"test": "images/easy-square0005.png", "truth":"images/easy-square0005-mask.png"},
+    {"test": "images/easy-square0006.png", "truth":"images/easy-square0006-mask.png"},
+    {"test": "images/easy-square0007.png", "truth":"images/easy-square0007-mask.png"},
+    {"test": "images/easy-square0008.png", "truth":"images/easy-square0008-mask.png"},
+    {"test": "images/easy-square0009.png", "truth":"images/easy-square0009-mask.png"},
+    {"test": "images/easy-square0010.png", "truth":"images/easy-square0010-mask.png"},
+    {"test": "images/easy-square0011.png", "truth":"images/easy-square0011-mask.png"},
+    {"test": "images/easy-square0012.png", "truth":"images/easy-square0012-mask.png"},
+    {"test": "images/easy-square0013.png", "truth":"images/easy-square0013-mask.png"},
+    {"test": "images/easy-square0014.png", "truth":"images/easy-square0014-mask.png"},
+    {"test": "images/easy-square0015.png", "truth":"images/easy-square0015-mask.png"},
+    {"test": "images/easy-square0016.png", "truth":"images/easy-square0016-mask.png"},
+    {"test": "images/easy-square0017.png", "truth":"images/easy-square0017-mask.png"},
+    {"test": "images/easy-square0018.png", "truth":"images/easy-square0018-mask.png"},
+    {"test": "images/easy-square0019.png", "truth":"images/easy-square0019-mask.png"},
+    {"test": "images/easy-square0020.png", "truth":"images/easy-square0020-mask.png"}
+  ]
+}

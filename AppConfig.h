@@ -7,6 +7,8 @@
 
 #include <string>
 #include <vector>
+#include "model/ImagePair.h"
+
 using namespace std;
 namespace GeneticVision
 {
@@ -20,24 +22,19 @@ namespace GeneticVision
         double elitism;
         int minDepth;
         int maxDepth;
-        int logFrequency;
         string runLogPath;
-        vector<vector<string> > imagePairPaths;
-        string imageDirectoryPath;
+        int logFrequency;
+        bool guiEnabled;
+        vector<ImagePair > imagePairs;
+
+        string workingDirectory;
 
     public:
-        AppConfig():
-            populationSize(100),
-            mutation(0.28),
-            crossover(0.70),
-            elitism(0.02),
-            minDepth(2),
-            maxDepth(5),
-            runLogPath("output/run_log.txt")
+        AppConfig()
         {
 
         };
-        void loadConfigFile(const string * filepath);
+        void loadConfigFile(const string *filepath);
         int getPopulationSize() const {
             return populationSize;
         }
@@ -64,14 +61,14 @@ namespace GeneticVision
         int getLogFrequency() const {
             return logFrequency;
         }
-        vector<vector<string> > getImagePairPaths()  {
-            return this->imagePairPaths;
+        vector<ImagePair > * getImagePairs()  {
+            return &this->imagePairs;
         }
         const char * getRunLogPath() const {
             return runLogPath.c_str();
         }
-        const char * getImageDirectoryPath() const {
-            return imageDirectoryPath.c_str();
+        const char * getWorkingDirectory() const {
+            return workingDirectory.c_str();
         }
 
     };

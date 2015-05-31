@@ -16,7 +16,6 @@ util/jsoncpp.cpp
 util/json/json.h
 util/json/json-forwards.h
 model/ImagePair.cpp model/ImagePair.h
-model/Model.cpp model/Model.h
 view/OpenCVWindow.cpp view/OpenCVWindow.h
 model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
 model/simulation/types/ReturnDouble.cpp model/simulation/types/ReturnDouble.h

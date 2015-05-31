@@ -7,6 +7,10 @@
 
 #include "../model/Model.h"
 
+#ifdef CV_HIGHGUI_ENABLED
+#include "OpenCVWindow.h"
+#endif
+
 namespace GeneticVision {
     class ViewController {
     public:
