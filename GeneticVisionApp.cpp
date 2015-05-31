@@ -4,9 +4,12 @@
 
 #include "GeneticVisionApp.h"
 #include <string>
-#include "model/ImagePair.h"
-#include "view/OpenCVWindow.h"
+#include <vector>
+#include "model/simulation/RunResult.h"
 
+#ifdef CV_HIGHGUI_ENABLED
+#include "view/OpenCVWindow.h"
+#endif //CV_HIGHGUI_ENABLED
 
 
 namespace GeneticVision
@@ -19,13 +22,23 @@ namespace GeneticVision
 
         this->appConfig.loadConfigFile(jsonConfigFilePath);
         this->gpSimulation = new GpSimulation(&this->appConfig);
-        
-        bool solutionFound = false;
+
+
+#ifdef CV_HIGHGUI_ENABLED
+        OpenCVWindow output("output",100,100);
+#endif //CV_HIGHGUI_ENABLED
+
+        RunResult runResult;
         do
         {
-            solutionFound = this->gpSimulation->tick(1);
-        }while(solutionFound == false);
-        waitKey(0);
+            runResult = this->gpSimulation->tick(this->appConfig.getGenerationsPerTick());
+            cout << runResult.toString() << endl;
+
+#ifdef CV_HIGHGUI_ENABLED
+            output.showImages(runResult.bestResultImages);
+#endif //CV_HIGHGUI_ENABLED
+
+        }while(runResult.solutionFound == false && runResult.generationId < this->appConfig.getMaxGenerations());
     }
 
     GeneticVisionApp::~GeneticVisionApp() {

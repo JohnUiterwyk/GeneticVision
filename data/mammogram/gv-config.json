@@ -1,0 +1,17 @@
+{
+  "populationSize": 1000,
+  "maxGenerations":300,
+  "generationsPerTick":1,
+  "mutation":0.29,
+  "crossover":0.70,
+  "elitism":0.01,
+  "minDepth": 2,
+  "maxDepth":5,
+  "runLogPath":"output/run_log.txt",
+  "showImagesInHighGuiWindow": true,
+  "saveBestImagesToDisk": true,
+  "runResultOutputDirectory":"output/",
+  "imagePairPaths": [
+    {"test": "mg-300.jpg", "truth":"mg-truth.jpg"}
+  ]
+}

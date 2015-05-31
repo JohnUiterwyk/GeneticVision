@@ -21,8 +21,9 @@ void GeneticVision::AppConfig::loadConfigFile(const string *filepath)
     Json::Value root;
     config_json >> root;
 
-    this->workingDirectory = filepath->substr(0, filepath->find_last_of("\\/"));
+    this->workingDirectory = filepath->substr(0, filepath->find_last_of("\\/"))+"/";
 
+    // fetch values from json, or use default if not present
     this->runLogPath =      root.get("runLogPath", "output/run_log.txt" ).asString();
     this->populationSize =  root.get("populationSize",100 ).asInt();
     this->mutation =        root.get("mutation",0.70 ).asDouble();
@@ -30,16 +31,22 @@ void GeneticVision::AppConfig::loadConfigFile(const string *filepath)
     this->elitism =         root.get("elitism",0.28).asDouble();
     this->minDepth =         root.get("minDepth",2).asInt();
     this->maxDepth =         root.get("maxDepth",5).asInt();
+    this->maxGenerations =         root.get("maxGenerations",100).asInt();
+    this->generationsPerTick =         root.get("generationsPerTick",1).asInt();
 
     //load image paths / images
     const Json::Value imagePairPaths = root["imagePairPaths"];
     this->imagePairs.resize(imagePairPaths.size());
     for ( int index = 0; index < imagePairPaths.size(); ++index )
     {
+        string testImage = this->workingDirectory + imagePairPaths[index].get("test","").asString();
+        string truthImage = this->workingDirectory + imagePairPaths[index].get("truth","").asString();
+        cout << testImage << endl;
+        cout << truthImage << endl;
 
-        this->imagePairs[index].loadTrainingImage(imagePairPaths[index].get("test","").asString()) ;
-        this->imagePairs[index].loadGroundTruth(imagePairPaths[index].get("truth","").asString()) ;
+        this->imagePairs[index].loadTrainingImage(testImage) ;
+        this->imagePairs[index].loadGroundTruth(truthImage) ;
         // Iterates over the sequence elements.
     }
-    cout << "Loaded " << imagePairPaths.size() << " image pairs" << endl;
+    cout << "Loaded " << this->imagePairs.size() << " image pairs" << endl;
 }

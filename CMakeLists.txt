@@ -31,7 +31,7 @@ model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVF
 model/simulation/functions/TFunction.h
 model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
 model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
-model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h AppConfig.cpp AppConfig.h view/StdOutView.cpp view/StdOutView.h view/ViewController.cpp view/ViewController.h)
+model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h AppConfig.cpp AppConfig.h view/StdOutView.cpp view/StdOutView.h view/ViewController.cpp view/ViewController.h model/simulation/RunResult.cpp model/simulation/RunResult.h)
 
 add_definitions(-DCV_HIGHGUI_ENABLED)
 

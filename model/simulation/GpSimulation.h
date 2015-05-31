@@ -9,6 +9,7 @@
 #include "../../AppConfig.h"
 #include "../../rmitgp/Population.h"
 #include "../ImagePair.h"
+#include "RunResult.h"
 
 class GpSimulation {
 
@@ -19,7 +20,7 @@ private:
 public:
 
     GpSimulation(GeneticVision::AppConfig * appConfig);
-    bool tick(int);
+    RunResult tick(int);
     void cleanUp();
 };
 

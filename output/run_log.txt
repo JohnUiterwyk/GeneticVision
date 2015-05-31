@@ -1,0 +1,11 @@
+*****************************************
+Generation 0
+Time Mon Jun  1 00:43:17 2015
+BestFitness 1
+WorstFitness 100
+AverageFitness 82.2995
+AverageDepth 3.374
+AverageSize 13.83
+StandardDeviationSize 9.50185
+Evaluation 500
+ParsimonyCoeff 0

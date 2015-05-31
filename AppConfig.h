@@ -16,18 +16,6 @@ namespace GeneticVision
     {
 
     private:
-        int populationSize;
-        double mutation;
-        double crossover;
-        double elitism;
-        int minDepth;
-        int maxDepth;
-        string runLogPath;
-        int logFrequency;
-        bool guiEnabled;
-        vector<ImagePair > imagePairs;
-
-        string workingDirectory;
 
     public:
         AppConfig()
@@ -64,12 +52,38 @@ namespace GeneticVision
         vector<ImagePair > * getImagePairs()  {
             return &this->imagePairs;
         }
-        const char * getRunLogPath() const {
-            return runLogPath.c_str();
+        const string getRunLogPath() const {
+            return runLogPath;
         }
-        const char * getWorkingDirectory() const {
-            return workingDirectory.c_str();
+        const string getWorkingDirectory() const {
+            return workingDirectory;
         }
+
+        int getMaxGenerations() const {
+            return maxGenerations;
+        }
+
+        int getGenerationsPerTick() const {
+            return generationsPerTick;
+        }
+
+    private:
+        int populationSize;
+        double mutation;
+        double crossover;
+        double elitism;
+        int minDepth;
+        int maxDepth;
+        string runLogPath;
+        int logFrequency;
+        bool guiEnabled;
+        vector<ImagePair > imagePairs;
+        string workingDirectory;
+        int maxGenerations;
+        int generationsPerTick;
+        bool showImagesInHighGuiWindow;
+    public:
+
 
     };
 

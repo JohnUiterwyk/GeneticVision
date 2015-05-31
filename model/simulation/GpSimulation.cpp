@@ -51,8 +51,8 @@ GpSimulation::GpSimulation(GeneticVision::AppConfig * appConfig)
 
 
     //Set the depth limit for the system
-    this->runConfig->maxDepth = 5;
-    this->runConfig->minDepth = 2;
+    this->runConfig->maxDepth = appConfig->getMaxDepth();
+    this->runConfig->minDepth = appConfig->getMinDepth();
 
     //Create the program generator
     this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
@@ -61,7 +61,7 @@ GpSimulation::GpSimulation(GeneticVision::AppConfig * appConfig)
 
     this->pop = new Population(
             appConfig->getPopulationSize(),
-            appConfig->getRunLogPath(),
+            appConfig->getRunLogPath().c_str(),
             this->runConfig);
 
 
@@ -74,7 +74,6 @@ GpSimulation::GpSimulation(GeneticVision::AppConfig * appConfig)
     //Set the return type for our programs
     this->pop->setReturnType(ReturnImage::TYPENUM);
 
-    //this->pop->setLogFrequency(100);
 
 
     //Set the fitness class to be used
@@ -85,25 +84,31 @@ GpSimulation::GpSimulation(GeneticVision::AppConfig * appConfig)
 
     //init the population
     this->pop->generateInitialPopulation();
+
+    //pseudo disable built int logging
+    this->pop->setLogFrequency(10000000);
     //this->pop->writeToFile();
 
 //    //clean up
 }
 
-bool GpSimulation::tick(int generations)
+RunResult GpSimulation::tick(int generations)
 {
     // run x generations
-    bool foundSolution = this->pop->evolve(generations);
-
-    string str1;
-    this->pop->getBest()->print(str1);
-
+    bool solutionFound = this->pop->evolve(generations);
+    GeneticProgram * best = this->pop->getBest();
     VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
-    fitness->evalutateProgram(this->pop->getBest());
 
-    return foundSolution;
+    RunResult runResult;
+    runResult.solutionFound = solutionFound;
+    runResult.generationId = this->pop->getGenerationNumber();
+    runResult.bestProgramId = best->getProgramID();
+    runResult.bestProgramFitness = best->getFitness();
+    runResult.bestResultImages = fitness->getResultImages(best);
+    best->print(runResult.bestProgramString);
+
+    return runResult;
 }
-
 
 
 
@@ -111,3 +116,5 @@ void GpSimulation::cleanUp()
 {
     this->runConfig->cleanUpObjects();
 }
+
+

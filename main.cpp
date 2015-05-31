@@ -14,7 +14,7 @@ int main( int argc, char** argv )
     if(argc==2)
     {
         jsonConfigFilePath.append(argv[1]);
-        GeneticVisionApp app = GeneticVisionApp(&jsonConfigFilePath);
+        GeneticVisionApp app(&jsonConfigFilePath);
     }
     else
     {

@@ -9,7 +9,6 @@
 VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf)
 {
     this->imagePairs = imagePairs;
-    this->lastResult.resize(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
 }
 
 VisionFitness::~VisionFitness() { }
@@ -25,7 +24,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
     for(i=0; i<popSize; i++)
     {
-        this->evalutateProgram(pop[i]);
+        this->evaluateProgram(pop[i]);
         if(this->isBetter(pop[i],best))
         {
             best = pop[i];
@@ -37,11 +36,8 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
 
 }
-vector<cv::Mat > * VisionFitness::evalutateProgram(GeneticProgram* prog)
+void VisionFitness::evaluateProgram(GeneticProgram* prog)
 {
-
-    string progString;
-    prog->print(progString);
     ReturnImage returnImage;
     ImagePair * testPair;
     double score = 0;
@@ -54,19 +50,36 @@ vector<cv::Mat > * VisionFitness::evalutateProgram(GeneticProgram* prog)
         testPair = &(this->imagePairs->at(i));
         ImageInput::setValue(testPair->getTrainingImage());
         prog->evaluate(&returnImage);
-        returnImage.getData().copyTo(lastResult[i]);
 
+        // measure difference between result image and truth
         cv::Mat diff_mat;
         cv::compare(testPair->getGroundTruth(), returnImage.getData(), diff_mat, cv::CMP_EQ);
         int nonzero = cv::countNonZero(diff_mat);
+
+        // this is the number correct pixels divided by total number of pixels
+        // added to the total score so far
         score += 100* (size - (double)nonzero)/size;
     }
 
+    // average the score from all result images
     prog->setFitness((double)(score/(double)(this->imagePairs->size())));
-    return &this->lastResult;
 
 }
 
+vector<cv::Mat> VisionFitness::getResultImages(GeneticProgram* prog)
+{
+    vector<cv::Mat> resultImages(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
+    ReturnImage returnImage;
+    ImagePair * testPair;
+    for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
+    {
+        testPair = &(this->imagePairs->at(i));
+        ImageInput::setValue(testPair->getTrainingImage());
+        prog->evaluate(&returnImage);
+        returnImage.getData().copyTo(resultImages[i]);
+    }
+    return resultImages;
+}
 bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;
     for (; i<popSize; i++)
