@@ -9,7 +9,7 @@ using namespace std;
 
 const string Mean::NAME = "cv_mean";
 
-Mean::Mean(GPConfig *conf) : TFunction(conf, 1)
+Mean::Mean(GPConfig *conf) : TFunction<Mean, ReturnDouble>(conf, 1)
 {
       setArgNReturnType(0, ReturnImage::TYPENUM);
 }

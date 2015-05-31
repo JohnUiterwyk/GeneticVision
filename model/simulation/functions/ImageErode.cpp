@@ -10,7 +10,7 @@
 
 const string ImageErode::NAME = "cv_erode";
 
-ImageErode::ImageErode(GPConfig *conf) : TFunction(conf, 3)
+ImageErode::ImageErode(GPConfig *conf) : TFunction<ImageErode, ReturnImage>(conf, 3)
 {
     setArgNReturnType(0, ReturnImage::TYPENUM);
     setArgNReturnType(1, ReturnDouble::TYPENUM);

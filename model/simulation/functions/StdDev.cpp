@@ -9,7 +9,7 @@ using namespace std;
 
 const string StdDev::NAME = "cv_stddev";
 
-StdDev::StdDev(GPConfig *conf) : TFunction(conf, 1)
+StdDev::StdDev(GPConfig *conf) : TFunction<StdDev, ReturnDouble>(conf, 1)
 {
       setArgNReturnType(0, ReturnImage::TYPENUM);
 }

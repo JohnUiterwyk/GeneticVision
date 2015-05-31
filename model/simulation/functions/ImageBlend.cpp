@@ -9,7 +9,7 @@
 
 const string ImageBlend::NAME = "cv_blend";
 
-ImageBlend::ImageBlend(GPConfig *conf) : TFunction(conf, 3)
+ImageBlend::ImageBlend(GPConfig *conf) : TFunction<ImageBlend, ReturnImage>(conf, 3)
 {
     setArgNReturnType(0, ReturnDouble::TYPENUM);
     setArgNReturnType(1, ReturnImage::TYPENUM);

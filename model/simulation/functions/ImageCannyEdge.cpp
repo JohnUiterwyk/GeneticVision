@@ -10,7 +10,7 @@
 
 const string ImageCannyEdge::NAME = "cv_canny_edge";
 
-ImageCannyEdge::ImageCannyEdge(GPConfig *conf) : TFunction(conf, 3)
+ImageCannyEdge::ImageCannyEdge(GPConfig *conf) : TFunction<ImageCannyEdge, ReturnImage>(conf, 3)
 {
     setArgNReturnType(0, ReturnImage::TYPENUM);
     setArgNReturnType(1, ReturnDouble::TYPENUM);

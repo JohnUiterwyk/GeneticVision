@@ -10,7 +10,7 @@
 
 const string ImageSobel::NAME = "cv_sobel";
 
-ImageSobel::ImageSobel(GPConfig *conf) : TFunction(conf, 3)
+ImageSobel::ImageSobel(GPConfig *conf) : TFunction<ImageSobel, ReturnImage>(conf, 3)
 {
     setArgNReturnType(0, ReturnImage::TYPENUM);
     setArgNReturnType(1, ReturnDouble::TYPENUM);

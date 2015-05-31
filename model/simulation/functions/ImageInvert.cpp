@@ -10,7 +10,7 @@
 
 const string ImageInvert::NAME = "cv_invert";
 
-ImageInvert::ImageInvert(GPConfig *conf) : TFunction(conf, 3)
+ImageInvert::ImageInvert(GPConfig *conf) : TFunction<ImageInvert, ReturnImage>(conf, 3)
 {
     setArgNReturnType(0, ReturnImage::TYPENUM);
     setArgNReturnType(1, ReturnDouble::TYPENUM);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.8)
 project(GeneticVision)
 
 find_package( OpenCV REQUIRED)
@@ -27,13 +27,12 @@ model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.
 model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
 model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
 model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h
-model/simulation/functions/OpenCVFunction.cpp model/simulation/functions/OpenCVFunction.h
 model/simulation/functions/TFunction.h
 model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
 model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
 model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h AppConfig.cpp AppConfig.h view/StdOutView.cpp view/StdOutView.h view/ViewController.cpp view/ViewController.h model/simulation/RunResult.cpp model/simulation/RunResult.h)
 
-add_definitions(-DCV_HIGHGUI_ENABLED)
+#add_definitions(-DCV_HIGHGUI_ENABLED) #disable on VPAC
 
 target_link_libraries(GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)
