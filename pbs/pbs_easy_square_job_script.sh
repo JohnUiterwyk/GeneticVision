@@ -21,6 +21,8 @@
 #       Note: Please ensure that the PBS -M option above is set.
 #
 #PBS -m abe
+#PBS -j oe
+#PBS -o pbs_gv_run.log
 
 
 # Changes directory to your execution directory (Leave as is)
@@ -30,4 +32,4 @@ cd $PBS_O_WORKDIR
 # module load R
 
 # The command to actually run the job
-./bin/GeneticVision ./data/easy-square/gv-config.json > output/pbs_gv_stdout.log
+../bin/GeneticVision ../data/easy-square/gv-config.json
