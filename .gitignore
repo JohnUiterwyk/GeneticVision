@@ -2,3 +2,5 @@
 librmitgp.a
 *.gen
 run-log.txt
+CMakeFiles
+run_log.txt

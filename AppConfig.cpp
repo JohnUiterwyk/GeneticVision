@@ -41,8 +41,8 @@ void GeneticVision::AppConfig::loadConfigFile(const string *filepath)
     {
         string testImage = this->workingDirectory + imagePairPaths[index].get("test","").asString();
         string truthImage = this->workingDirectory + imagePairPaths[index].get("truth","").asString();
-        cout << testImage << endl;
-        cout << truthImage << endl;
+        //cout << testImage << endl;
+        //cout << truthImage << endl;
 
         this->imagePairs[index].loadTrainingImage(testImage) ;
         this->imagePairs[index].loadGroundTruth(truthImage) ;
