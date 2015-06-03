@@ -24,6 +24,7 @@
 
 # Merging Standard Output
 #PBS -j oe
+#PBS -o $PBS_O_WORKDIR/../output/pbs_gv_compile.log
 
 ROOT_DIR=$PBS_O_WORKDIR/..
 BUILD_DIR=$PBS_O_WORKDIR/../build
@@ -32,7 +33,6 @@ OUTPUT_DIR=$PBS_O_WORKDIR/../output
 STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_compile.log
 touch STDOUT_LOG
 # Set output file
-#PBS -o STDOUT_LOG
 
 # Changes directory to your execution directory (Leave as is)
 cd $PBS_O_WORKDIR
@@ -51,6 +51,6 @@ cd $BUILD_DIR
 cmake $ROOT_DIR
 make
 mv GeneticVision $BIN_DIR
-rm -f $BUILD_DIR
+rm -rf $BUILD_DIR
 cd $PBS_O_WORKDIR
 
