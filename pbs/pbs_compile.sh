@@ -23,15 +23,19 @@
 #PBS -m abe
 
 # Merging Standard Output
-#PBS -j oe
-#PBS -o $PBS_O_WORKDIR/../output/pbs_gv_compile.log
 
 ROOT_DIR=$PBS_O_WORKDIR/..
 BUILD_DIR=$PBS_O_WORKDIR/../build
 BIN_DIR=$PBS_O_WORKDIR/../bin
 OUTPUT_DIR=$PBS_O_WORKDIR/../output
 STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_compile.log
-touch STDOUT_LOG
+
+mkdir $OUTPUT_DIR
+mkdir $BUILD_DIR
+mkdir $BIN_DIR
+#PBS -j oe
+#PBS -o ../output/pbs_gv_compile.log
+
 # Set output file
 
 # Changes directory to your execution directory (Leave as is)
@@ -39,9 +43,6 @@ cd $PBS_O_WORKDIR
 cd $ROOT_DIR
 
 # make the directories just in case
-mkdir $OUTPUT_DIR
-mkdir $BUILD_DIR
-mkdir $BIN_DIR
 
 # Load the environment variables for cmake
 module load cmake
