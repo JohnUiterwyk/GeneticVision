@@ -5,8 +5,11 @@ find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-
-include_directories(${CMAKE_SOURCE_DIR}/LibProject/inc)
+add_custom_target(
+   librmitgp
+   COMMAND make
+   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/rmitgp
+)
 
 set(SOURCE_FILES src/main.cpp)
 add_executable(
@@ -52,3 +55,4 @@ ENDIF(GUI)
 
 target_link_libraries(GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/src/rmitgp/librmitgp.a)
+add_dependencies(GeneticVision librmitgp)
