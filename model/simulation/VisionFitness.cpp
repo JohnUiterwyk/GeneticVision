@@ -61,6 +61,14 @@ void VisionFitness::evaluateProgram(GeneticProgram* prog)
         score += 100* (size - (double)nonzero)/size;
     }
 
+    // Idea for improving fitness:
+    // use an ensemble for fitness from best X of past generations;  add Mats , then use threshold of n/2
+    // also use boosting: keep a running weight for each image.
+    // decrease  weight of correctly classified examples.
+    // Then use that weight when calculating fitness of next generation
+    // Also, make this a setting in the config for fitness function
+    //
+    // current approach:
     // average the score from all result images
     prog->setFitness((double)(score/(double)(this->imagePairs->size())));
 
