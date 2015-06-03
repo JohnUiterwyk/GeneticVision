@@ -30,7 +30,7 @@ BUILD_DIR=$PBS_O_WORKDIR/../build
 BIN_DIR=$PBS_O_WORKDIR/../bin
 OUTPUT_DIR=$PBS_O_WORKDIR/../output
 STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_compile.log
-
+touch STDOUT_LOG
 # Set output file
 #PBS -o STDOUT_LOG
 
