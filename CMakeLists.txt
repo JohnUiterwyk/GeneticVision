@@ -6,40 +6,41 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
+include_directories(${CMAKE_SOURCE_DIR}/LibProject/inc)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES src/main.cpp)
 add_executable(
 GeneticVision
 ${SOURCE_FILES}
-GeneticVisionApp.cpp
-GeneticVisionApp.h
-util/jsoncpp.cpp
-util/json/json.h
-util/json/json-forwards.h
-model/ImagePair.cpp model/ImagePair.h
-view/OpenCVWindow.cpp view/OpenCVWindow.h
-model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
-model/simulation/types/ReturnDouble.cpp model/simulation/types/ReturnDouble.h
-model/simulation/GpSimulation.cpp model/simulation/GpSimulation.h
-model/simulation/types/ReturnImage.cpp model/simulation/types/ReturnImage.h
-model/simulation/functions/ImageThreshold.cpp model/simulation/functions/ImageThreshold.h
-model/simulation/terminals/RandDouble.cpp model/simulation/terminals/RandDouble.h
-model/simulation/terminals/ImageInput.cpp model/simulation/terminals/ImageInput.h
-model/simulation/functions/PlusDouble.cpp model/simulation/functions/PlusDouble.h
-model/simulation/VisionFitness.cpp model/simulation/VisionFitness.h
-model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/ImageGaussianBlur.h
-model/simulation/functions/TFunction.h
-model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
-model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
-model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h
-model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h
-model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h
-model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h
-model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h
-AppConfig.cpp AppConfig.h
-view/StdOutView.cpp view/StdOutView.h
-view/ViewController.cpp view/ViewController.h
-model/simulation/RunResult.cpp model/simulation/RunResult.h)
+src/GeneticVisionApp.cpp
+src/GeneticVisionApp.h
+src/util/jsoncpp.cpp
+src/util/json/json.h
+src/util/json/json-forwards.h
+src/model/ImagePair.cpp src/model/ImagePair.h
+src/view/OpenCVWindow.cpp src/view/OpenCVWindow.h
+src/model/simulation/VisionFitness.cpp src/model/simulation/VisionFitness.h
+src/model/simulation/types/ReturnDouble.cpp src/model/simulation/types/ReturnDouble.h
+src/model/simulation/GpSimulation.cpp src/model/simulation/GpSimulation.h
+src/model/simulation/types/ReturnImage.cpp src/model/simulation/types/ReturnImage.h
+src/model/simulation/functions/ImageThreshold.cpp src/model/simulation/functions/ImageThreshold.h
+src/model/simulation/terminals/RandDouble.cpp src/model/simulation/terminals/RandDouble.h
+src/model/simulation/terminals/ImageInput.cpp src/model/simulation/terminals/ImageInput.h
+src/model/simulation/functions/PlusDouble.cpp src/model/simulation/functions/PlusDouble.h
+src/model/simulation/VisionFitness.cpp src/model/simulation/VisionFitness.h
+src/model/simulation/functions/ImageGaussianBlur.cpp src/model/simulation/functions/ImageGaussianBlur.h
+src/model/simulation/functions/TFunction.h
+src/model/simulation/functions/Mean.h src/model/simulation/functions/Mean.cpp
+src/model/simulation/functions/StdDev.h src/model/simulation/functions/StdDev.cpp
+src/model/simulation/functions/ImageBlend.cpp src/model/simulation/functions/ImageBlend.h
+src/model/simulation/functions/ImageCannyEdge.cpp src/model/simulation/functions/ImageCannyEdge.h
+src/model/simulation/functions/ImageInvert.cpp src/model/simulation/functions/ImageInvert.h
+src/model/simulation/functions/ImageErode.cpp src/model/simulation/functions/ImageErode.h
+src/model/simulation/functions/ImageSobel.cpp src/model/simulation/functions/ImageSobel.h
+src/AppConfig.cpp src/AppConfig.h
+src/view/StdOutView.cpp src/view/StdOutView.h
+src/view/ViewController.cpp src/view/ViewController.h
+src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h)
 
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui
@@ -50,4 +51,4 @@ IF(GUI)
 ENDIF(GUI)
 
 target_link_libraries(GeneticVision ${OpenCV_LIBS} )
-target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)
+target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/src/rmitgp/librmitgp.a)
