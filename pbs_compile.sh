@@ -28,11 +28,11 @@ cd $PBS_O_WORKDIR
 
 # Load the environment variables for R
 # module load R
-module load cmake
+module load cmake >> $PBS_O_WORKDIR/output/pbs_gv_stdout.log
 
 # The command to actually run the job
-mkdir build
-cd build
-cmake ..
-make
+mkdir build >> $PBS_O_WORKDIR/output/pbs_gv_stdout.log
+cd build >> $PBS_O_WORKDIR/output/pbs_gv_stdout.log
+cmake .. >> $PBS_O_WORKDIR/output/pbs_gv_stdout.log
+make >> $PBS_O_WORKDIR/output/pbs_gv_stdout.log
 
