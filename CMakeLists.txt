@@ -6,6 +6,7 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
+
 set(SOURCE_FILES main.cpp)
 add_executable(
 GeneticVision
@@ -30,9 +31,20 @@ model/simulation/functions/ImageGaussianBlur.cpp model/simulation/functions/Imag
 model/simulation/functions/TFunction.h
 model/simulation/functions/Mean.h model/simulation/functions/Mean.cpp
 model/simulation/functions/StdDev.h model/simulation/functions/StdDev.cpp
-model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h AppConfig.cpp AppConfig.h view/StdOutView.cpp view/StdOutView.h view/ViewController.cpp view/ViewController.h model/simulation/RunResult.cpp model/simulation/RunResult.h)
+model/simulation/functions/ImageBlend.cpp model/simulation/functions/ImageBlend.h
+model/simulation/functions/ImageCannyEdge.cpp model/simulation/functions/ImageCannyEdge.h
+model/simulation/functions/ImageInvert.cpp model/simulation/functions/ImageInvert.h
+model/simulation/functions/ImageErode.cpp model/simulation/functions/ImageErode.h
+model/simulation/functions/ImageSobel.cpp model/simulation/functions/ImageSobel.h
+AppConfig.cpp AppConfig.h
+view/StdOutView.cpp view/StdOutView.h
+view/ViewController.cpp view/ViewController.h
+model/simulation/RunResult.cpp model/simulation/RunResult.h)
 
-#add_definitions(-DCV_HIGHGUI_ENABLED) #disable on VPAC
+# CV_HIGHGUI_ENABLED flag
+# This enables a GUI output window on systems that can support opencv highgui
+# note: disable on VPAC since it is not supported
+add_definitions(-DCV_HIGHGUI_ENABLED)
 
 target_link_libraries(GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)
