@@ -5,6 +5,8 @@ find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+# build the librmitgp if needed
 add_custom_target(
    librmitgp
    COMMAND make
