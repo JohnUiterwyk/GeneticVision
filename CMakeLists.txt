@@ -44,7 +44,10 @@ model/simulation/RunResult.cpp model/simulation/RunResult.h)
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui
 # note: disable on VPAC since it is not supported
-add_definitions(-DCV_HIGHGUI_ENABLED)
+OPTION(GUI "Enable guid window" OFF)
+IF(GUI)
+    add_definitions(-DCV_HIGHGUI_ENABLED)
+ENDIF(GUI)
 
 target_link_libraries(GeneticVision ${OpenCV_LIBS} )
 target_link_libraries(GeneticVision ${CMAKE_SOURCE_DIR}/rmitgp/librmitgp.a)
