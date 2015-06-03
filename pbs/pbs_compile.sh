@@ -21,24 +21,36 @@
 #       Note: Please ensure that the PBS -M option above is set.
 #
 #PBS -m abe
+
+# Merging Standard Output
+#PBS -j oe
+
 ROOT_DIR=$PBS_O_WORKDIR/..
 BUILD_DIR=$PBS_O_WORKDIR/../build
+BIN_DIR=$PBS_O_WORKDIR/../bin
 OUTPUT_DIR=$PBS_O_WORKDIR/../output
-STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_stdout.log
+STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_compile.log
+
+# Set output file
+#PBS -o STDOUT_LOG
 
 # Changes directory to your execution directory (Leave as is)
 cd $PBS_O_WORKDIR
 cd $ROOT_DIR
 
+# make the directories just in case
 mkdir $OUTPUT_DIR
+mkdir $BUILD_DIR
+mkdir $BIN_DIR
 
-# Load the environment variables for R
-# module load R
-module load cmake >> OUTPUT_DIR/pbs_gv_stdout.log
+# Load the environment variables for cmake
+module load cmake
 
 # The command to actually run the job
-mkdir $BUILD_DIR
-cd $BUILD_DIR >> $STDOUT_LOG
-cmake ROOT_DIR >> $STDOUT_LOG
-make >> $STDOUT_LOG
+cd $BUILD_DIR
+cmake $ROOT_DIR
+make
+mv GeneticVision $BIN_DIR
+rm -f $BUILD_DIR
 cd $PBS_O_WORKDIR
+
