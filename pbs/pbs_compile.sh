@@ -21,31 +21,30 @@
 #       Note: Please ensure that the PBS -M option above is set.
 #
 #PBS -m abe
+#PBS -j oe
+#PBS -o pbs_gv_compile.log
+cd $PBS_O_WORKDIR
 
 # Merging Standard Output
 
 ROOT_DIR=$PBS_O_WORKDIR/..
 BUILD_DIR=$PBS_O_WORKDIR/../build
 BIN_DIR=$PBS_O_WORKDIR/../bin
-OUTPUT_DIR=$PBS_O_WORKDIR/../output
-STDOUT_LOG=$PBS_O_WORKDIR/../output/pbs_gv_compile.log
 
-mkdir $OUTPUT_DIR
-mkdir $BUILD_DIR
-mkdir $BIN_DIR
-#PBS -j oe
-#PBS -o ../output/pbs_gv_compile.log
+mkdir -p $BUILD_DIR
+mkdir -p $BIN_DIR
 
 # Set output file
 
 # Changes directory to your execution directory (Leave as is)
-cd $PBS_O_WORKDIR
+
 cd $ROOT_DIR
 
 # make the directories just in case
 
-# Load the environment variables for cmake
-module load cmake
+# Load the environment variables for cmake and gcc
+module load gcc/4.9.2
+module load cmake/3.0.1
 
 # The command to actually run the job
 cd $BUILD_DIR
