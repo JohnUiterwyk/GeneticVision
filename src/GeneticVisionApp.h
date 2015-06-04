@@ -5,8 +5,8 @@
 #ifndef GENETICVISION_GENETICVISIONAPP_H
 #define GENETICVISION_GENETICVISIONAPP_H
 #include <string>
-#include "model/Model.h"
 #include "view/ViewController.h"
+#include "model/simulation/GvSimulation.h"
 
 
 using namespace std;
@@ -26,7 +26,7 @@ namespace GeneticVision
             virtual ~GeneticVisionApp();
 
         private:
-        GpSimulation * gpSimulation;
+        GvSimulation *gvSimulation;
         ViewController * view;
         AppConfig appConfig;
 

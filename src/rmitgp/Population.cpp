@@ -54,7 +54,7 @@ Population::Population(int size, const char* logFileName, GPConfig *conf) :
   
    for(i=0; i<numIndividuals; i++)
    {
-      pop[i] = new GeneticProgram(config); 
+      pop[i] = new GeneticProgram(config);
 
       if (pop[i] == NULL)
          throw string("Population::Population() Error, out of memory");
@@ -148,10 +148,10 @@ Population::Population(Population &p) :
 Population::~Population()
 {
    int i;
-   if (evaluations > 0)
-   {
-	writeToFile();
-   }	
+//   if (evaluations > 0)
+//   {
+//	    writeToFile();
+//   }
 	logFile.close();
 	
    for(i=0; i<numIndividuals; i++)
@@ -970,8 +970,9 @@ istream& operator >> (istream& i, Population& p)
                programString.append(1, tmpChar);
             } while (tmpChar != '\n');
          }
-
-         p.pop[individual]->parseProgram(programString);          
+        cout << "Loading Program: " << programString << endl;
+         p.pop[individual]->parseProgram(programString);
+          cout << "Loading Complete" << endl;
       }
       else
       {

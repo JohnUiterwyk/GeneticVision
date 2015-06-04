@@ -8,11 +8,13 @@
   "elitism":0.02,
   "minDepth": 2,
   "maxDepth":5,
-  "runLogPath":"output/run_log.txt",
+  "logFrequency":10,
   "showImagesInHighGuiWindow": true,
   "saveBestImagesToDisk": true,
-  "runResultOutputDirectory":"output/",
-  "imagePairPaths": [
+  "loadPopulationEnabled":true,
+  "loadPopulationPath":"output/populations/gen_000000.gen",
+  "outputPath":"output/",
+  "imagePairs": [
     {"test": "images/easy-square0001.png", "truth":"images/easy-square0001-mask.png"},
     {"test": "images/easy-square0002.png", "truth":"images/easy-square0002-mask.png"},
     {"test": "images/easy-square0003.png", "truth":"images/easy-square0003-mask.png"},

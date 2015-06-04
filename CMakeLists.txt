@@ -26,7 +26,7 @@ src/model/ImagePair.cpp src/model/ImagePair.h
 src/view/OpenCVWindow.cpp src/view/OpenCVWindow.h
 src/model/simulation/VisionFitness.cpp src/model/simulation/VisionFitness.h
 src/model/simulation/types/ReturnDouble.cpp src/model/simulation/types/ReturnDouble.h
-src/model/simulation/GpSimulation.cpp src/model/simulation/GpSimulation.h
+src/model/simulation/GvSimulation.cpp src/model/simulation/GvSimulation.h
 src/model/simulation/types/ReturnImage.cpp src/model/simulation/types/ReturnImage.h
 src/model/simulation/functions/ImageThreshold.cpp src/model/simulation/functions/ImageThreshold.h
 src/model/simulation/terminals/RandDouble.cpp src/model/simulation/terminals/RandDouble.h
@@ -45,7 +45,7 @@ src/model/simulation/functions/ImageSobel.cpp src/model/simulation/functions/Ima
 src/AppConfig.cpp src/AppConfig.h
 src/view/StdOutView.cpp src/view/StdOutView.h
 src/view/HighGuiView.cpp src/view/HighGuiView.h
-src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h src/view/ViewController.cpp src/view/ViewController.h)
+src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h src/view/ViewController.cpp src/view/ViewController.h src/model/simulation/GvPopulation.cpp src/model/simulation/GvPopulation.h)
 
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui

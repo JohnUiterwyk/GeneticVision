@@ -32,5 +32,5 @@ cd $PBS_O_WORKDIR
 # module load R
 
 # The command to actually run the job
-mkdir -p ../output
-../bin/GeneticVision ../data/easy-square/gv-config.json >> ../output/pbs_easy_square.log
+mkdir -p output
+../../bin/GeneticVision gv-config.json >> output/pbs_easy_square.log

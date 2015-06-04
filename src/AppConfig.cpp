@@ -6,6 +6,7 @@
 #include <streambuf>
 #include <string>
 #include <iostream>
+#include <sys/stat.h>
 #include "util/json/json.h"
 #include "AppConfig.h"
 
@@ -21,10 +22,29 @@ void GeneticVision::AppConfig::loadConfigFile(const string *filepath)
     Json::Value root;
     config_json >> root;
 
-    this->workingDirectory = filepath->substr(0, filepath->find_last_of("\\/"))+"/";
+    string configFileDirectory = filepath->substr(0, filepath->find_last_of("\\/"))+"/";
+    this->rootPath = root.get("rootPath", configFileDirectory ).asString();
+    this->outputPath = this->rootPath + root.get("outputPath", "output/" ).asString();
+    this->popFilesPath = this->outputPath + "populations/";
+    this->imagesOutputPath = this->outputPath + "images/";
+    this->runLogPath = this->outputPath + "output.log";
+
+    //
+    this->loadPopulationEnabled =  root.get("loadPopulationEnabled",false ).asBool();
+    if(this->loadPopulationEnabled)
+    {
+        this->loadPopulationPath = this->rootPath + root.get("loadPopulationPath", "output/populations/gen_latest.gen" ).asString();
+    }
+
+    // create directories
+    mode_t process_mask = umask(0);
+    int result_code1 = mkdir(this->outputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+    int result_code2 = mkdir(this->popFilesPath.c_str(),S_IRWXU | S_IREAD | S_IWRITE);
+    int result_code3 = mkdir(this->imagesOutputPath.c_str(),S_IRWXU | S_IREAD | S_IWRITE);
+    umask(process_mask);
 
     // fetch values from json, or use default if not present
-    this->runLogPath =      root.get("runLogPath", "output/run_log.txt" ).asString();
+    this->logFrequency =  root.get("logFrequency",10 ).asInt();
     this->populationSize =  root.get("populationSize",100 ).asInt();
     this->mutation =        root.get("mutation",0.70 ).asDouble();
     this->crossover =       root.get("crossover",0.02 ).asDouble();
@@ -35,12 +55,13 @@ void GeneticVision::AppConfig::loadConfigFile(const string *filepath)
     this->generationsPerTick =         root.get("generationsPerTick",1).asInt();
 
     //load image paths / images
-    const Json::Value imagePairPaths = root["imagePairPaths"];
+    const Json::Value imagePairPaths = root["imagePairs"];
     this->imagePairs.resize(imagePairPaths.size());
+
     for ( int index = 0; index < imagePairPaths.size(); ++index )
     {
-        string testImage = this->workingDirectory + imagePairPaths[index].get("test","").asString();
-        string truthImage = this->workingDirectory + imagePairPaths[index].get("truth","").asString();
+        string testImage = configFileDirectory + imagePairPaths[index].get("test","").asString();
+        string truthImage = configFileDirectory + imagePairPaths[index].get("truth","").asString();
         //cout << testImage << endl;
         //cout << truthImage << endl;
 

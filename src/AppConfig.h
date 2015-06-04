@@ -55,8 +55,17 @@ namespace GeneticVision
         const string getRunLogPath() const {
             return runLogPath;
         }
-        const string getWorkingDirectory() const {
-            return workingDirectory;
+        const string getRootPath() const {
+            return rootPath;
+        }
+        const string getOutputPath() const {
+            return outputPath;
+        }
+        const string getImagesOutputPath() const {
+            return outputPath;
+        }
+        const string getPopFilesPath() const {
+            return popFilesPath;
         }
 
         int getMaxGenerations() const {
@@ -65,6 +74,12 @@ namespace GeneticVision
 
         int getGenerationsPerTick() const {
             return generationsPerTick;
+        }
+        bool isLoadPopulationEnabled() const {
+            return loadPopulationEnabled;
+        }
+        const string  getLoadPopulationPath()  {
+            return loadPopulationPath;
         }
 
     private:
@@ -78,10 +93,16 @@ namespace GeneticVision
         int logFrequency;
         bool guiEnabled;
         vector<ImagePair > imagePairs;
-        string workingDirectory;
+        string rootPath;
+        string outputPath;
+        string popFilesPath;
+        string imagesOutputPath;
         int maxGenerations;
         int generationsPerTick;
         bool showImagesInHighGuiWindow;
+
+        bool loadPopulationEnabled;
+        string loadPopulationPath;
     public:
 
 

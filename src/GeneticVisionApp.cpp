@@ -18,14 +18,14 @@ namespace GeneticVision
 
 
         this->appConfig.loadConfigFile(jsonConfigFilePath);
-        this->gpSimulation = new GpSimulation(&this->appConfig);
+        this->gvSimulation = new GvSimulation(&this->appConfig);
         this->view = new ViewController(&this->appConfig);
 
 
         RunResult runResult;
         do
         {
-            runResult = this->gpSimulation->tick(this->appConfig.getGenerationsPerTick());
+            runResult = this->gvSimulation->tick(this->appConfig.getGenerationsPerTick());
             this->view->update(&runResult);
 
 
