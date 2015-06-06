@@ -12,6 +12,7 @@
 #include <dirent.h>
 #include "AppConfig.h"
 #include "util/json/json.h"
+#include <map>
 
 namespace GeneticVision {
     void AppConfig::loadConfigFile(const string *filepath) {
@@ -81,21 +82,36 @@ namespace GeneticVision {
     vector<ImagePair> AppConfig::loadImages(const Json::Value &images) {
         vector<ImagePair> result;
 
+
         if (images.size() == 0)
         {
             // if size == 0, its a string and is a relative path
             vector<string> filePaths;
-            string path = images.asString();
+            string path = this->rootPath + images.asString();
+            string tempFilename;
             DIR *directory;
             struct dirent * directoryEntry;
-            directory = opendir ("./");
+            directory = opendir (path.c_str());
             if (directory != NULL)
             {
                 while (directoryEntry = readdir (directory) )
                 {
+                    tempFilename = string(directoryEntry->d_name);
+                    cout << tempFilename;
+                    if(this->isValidImageType(tempFilename))
+                    {
+                        if(this->isMaskImage(tempFilename))
+                        {
+                            cout << " is a valid mask image." <<  endl;
+                        } else{
+                            cout << " is a valid train image." <<  endl;
+                        }
+                    } else
+                    {
+                        cout << " is not a valid image." <<  endl;
 
+                    }
                 }
-                    puts (directoryEntry->d_name);
                 (void) closedir (directory);
             }
             else
@@ -122,6 +138,48 @@ namespace GeneticVision {
         }
         cout << "Loaded " << result.size() << " image pairs" << endl;
         return result;
+
+    }
+
+    bool AppConfig::isValidImageType(string & filename)
+    {
+        string extension;
+        if(filename.length() > 3)
+        {
+            extension = filename.substr(filename.length()-4,4);
+        }else
+        {
+            extension = filename;
+        }
+
+        if(extension == ".png"
+                || extension == ".jpg")
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+
+    }
+    bool AppConfig::isMaskImage(string & filename)
+    {
+        string maskText;
+        if(filename.length() > 9)
+        {
+            maskText = filename.substr(filename.length()-9,5);
+        }else
+        {
+            maskText = filename;
+        }
+
+        if(maskText == "-mask")
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
 
     }
 

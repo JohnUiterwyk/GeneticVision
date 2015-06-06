@@ -44,6 +44,8 @@ namespace GeneticVision
         };
         void loadConfigFile(const string *filepath);
         vector<ImagePair> loadImages(const Json::Value &images);
+        bool isValidImageType(string & filename);
+        bool isMaskImage(string & filename);
 
 
         /**
