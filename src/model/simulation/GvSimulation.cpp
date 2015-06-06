@@ -81,7 +81,7 @@ namespace GeneticVision
 
 
         //Set the fitness class to be used
-        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getImagePairs());
+        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainingImagePairs());
 
         //Initialise the fitness
         this->runConfig->fitnessObject->initFitness();
@@ -90,7 +90,16 @@ namespace GeneticVision
         {
             char pathToPop[256];
             sprintf(pathToPop, "%s", appConfig->getLoadPopulationPath().c_str());
-            this->pop->readFromFile(pathToPop);
+            try
+            {
+                this->pop->readFromFile(pathToPop);
+            }
+            catch(const string & err)
+            {
+                cerr << err << endl;
+                cerr << "Exiting" << endl;
+                exit(1);
+            }
         } else
         {
             //init the population

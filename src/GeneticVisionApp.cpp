@@ -18,6 +18,13 @@ namespace GeneticVision
 
 
         this->appConfig.loadConfigFile(jsonConfigFilePath);
+        //check for images, otherwise quit nicely
+        if(this->appConfig.getTrainingImagePairs()->size() == 0)
+        {
+            cerr << "No images loaded. Need to load images to proceed." << endl;
+            exit(1);
+        }
+
         this->gvSimulation = new GvSimulation(&this->appConfig);
         this->view = new ViewController(&this->appConfig);
 

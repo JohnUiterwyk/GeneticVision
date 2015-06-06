@@ -31,7 +31,7 @@ Function* PlusDouble::generate(const string &name, GPConfig *conf)
 {
    if (name == "")
       return new PlusDouble(conf);
-   else if (name == "PlusDouble")
+   else if (name == "plus_double")
       return new PlusDouble(conf);
 
    return NULL;     
@@ -40,13 +40,13 @@ Function* PlusDouble::generate(const string &name, GPConfig *conf)
 void PlusDouble::evaluate(ReturnData *out)
 {
    if (out->getTypeNum() != ReturnDouble::TYPENUM)
-      throw string("PlusDouble::evaluate, incorrect ReturnData type");
+      throw string("plus_double::evaluate, incorrect ReturnData type");
 
    for (int i=0; i < maxArgs; i++)
    {
       if (getArgNReturnType(i) != getArgN(i)->getReturnType())
       {
-         throw string("PlusDouble::evaluate Error argument has incorrect return type");
+         throw string("plus_double::evaluate Error argument has incorrect return type");
       }
    }
 

@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "model/ImagePair.h"
+#include "util/json/json.h"
 
 using namespace std;
 namespace GeneticVision
@@ -16,13 +17,38 @@ namespace GeneticVision
     {
 
     private:
-
+        int populationSize;
+        double mutation;
+        double crossover;
+        double elitism;
+        int minDepth;
+        int maxDepth;
+        string runLogPath;
+        int logFrequency;
+        bool guiEnabled;
+        vector<ImagePair > trainingImagePairs;
+        vector<ImagePair > testImagePairs;
+        string rootPath;
+        string outputPath;
+        string popFilesPath;
+        string imagesOutputPath;
+        int maxGenerations;
+        int generationsPerTick;
+        bool showImagesInHighGuiWindow;
+        bool loadPopulationEnabled;
+        string loadPopulationPath;
     public:
         AppConfig()
         {
 
         };
         void loadConfigFile(const string *filepath);
+        vector<ImagePair> loadImages(const Json::Value &images);
+
+
+        /**
+         *  getters and setters
+         */
         int getPopulationSize() const {
             return populationSize;
         }
@@ -49,8 +75,11 @@ namespace GeneticVision
         int getLogFrequency() const {
             return logFrequency;
         }
-        vector<ImagePair > * getImagePairs()  {
-            return &this->imagePairs;
+        vector<ImagePair > * getTrainingImagePairs()  {
+            return &this->trainingImagePairs;
+        }
+        vector<ImagePair > * getTestImagePairs()  {
+            return &this->testImagePairs;
         }
         const string getRunLogPath() const {
             return runLogPath;
@@ -82,28 +111,6 @@ namespace GeneticVision
             return loadPopulationPath;
         }
 
-    private:
-        int populationSize;
-        double mutation;
-        double crossover;
-        double elitism;
-        int minDepth;
-        int maxDepth;
-        string runLogPath;
-        int logFrequency;
-        bool guiEnabled;
-        vector<ImagePair > imagePairs;
-        string rootPath;
-        string outputPath;
-        string popFilesPath;
-        string imagesOutputPath;
-        int maxGenerations;
-        int generationsPerTick;
-        bool showImagesInHighGuiWindow;
-
-        bool loadPopulationEnabled;
-        string loadPopulationPath;
-    public:
 
 
     };
