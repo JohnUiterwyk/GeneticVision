@@ -152,35 +152,19 @@ namespace GeneticVision {
             extension = filename;
         }
 
-        if(extension == ".png"
-                || extension == ".jpg")
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
+        return extension == ".png"
+               || extension == ".jpg"
+               || extension == ".bmp"
+               || extension == ".tif";
 
     }
     bool AppConfig::isMaskImage(string & filename)
     {
-        string maskText;
-        if(filename.length() > 9)
-        {
-            maskText = filename.substr(filename.length()-9,5);
-        }else
-        {
-            maskText = filename;
-        }
-
-        if(maskText == "-mask")
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
-
+        return filename.find("-mask.") != std::string::npos;
+    }
+    string AppConfig::getImagKey(string & filename)
+    {
+        return filename.find("-mask.") != std::string::npos;
     }
 
 }
