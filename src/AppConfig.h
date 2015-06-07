@@ -46,6 +46,7 @@ namespace GeneticVision
         vector<ImagePair> loadImages(const Json::Value &images);
         bool isValidImageType(string & filename);
         bool isMaskImage(string & filename);
+        string getImagKey(string & filename);
 
 
         /**

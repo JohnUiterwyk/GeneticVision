@@ -160,11 +160,19 @@ namespace GeneticVision {
     }
     bool AppConfig::isMaskImage(string & filename)
     {
-        return filename.find("-mask.") != std::string::npos;
+        return (filename.find("-mask.") != std::string::npos);
     }
     string AppConfig::getImagKey(string & filename)
     {
-        return filename.find("-mask.") != std::string::npos;
+        string key;
+        if(this->isMaskImage(filename))
+        {
+
+        } else
+        {
+
+        }
+        return key;
     }
 
 }
