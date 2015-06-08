@@ -12,7 +12,7 @@
   "showImagesInHighGuiWindow": true,
   "saveBestImagesToDisk": true,
   "loadPopulationEnabled":false,
-  "loadPopulationPath":"output/populations/gen_000000.gen",
+  "loadPopulationPath":"output/populations/gen_000290.gen",
   "loadTrainingPairs":"true",
   "outputPath":"output/",
   "testSet":"images/",

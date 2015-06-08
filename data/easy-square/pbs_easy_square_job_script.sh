@@ -33,4 +33,4 @@ cd $PBS_O_WORKDIR
 
 # The command to actually run the job
 mkdir -p output
-../../bin/GeneticVision gv-config.json >> output/pbs_easy_square.log
+../../bin/GeneticVision gv-config.json >> output/pbs_stdout_stream.log
