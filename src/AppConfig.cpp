@@ -27,7 +27,14 @@ namespace GeneticVision {
         Json::Value root;
         config_json >> root;
 
-        string configFileDirectory = filepath->substr(0, filepath->find_last_of("\\/")) + "/";
+        string configFileDirectory = "./";
+
+        //if the config file path has a slash in it, extract the directory
+        unsigned long slashPosition = filepath->find_last_of("\\/");
+        if(slashPosition != string::npos)
+        {
+            string configFileDirectory = filepath->substr(0,slashPosition) + "/";
+        }
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
         this->outputPath = this->rootPath + root.get("outputPath", "output/").asString();
         this->popFilesPath = this->outputPath + "populations/";
@@ -94,7 +101,7 @@ namespace GeneticVision {
             directory = opendir (path.c_str());
             if (directory != NULL)
             {
-                while (directoryEntry = readdir (directory) )
+                while ((directoryEntry = readdir (directory)))
                 {
                     tempFilename = string(directoryEntry->d_name);
                     cout << tempFilename;
@@ -116,7 +123,7 @@ namespace GeneticVision {
             }
             else
             {
-                cerr << "Couldn't open the directory" << endl;
+                cerr << "Couldn't open the directory " << path << endl;
             }
         } else
         {
