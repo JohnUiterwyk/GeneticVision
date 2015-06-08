@@ -14,18 +14,16 @@ namespace GeneticVision
 
     void StdOutView::update(RunResult *runResult)
     {
-        std::ostringstream result;
 
         //Print date and time
         time_t t = time(0);   // get time now
         struct tm * now = localtime( & t );
-        result << "DateTime, " << this->getCurrentDateTime() << endl;
-        result << "GenerationID, " << runResult->generationId << endl;
-        result << "Best Fitness, " << runResult->bestProgramFitness << endl;
-        result << "Program String, " << runResult->bestProgramString << endl;
-        result << endl;
+        cout << "DateTime, " << this->getCurrentDateTime() << endl;
+        cout << "GenerationID, " << runResult->generationId << endl;
+        cout << "Best Fitness, " << runResult->bestProgramFitness << endl;
+        cout << "Program String, " << runResult->bestProgramString << endl;
+        cout << endl;
 
-        cout << result.str();
     }
 
     const std::string StdOutView::getCurrentDateTime() {
