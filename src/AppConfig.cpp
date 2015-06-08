@@ -33,8 +33,9 @@ namespace GeneticVision {
         unsigned long slashPosition = filepath->find_last_of("\\/");
         if(slashPosition != string::npos)
         {
-            string configFileDirectory = filepath->substr(0,slashPosition) + "/";
+            configFileDirectory = filepath->substr(0,slashPosition) + "/";
         }
+
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
         this->outputPath = this->rootPath + root.get("outputPath", "output/").asString();
         this->popFilesPath = this->outputPath + "populations/";
