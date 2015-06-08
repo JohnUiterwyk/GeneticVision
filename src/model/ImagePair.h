@@ -9,6 +9,7 @@
 class ImagePair {
 
 private:
+    std::string filenameKey;
     std::string trainingImagePath;
     std::string groundTruthPath;
 
@@ -20,9 +21,11 @@ public:
     void loadTrainingImage(const std::string &trainingImagePath);
     void loadGroundTruth(const std::string &groundTruthPath);
 
-    cv::Mat getTrainingImage();
-    cv::Mat getGroundTruth();
-    cv::Mat getResultImage();
+    cv::Mat & getTrainingImage();
+    cv::Mat & getGroundTruth();
+    cv::Mat & getResultImage();
+
+    void setResultImage(cv::Mat & mat);
 
     /*********************
      virtual destructor

@@ -19,12 +19,15 @@ void ImagePair::loadGroundTruth(const std::string &groundTruthPath)
     this->groundTruthPath = groundTruthPath;
     this->groundTruth = cv::imread( groundTruthPath, CV_LOAD_IMAGE_GRAYSCALE );
 }
+void ImagePair::setResultImage(cv::Mat & mat) {
+    this->resultImage = mat;
+}
 
-cv::Mat ImagePair::getTrainingImage() {
+cv::Mat & ImagePair::getTrainingImage() {
     return this->trainingImage;
 }
 
-cv::Mat ImagePair::getGroundTruth() {
+cv::Mat & ImagePair::getGroundTruth() {
     return this->groundTruth;
 }
 
@@ -32,6 +35,6 @@ ImagePair::~ImagePair() {
 
 }
 
-cv::Mat ImagePair::getResultImage() {
+cv::Mat & ImagePair::getResultImage() {
     return this->resultImage;
 }
