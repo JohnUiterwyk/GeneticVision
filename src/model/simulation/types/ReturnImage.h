@@ -32,7 +32,7 @@ public:
     /****************************
      Get the data of this class
     ****************************/
-    cv::Mat getData() const;
+    cv::Mat & getData() ;
 };
 
 

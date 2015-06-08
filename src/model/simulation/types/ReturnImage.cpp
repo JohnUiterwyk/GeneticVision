@@ -25,7 +25,7 @@ void ReturnImage::setData(cv::Mat image)
     data = image;
 }
 
-cv::Mat ReturnImage::getData() const
+cv::Mat & ReturnImage::getData()
 {
     return data;
 }

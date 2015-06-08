@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # To give your job a name, replace "MyJob" with an appropriate name
-#PBS -N GV_EasySquare
+#PBS -N GV_Mammogram
 
 # For R need to run on single CPU
 #PBS -l nodes=1
 
 # set your minimum acceptable walltime=hours:minutes:seconds
-#PBS -l walltime=100:00:00
+#PBS -l walltime=1:00:00
 
 # Inherit the correct environment variables
 # PBS -V
