@@ -7,7 +7,6 @@
 #include <string.h>
 #include <opencv2/core/core.hpp>
 class ImagePair {
-
 private:
     std::string filenameKey;
     std::string trainingImagePath;
@@ -26,6 +25,10 @@ public:
     cv::Mat & getResultImage();
 
     void setResultImage(cv::Mat & mat);
+    void setFilenameKey(const std::string &filenameKey);
+    const std::string & getFilenameKey() const;
+
+    bool isPairValid();
 
     /*********************
      virtual destructor

@@ -45,7 +45,11 @@ src/model/simulation/functions/ImageSobel.cpp src/model/simulation/functions/Ima
 src/AppConfig.cpp src/AppConfig.h
 src/view/StdOutView.cpp src/view/StdOutView.h
 src/view/HighGuiView.cpp src/view/HighGuiView.h
-src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h src/view/ViewController.cpp src/view/ViewController.h src/model/simulation/GvPopulation.cpp src/model/simulation/GvPopulation.h src/view/ImageWriter.cpp src/view/ImageWriter.h)
+src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h
+src/view/ViewController.cpp src/view/ViewController.h
+src/model/simulation/GvPopulation.cpp src/model/simulation/GvPopulation.h
+src/view/ImageWriter.cpp src/view/ImageWriter.h
+src/model/simulation/ImagePairCollection.cpp src/model/simulation/ImagePairCollection.h)
 
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui

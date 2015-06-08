@@ -6,9 +6,9 @@
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
 
-VisionFitness::VisionFitness(GPConfig *conf, vector<ImagePair> * imagePairs) : Fitness(conf)
+VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection) : Fitness(conf)
 {
-    this->imagePairs = imagePairs;
+    this->imagePairs = &imagePairCollection.getCollection();
 }
 
 VisionFitness::~VisionFitness() { }

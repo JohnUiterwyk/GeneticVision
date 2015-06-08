@@ -8,7 +8,9 @@
 ImagePair::ImagePair() {
 
 }
+ImagePair::~ImagePair() {
 
+}
 void ImagePair::loadTrainingImage(const std::string &trainingImagePath)
 {
     this->trainingImagePath = trainingImagePath;
@@ -31,10 +33,17 @@ cv::Mat & ImagePair::getGroundTruth() {
     return this->groundTruth;
 }
 
-ImagePair::~ImagePair() {
-
-}
-
 cv::Mat & ImagePair::getResultImage() {
     return this->resultImage;
+}
+
+void ImagePair::setFilenameKey(const std::string &filenameKey) {
+    this->filenameKey = filenameKey;
+}
+const std::string & ImagePair::getFilenameKey() const {
+    return this->filenameKey;
+}
+
+bool ImagePair::isPairValid() {
+    return (this->trainingImage.cols*this->trainingImage.rows > 0 && this->groundTruth.cols*this->groundTruth.rows > 0)  ;
 }

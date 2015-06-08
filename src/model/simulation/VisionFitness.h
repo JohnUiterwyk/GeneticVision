@@ -10,6 +10,7 @@
 #include "../../rmitgp/Fitness.h"
 #include "../ImagePair.h"
 #include "../../view/OpenCVWindow.h"
+#include "ImagePairCollection.h"
 
 class VisionFitness : public Fitness
 {
@@ -21,7 +22,7 @@ class VisionFitness : public Fitness
     public:
 
     //Constructor
-    VisionFitness(GPConfig *conf, vector<ImagePair> * );
+    VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection );
     virtual ~VisionFitness();
     virtual void initFitness();
     virtual void assignFitness(GeneticProgram* pop[], int popSize);

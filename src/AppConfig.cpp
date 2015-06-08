@@ -42,20 +42,27 @@ namespace GeneticVision {
         this->imagesOutputPath = this->outputPath + "images/";
         this->runLogPath = this->outputPath + "output.log";
 
-        vector<ImagePair> result;
-
+        // load training set images
         Json::Value trainingSet = root["trainingSet"];
-        cout << "trainingSet length: " << trainingSet.size() << endl;
-        result = this->loadImages(trainingSet);
-        cout << "result length: " << result.size() << endl;
-        this->trainingImagePairs.insert( this->trainingImagePairs.end(), result.begin(), result.end() );
+        if (trainingSet.size() == 0)
+        {
+            string path = this->rootPath + trainingSet.asString();
+            this->trainPairs.loadFromDirectory(path);
+        }else
+        {
+            this->trainPairs.loadFromJson(trainingSet, this->rootPath);
+        }
 
-
+        // load test set images
         Json::Value testSet = root["testSet"];
-        cout << "trainingSet length: " << testSet.size() << endl;
-        result = this->loadImages(testSet);
-        cout << "result length: " << result.size() << endl;
-        this->testImagePairs.insert( this->trainingImagePairs.end(), result.begin(), result.end() );
+        if (testSet.size() == 0)
+        {
+            string path = this->rootPath + testSet.asString();
+            this->testPairs.loadFromDirectory(path);
+        }else
+        {
+            this->testPairs.loadFromJson(testSet, this->rootPath);
+        }
 
         // check for load from file
         this->loadPopulationEnabled = root.get("loadPopulationEnabled", false).asBool();
@@ -64,7 +71,7 @@ namespace GeneticVision {
                     this->rootPath + root.get("loadPopulationPath", "output/populations/gen_latest.gen").asString();
         }
 
-        // create directories
+        // create output directories
         mode_t process_mask = umask(0);
         int result_code1 = mkdir(this->outputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
         int result_code2 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
@@ -84,103 +91,7 @@ namespace GeneticVision {
 
     }
 
-    /**
-     * loadImagesFromJson processess a list of objects that define a test image and the truthImage
-     */
-    vector<ImagePair> AppConfig::loadImages(const Json::Value &images) {
-        vector<ImagePair> result;
 
 
-        if (images.size() == 0)
-        {
-            // if size == 0, its a string and is a relative path
-            vector<string> filePaths;
-            string path = this->rootPath + images.asString();
-            string tempFilename;
-            DIR *directory;
-            struct dirent * directoryEntry;
-            directory = opendir (path.c_str());
-            if (directory != NULL)
-            {
-                while ((directoryEntry = readdir (directory)))
-                {
-                    tempFilename = string(directoryEntry->d_name);
-                    cout << tempFilename;
-                    if(this->isValidImageType(tempFilename))
-                    {
-                        if(this->isMaskImage(tempFilename))
-                        {
-                            cout << " is a valid mask image." <<  endl;
-                        } else{
-                            cout << " is a valid train image." <<  endl;
-                        }
-                    } else
-                    {
-                        cout << " is not a valid image." <<  endl;
-
-                    }
-                }
-                (void) closedir (directory);
-            }
-            else
-            {
-                cerr << "Couldn't open the directory " << path << endl;
-            }
-        } else
-        {
-            // if size > 0, images is a json object
-            result.resize(images.size());
-
-            for (int index = 0; index < images.size(); ++index) {
-                string testImage = this->rootPath + images[index].get("test", "").asString();
-                string truthImage = this->rootPath + images[index].get("truth", "").asString();
-                //cout << testImage << endl;
-                //cout << truthImage << endl;
-
-                result[index].loadTrainingImage(testImage);
-                result[index].loadGroundTruth(truthImage);
-                // Iterates over the sequence elements.
-            }
-
-
-        }
-        cout << "Loaded " << result.size() << " image pairs" << endl;
-        return result;
-
-    }
-
-    bool AppConfig::isValidImageType(string & filename)
-    {
-        string extension;
-        if(filename.length() > 3)
-        {
-            extension = filename.substr(filename.length()-4,4);
-        }else
-        {
-            extension = filename;
-        }
-
-        return extension == ".png"
-               || extension == ".jpg"
-               || extension == ".bmp"
-               || extension == ".tif";
-
-    }
-    bool AppConfig::isMaskImage(string & filename)
-    {
-        return (filename.find("-mask.") != std::string::npos);
-    }
-    string AppConfig::getImagKey(string & filename)
-    {
-        string key;
-        if(this->isMaskImage(filename))
-        {
-
-        } else
-        {
-
-        }
-        return key;
-    }
 
 }

@@ -9,6 +9,7 @@
 #include <vector>
 #include "model/ImagePair.h"
 #include "util/json/json.h"
+#include "model/simulation/ImagePairCollection.h"
 
 using namespace std;
 namespace GeneticVision
@@ -26,8 +27,8 @@ namespace GeneticVision
         string runLogPath;
         int logFrequency;
         bool guiEnabled;
-        vector<ImagePair > trainingImagePairs;
-        vector<ImagePair > testImagePairs;
+        ImagePairCollection trainPairs;
+        ImagePairCollection testPairs;
         string rootPath;
         string outputPath;
         string popFilesPath;
@@ -44,9 +45,6 @@ namespace GeneticVision
         };
         void loadConfigFile(const string *filepath);
         vector<ImagePair> loadImages(const Json::Value &images);
-        bool isValidImageType(string & filename);
-        bool isMaskImage(string & filename);
-        string getImagKey(string & filename);
 
 
         /**
@@ -78,11 +76,11 @@ namespace GeneticVision
         int getLogFrequency() const {
             return logFrequency;
         }
-        vector<ImagePair > * getTrainingImagePairs()  {
-            return &this->trainingImagePairs;
+        ImagePairCollection & getTrainPairs()  {
+            return this->trainPairs;
         }
-        vector<ImagePair > * getTestImagePairs()  {
-            return &this->testImagePairs;
+        ImagePairCollection & getTestPairs()  {
+            return this->testPairs;
         }
         const string getRunLogPath() const {
             return runLogPath;
