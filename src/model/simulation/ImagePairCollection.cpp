@@ -5,6 +5,7 @@
 #include <iostream>
 #include <dirent.h>
 #include "ImagePairCollection.h"
+
 using namespace std;
 namespace GeneticVision
 {
@@ -65,48 +66,75 @@ namespace GeneticVision
             }
 
 
-        cout << "Loaded " << result.size() << " image pairs" << endl;
+        cout << "Loaded " << result.size() << " image pairs from the json config" << endl;
         this->collection.insert( this->collection.end(), result.begin(), result.end() );
         return (int)result.size();
 
     }
-    int ImagePairCollection::loadFromDirectory(string & path)
-    {
-        vector<ImagePair> result;
 
+
+    int ImagePairCollection::loadFromDirectory(string & directoryPath)
+    {
+        map<string, ImagePair> imagePairMap;
         string tempFilename;
         DIR *directory;
         struct dirent * directoryEntry;
-        directory = opendir (path.c_str());
+
+        // open the directory and scan in all the files
+        directory = opendir (directoryPath.c_str());
         if (directory != NULL)
         {
             while ((directoryEntry = readdir (directory)))
             {
+                // get the filename
                 tempFilename = string(directoryEntry->d_name);
-                cout << tempFilename;
+
+                // check if it is a supported type
                 if(this->isValidImageType(tempFilename))
                 {
+                    // get the key for the filename
+                    string key = this->getImagKey(tempFilename);
+
+                    // if the key is not in the map, create a new image pair and add to the map
+                    if(imagePairMap.find(key) == imagePairMap.end())
+                    {
+                        imagePairMap.insert(std::make_pair(key, ImagePair()));
+                        imagePairMap[key].setFilenameKey(key);
+                    }
+
+                    // load the file into the correct variable
                     if(this->isMaskImage(tempFilename))
                     {
-                        cout << " is a valid mask image with key " << this->getImagKey(tempFilename) <<   endl;
-                    } else{
-                        cout << " is a valid train image with key " << this->getImagKey(tempFilename) <<   endl;
-                    }
-                } else
-                {
-                    cout << " is not a valid image." <<  endl;
+                        imagePairMap[key].loadGroundTruth(directoryPath + "/"+tempFilename);
+                    }else{
+                        imagePairMap[key].loadTrainingImage(directoryPath + "/"+tempFilename);
 
+                    }
+                }else
+                {
+                    // ignore invlaid images
+                    //cout << " is not a valid image." <<  endl;
                 }
             }
             (void) closedir (directory);
         }
         else
         {
-            cerr << "Couldn't open the directory " << path << endl;
+            cerr << "Couldn't open the directory " << directoryPath << endl;
         }
-        cout << "Loaded " << result.size() << " image pairs" << endl;
-        this->collection.insert( this->collection.end(), result.begin(), result.end() );
-        return (int)result.size();
+
+        // loop through the map, if a pair has a training and ground truth, it is valid, and add it to collection
+        int count = 0;
+        for ( std::map<string,ImagePair>::iterator it=imagePairMap.begin() ; it != imagePairMap.end(); ++it )
+        {
+            if(it->second.isPairValid())
+            {
+                count++;
+                this->collection.push_back(it->second);
+            }
+        }
+        cout << "Loaded " << count << " image pairs from the directory: " << directoryPath << endl;
+        return (int)count;
 
     }
 }

@@ -15,8 +15,8 @@
   "loadPopulationPath":"output/populations/gen_000290.gen",
   "loadTrainingPairs":"true",
   "outputPath":"output/",
-  "testSet":"images/",
-  "trainingSet":[
+  "trainingSet":"images/",
+  "testSet":[
       {"test": "images/easy-square0001.png", "truth":"images/easy-square0001-mask.png"},
       {"test": "images/easy-square0002.png", "truth":"images/easy-square0002-mask.png"},
       {"test": "images/easy-square0003.png", "truth":"images/easy-square0003-mask.png"},
