@@ -125,7 +125,7 @@ namespace GeneticVision
         runResult.generationId = this->pop->getGenerationNumber();
         runResult.bestProgramId = best->getProgramID();
         runResult.bestProgramFitness = best->getFitness();
-        runResult.bestResultImages = fitness->getResultImages(best);
+        runResult.resultMap = fitness->getResultImages(best);
         best->print(runResult.bestProgramString);
 
         return runResult;

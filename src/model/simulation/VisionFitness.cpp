@@ -41,19 +41,19 @@ void VisionFitness::evaluateProgram(GeneticProgram* prog)
     ReturnImage returnImage;
     ImagePair * testPair;
     double score = 0;
-    int size = this->imagePairs->at(0).getTrainingImage().cols * this->imagePairs->at(0).getTrainingImage().rows;
+    int size = this->imagePairs->at(0).getSourceImage().cols * this->imagePairs->at(0).getSourceImage().rows;
 
 
     prog->setFitness(0.0);
     for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
     {
         testPair = &(this->imagePairs->at(i));
-        ImageInput::setValue(testPair->getTrainingImage());
+        ImageInput::setValue(testPair->getSourceImage());
         prog->evaluate(&returnImage);
 
         // measure difference between result image and truth
         cv::Mat diff_mat;
-        cv::compare(testPair->getGroundTruth(), returnImage.getData(), diff_mat, cv::CMP_EQ);
+        cv::compare(testPair->getTargetImage(), returnImage.getData(), diff_mat, cv::CMP_EQ);
         int nonzero = cv::countNonZero(diff_mat);
 
         // this is the number correct pixels divided by total number of pixels
@@ -74,19 +74,21 @@ void VisionFitness::evaluateProgram(GeneticProgram* prog)
 
 }
 
-vector<cv::Mat> VisionFitness::getResultImages(GeneticProgram* prog)
+std::map<std::string, cv::Mat> VisionFitness::getResultImages(GeneticProgram* prog)
 {
-    vector<cv::Mat> resultImages(this->imagePairs->size(),cv::Mat::zeros(1,1,CV_32F));
+
+    std::map<std::string, cv::Mat> resultMap;
     ReturnImage returnImage;
     ImagePair * testPair;
     for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
     {
         testPair = &(this->imagePairs->at(i));
-        ImageInput::setValue(testPair->getTrainingImage());
+        resultMap.insert(std::make_pair(testPair->getFilenameKey(), cv::Mat::zeros(1,1,CV_32F)));
+        ImageInput::setValue(testPair->getSourceImage());
         prog->evaluate(&returnImage);
-        returnImage.getData().copyTo(resultImages[i]);
+        returnImage.getData().copyTo(resultMap[testPair->getFilenameKey()]);
     }
-    return resultImages;
+    return resultMap;
 }
 bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;

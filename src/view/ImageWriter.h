@@ -17,6 +17,7 @@ namespace GeneticVision
     private:
         int writeFrequency;
         string outputDirectory;
+        bool enabled;
     };
 
 }

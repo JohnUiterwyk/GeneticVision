@@ -9,19 +9,19 @@
 class ImagePair {
 private:
     std::string filenameKey;
-    std::string trainingImagePath;
-    std::string groundTruthPath;
+    std::string sourceImagePath;
+    std::string targetImagePath;
 
-    cv::Mat trainingImage;
-    cv::Mat groundTruth;
+    cv::Mat sourceImage;
+    cv::Mat targetImage;
     cv::Mat resultImage;
 public:
     ImagePair();
-    void loadTrainingImage(const std::string &trainingImagePath);
-    void loadGroundTruth(const std::string &groundTruthPath);
+    void loadSourceImage(const std::string &imagePath);
+    void loadTargetImage(const std::string &imagePath);
 
-    cv::Mat & getTrainingImage();
-    cv::Mat & getGroundTruth();
+    cv::Mat &getSourceImage();
+    cv::Mat &getTargetImage();
     cv::Mat & getResultImage();
 
     void setResultImage(cv::Mat & mat);

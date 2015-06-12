@@ -4,6 +4,7 @@
 
 
 #include "HighGuiView.h"
+#include <map>
 #include "../model/simulation/RunResult.h"
 namespace GeneticVision
 {
@@ -18,7 +19,13 @@ namespace GeneticVision
     void HighGuiView::update(RunResult *runResult)
     {
         #ifdef CV_HIGHGUI_ENABLED
-            output.showImages(runResult->bestResultImages);
+            vector<cv::Mat> resultVector;
+            for ( std::map<string,cv::Mat>::iterator it=runResult->resultMap.begin() ; it != runResult->resultMap.end(); ++it )
+            {
+                resultVector.push_back(it->second);
+
+            }
+            output.showImages(resultVector);
         #endif //CV_HIGHGUI_ENABLED
     }
 }

@@ -11,26 +11,26 @@ ImagePair::ImagePair() {
 ImagePair::~ImagePair() {
 
 }
-void ImagePair::loadTrainingImage(const std::string &trainingImagePath)
+void ImagePair::loadSourceImage(const std::string &imagePath)
 {
-    this->trainingImagePath = trainingImagePath;
-    this->trainingImage = cv::imread( trainingImagePath, CV_LOAD_IMAGE_GRAYSCALE );
+    this->sourceImagePath = imagePath;
+    this->sourceImage = cv::imread(imagePath, CV_LOAD_IMAGE_GRAYSCALE );
 }
-void ImagePair::loadGroundTruth(const std::string &groundTruthPath)
+void ImagePair::loadTargetImage(const std::string &imagePath)
 {
-    this->groundTruthPath = groundTruthPath;
-    this->groundTruth = cv::imread( groundTruthPath, CV_LOAD_IMAGE_GRAYSCALE );
+    this->targetImagePath = imagePath;
+    this->targetImage = cv::imread(imagePath, CV_LOAD_IMAGE_GRAYSCALE );
 }
 void ImagePair::setResultImage(cv::Mat & mat) {
     this->resultImage = mat;
 }
 
-cv::Mat & ImagePair::getTrainingImage() {
-    return this->trainingImage;
+cv::Mat & ImagePair::getSourceImage() {
+    return this->sourceImage;
 }
 
-cv::Mat & ImagePair::getGroundTruth() {
-    return this->groundTruth;
+cv::Mat & ImagePair::getTargetImage() {
+    return this->targetImage;
 }
 
 cv::Mat & ImagePair::getResultImage() {
@@ -45,5 +45,5 @@ const std::string & ImagePair::getFilenameKey() const {
 }
 
 bool ImagePair::isPairValid() {
-    return (this->trainingImage.cols*this->trainingImage.rows > 0 && this->groundTruth.cols*this->groundTruth.rows > 0)  ;
+    return (this->sourceImage.cols*this->sourceImage.rows > 0 && this->targetImage.cols*this->targetImage.rows > 0)  ;
 }

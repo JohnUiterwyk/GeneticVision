@@ -37,6 +37,7 @@ namespace GeneticVision
         int generationsPerTick;
         bool showImagesInHighGuiWindow;
         bool loadPopulationEnabled;
+        bool saveResultImages;
         string loadPopulationPath;
     public:
         AppConfig()
@@ -92,7 +93,7 @@ namespace GeneticVision
             return outputPath;
         }
         const string getImagesOutputPath() const {
-            return outputPath;
+            return imagesOutputPath;
         }
         const string getPopFilesPath() const {
             return popFilesPath;
@@ -107,6 +108,9 @@ namespace GeneticVision
         }
         bool isLoadPopulationEnabled() const {
             return loadPopulationEnabled;
+        }
+        bool isSaveResultImagesEnabled() const {
+            return saveResultImages;
         }
         const string  getLoadPopulationPath()  {
             return loadPopulationPath;

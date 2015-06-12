@@ -10,6 +10,7 @@
 #include "../AppConfig.h"
 #include "HighGuiView.h"
 #include "StdOutView.h"
+#include "ImageWriter.h"
 
 namespace GeneticVision {
     class ViewController {
@@ -18,6 +19,7 @@ namespace GeneticVision {
 
         HighGuiView highGuiView;
         StdOutView stdOutView;
+        ImageWriter imageWriter;
         ViewController(AppConfig * appConfig);;
 
         void update(RunResult *runResult);

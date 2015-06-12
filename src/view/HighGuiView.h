@@ -10,6 +10,7 @@
     #include "OpenCVWindow.h"
 #endif //CV_HIGHGUI_ENABLED
 
+
 #include "../model/simulation/RunResult.h"
 #include "../AppConfig.h"
 

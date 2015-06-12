@@ -11,6 +11,7 @@
 #include "../ImagePair.h"
 #include "../../view/OpenCVWindow.h"
 #include "ImagePairCollection.h"
+#include <map>
 
 class VisionFitness : public Fitness
 {
@@ -35,7 +36,7 @@ class VisionFitness : public Fitness
     virtual double worst();
 
     void evaluateProgram(GeneticProgram* prog);
-    vector<cv::Mat> getResultImages(GeneticProgram* prog);
+    std::map<std::string, cv::Mat> getResultImages(GeneticProgram* prog);
 };
 
 #endif //GENETICVISION_FITNESS_H

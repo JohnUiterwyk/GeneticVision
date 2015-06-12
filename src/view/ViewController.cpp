@@ -8,7 +8,8 @@ namespace GeneticVision
 
     ViewController::ViewController(GeneticVision::AppConfig * appConfig):
             highGuiView(appConfig),
-            stdOutView(appConfig)
+            stdOutView(appConfig),
+            imageWriter(appConfig)
     {
 
 
@@ -17,5 +18,6 @@ namespace GeneticVision
     void ViewController::update(RunResult *runResult) {
         this->highGuiView.update(runResult);
         this->stdOutView.update(runResult);
+        this->imageWriter.update(runResult);
     }
 }

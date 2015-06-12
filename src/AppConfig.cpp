@@ -79,15 +79,16 @@ namespace GeneticVision {
         umask(process_mask);
 
         // fetch values from json, or use default if not present
-        this->logFrequency = root.get("logFrequency", 10).asInt();
+        this->logFrequency = root.get("logFrequency", 1).asInt();
         this->populationSize = root.get("populationSize", 100).asInt();
         this->mutation = root.get("mutation", 0.70).asDouble();
         this->crossover = root.get("crossover", 0.02).asDouble();
         this->elitism = root.get("elitism", 0.28).asDouble();
         this->minDepth = root.get("minDepth", 2).asInt();
         this->maxDepth = root.get("maxDepth", 5).asInt();
-        this->maxGenerations = root.get("maxGenerations", 100).asInt();
+        this->maxGenerations = root.get("maxGenerations", 1).asInt();
         this->generationsPerTick = root.get("generationsPerTick", 1).asInt();
+        this->saveResultImages = root.get("saveResultImages",true).asBool();
 
     }
 

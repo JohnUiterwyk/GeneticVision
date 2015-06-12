@@ -55,13 +55,13 @@ namespace GeneticVision
 
             for (int index = 0; index < images.size(); ++index)
             {
-                string testImage = rootPath + images[index].get("test", "").asString();
-                string truthImage = rootPath + images[index].get("truth", "").asString();
+                string testImage = rootPath + images[index].get("source", "").asString();
+                string truthImage = rootPath + images[index].get("target", "").asString();
                 //cout << testImage << endl;
                 //cout << truthImage << endl;
 
-                result[index].loadTrainingImage(testImage);
-                result[index].loadGroundTruth(truthImage);
+                result[index].loadSourceImage(testImage);
+                result[index].loadTargetImage(truthImage);
                 // Iterates over the sequence elements.
             }
 
@@ -105,9 +105,9 @@ namespace GeneticVision
                     // load the file into the correct variable
                     if(this->isMaskImage(tempFilename))
                     {
-                        imagePairMap[key].loadGroundTruth(directoryPath + "/"+tempFilename);
+                        imagePairMap[key].loadTargetImage(directoryPath + "/" + tempFilename);
                     }else{
-                        imagePairMap[key].loadTrainingImage(directoryPath + "/"+tempFilename);
+                        imagePairMap[key].loadSourceImage(directoryPath + "/" + tempFilename);
 
                     }
                 }else

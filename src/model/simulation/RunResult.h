@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <map>
 #include <vector>
 #include <opencv2/core/core.hpp>
 
@@ -18,6 +19,7 @@ public:
     std::string bestProgramString;
     bool solutionFound;
     std::vector<cv::Mat> bestResultImages;
+    std::map<std::string, cv::Mat> resultMap;
 
     std::string toString();
 
