@@ -1,6 +1,6 @@
 {
   "populationSize": 150,
-  "maxGenerations":100,
+  "maxGenerations":3000,
   "targetFitness":0.01,
   "generationsPerTick":1,
   "mutation":0.28,
@@ -8,7 +8,7 @@
   "elitism":0.02,
   "minDepth": 2,
   "maxDepth":5,
-  "logFrequency":10,
+  "logFrequency":100,
   "showResultImagesInHighGuiWindow": true,
   "saveResultImages": true,
   "loadPopulationEnabled":true,
