@@ -79,6 +79,9 @@ namespace GeneticVision {
         umask(process_mask);
 
         // fetch values from json, or use default if not present
+
+        // TODO: make log frequency and gens per tick consistent
+        // currently you can have a mismatch of gens per tick and log frquency such that you never get any logs
         this->logFrequency = root.get("logFrequency", 1).asInt();
         this->populationSize = root.get("populationSize", 100).asInt();
         this->mutation = root.get("mutation", 0.70).asDouble();

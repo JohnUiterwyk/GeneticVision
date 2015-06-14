@@ -21,7 +21,7 @@ namespace GeneticVision
 
     void ImageWriter::update(RunResult *runResult)
     {
-        if(runResult->generationId % this->writeFrequency == 0 || runResult->generationId == 1)
+        if(this->enabled && (runResult->generationId % this->writeFrequency == 0 || runResult->generationId == 1))
         {
             for ( std::map<string,cv::Mat>::iterator it=runResult->resultMap.begin() ; it != runResult->resultMap.end(); ++it )
             {
