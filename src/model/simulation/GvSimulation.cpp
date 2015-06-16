@@ -117,6 +117,10 @@ namespace GeneticVision
     {
         // run x generations
         bool solutionFound = this->pop->evolve(generations);
+        if(solutionFound)
+        {
+            this->pop->writeToFile();
+        }
         GeneticProgram * best = this->pop->getBest();
         VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
 

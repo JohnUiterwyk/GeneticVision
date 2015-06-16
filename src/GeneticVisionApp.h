@@ -18,7 +18,7 @@ namespace GeneticVision
             /*************
              Constructor.
             **************/
-            GeneticVisionApp(const string * jsonConfigFilePath);
+            GeneticVisionApp( int argc, char** argv );
 
             /*********************
              virtual destructor

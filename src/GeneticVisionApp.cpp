@@ -12,12 +12,10 @@
 namespace GeneticVision
 {
 
-    GeneticVisionApp::GeneticVisionApp(const string * jsonConfigFilePath)
+    GeneticVisionApp::GeneticVisionApp( int argc, char** argv )
     {
 
-
-
-        this->appConfig.loadConfigFile(jsonConfigFilePath);
+        this->appConfig.parseCommandLineArgs(argc,argv);
         //check for images, otherwise quit nicely
         if(this->appConfig.getTrainPairs().size() == 0)
         {

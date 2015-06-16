@@ -13,8 +13,68 @@
 #include "AppConfig.h"
 #include "util/json/json.h"
 #include <map>
+#include <getopt.h>
 
 namespace GeneticVision {
+
+
+    void AppConfig::parseCommandLineArgs(int argc, char **argv) {
+
+        int c;
+        int option_index = 0;
+        static struct option long_options[] = {
+                {"config",  required_argument, 0,  0 },
+                {"runProgram",          required_argument, 0,  0 },
+                {"loadImages",          required_argument, 0,  0 },
+                {"loadPopulation",          required_argument, 0,  0 },
+                {"populationSize",          required_argument, 0,  0 },
+                {"imageOutput",          required_argument, 0,  0 },
+                {"generations",          required_argument, 0,  0 }
+
+        };
+
+        //first look for the config file
+        do{
+            c = getopt_long(argc, argv, "", long_options, &option_index);
+            if(c == 0 && string(long_options[option_index].name) == "config")
+            {
+                string jsonFilePath(optarg);
+                cout << "loading config file: " << jsonFilePath << endl;
+                this->loadConfigFile(&jsonFilePath);
+            }
+        }while(c != -1);
+
+        // reset opt processing; (yay. global vars. >_< let's wave our magic c wand.)
+        optind = 1;
+
+        //now apply other args
+        do{
+            c = getopt_long(argc, argv, "", long_options, &option_index);
+            if (c == 0)
+            {
+                string longOptionName = long_options[option_index].name;
+                //cout << "handle option: " << longOptionName;
+                if(longOptionName == "trainingImages")
+                {
+
+                }else if(longOptionName == "loadProgram")
+                {
+
+                }else if(longOptionName == "config")
+                {
+                    //ignore
+                }
+            }
+
+        }while(c != -1);
+        if (optind < argc) {
+            printf("non-option ARGV-elements: ");
+            while (optind < argc)
+                cout << argv[optind++];
+            cout << endl;
+        }
+    }
+
     void AppConfig::loadConfigFile(const string *filepath) {
         std::ifstream config_json(filepath->c_str());
         if (config_json.good() == false) {
@@ -27,17 +87,16 @@ namespace GeneticVision {
         Json::Value root;
         config_json >> root;
 
+        // set root directory
         string configFileDirectory = "./";
-
         //if the config file path has a slash in it, extract the directory
         unsigned long slashPosition = filepath->find_last_of("\\/");
         if(slashPosition != string::npos)
         {
             configFileDirectory = filepath->substr(0,slashPosition) + "/";
         }
-
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
-        this->outputPath = this->rootPath + root.get("outputPath", "output/").asString();
+        this->outputPath = this->rootPath + root.get("outputPath", this->outputPath).asString();
         this->popFilesPath = this->outputPath + "populations/";
         this->imagesOutputPath = this->outputPath + "images/";
         this->runLogPath = this->outputPath + "output.log";
@@ -94,8 +153,5 @@ namespace GeneticVision {
         this->saveResultImages = root.get("saveResultImages",true).asBool();
 
     }
-
-
-
 
 }

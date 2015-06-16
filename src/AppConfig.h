@@ -40,10 +40,25 @@ namespace GeneticVision
         bool saveResultImages;
         string loadPopulationPath;
     public:
-        AppConfig()
+        AppConfig():
+                populationSize(100),
+                mutation(0.70),
+                crossover(0.02),
+                elitism(0.28),
+                minDepth(2),
+                maxDepth(5),
+                maxGenerations(1),
+                generationsPerTick(1),
+                saveResultImages(false),
+                loadPopulationEnabled(false),
+                rootPath("./"),
+                outputPath("output/"),
+                popFilesPath( "output/populations/"),
+                runLogPath("output/output.log")
         {
 
         };
+        void parseCommandLineArgs(int argc, char **argv);
         void loadConfigFile(const string *filepath);
         vector<ImagePair> loadImages(const Json::Value &images);
 
