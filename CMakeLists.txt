@@ -5,7 +5,6 @@ find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-
 # build the librmitgp if needed
 add_custom_target(
    librmitgp
@@ -13,10 +12,8 @@ add_custom_target(
    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src/rmitgp
 )
 
-set(SOURCE_FILES src/main.cpp)
-add_executable(
-GeneticVision
-${SOURCE_FILES}
+set(SOURCE_FILES
+src/main.cpp
 src/GeneticVisionApp.cpp
 src/GeneticVisionApp.h
 src/util/jsoncpp.cpp
@@ -49,7 +46,9 @@ src/model/simulation/RunResult.cpp src/model/simulation/RunResult.h
 src/view/ViewController.cpp src/view/ViewController.h
 src/model/simulation/GvPopulation.cpp src/model/simulation/GvPopulation.h
 src/view/ImageWriter.cpp src/view/ImageWriter.h
-src/model/simulation/ImagePairCollection.cpp src/model/simulation/ImagePairCollection.h)
+src/model/simulation/ImagePairCollection.cpp src/model/simulation/ImagePairCollection.h
+)
+add_executable(GeneticVision ${SOURCE_FILES})
 
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui
