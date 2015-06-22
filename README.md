@@ -1,10 +1,19 @@
 # GeneticVision
 by John Uiterwyk
 
+GeneticVision is a machine learning application that evolves programs that use functionality from OpenCV. 
+The application is built with C++ using the following libraries:
+
+- [RmitGP](http://goanna.cs.rmit.edu.au/~vc/rmitgp/), a genetic programming library developed at RMIT University .
+- [OpenCV](http://opencv.org) an open source computer vision library
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp) a json library
+
 ## Using GeneticVision
+
 
 ### Config file
 Here is an example config file:
+```
     {
       "populationSize": 150,
       "maxGenerations":3000,
@@ -29,6 +38,7 @@ Here is an example config file:
           {"source": "images/easy-square0003.png", "target":"images/easy-square0003-mask.png"}
       ]
     }
+```
 ## Compiling 
 Compile this application using Cmake 2.8 or higher. This application requires that OpenCV has been installed properly. 
 This application requires that OpenCV was installed correctly.
