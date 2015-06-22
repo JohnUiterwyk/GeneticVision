@@ -16,51 +16,51 @@ namespace GeneticVision
 {
     class AppConfig
     {
-
+    public:
+        enum RunMode
+        {
+            EVOLVE,
+            TEST,
+            RUN
+        };
     private:
+        RunMode runMode;
+        int generationsPerTick;
+        int maxGenerations;
+
         int populationSize;
         double mutation;
         double crossover;
         double elitism;
         int minDepth;
         int maxDepth;
+        double targetFitness;
+
         string runLogPath;
+
         int logFrequency;
+
         bool guiEnabled;
-        ImagePairCollection trainPairs;
-        ImagePairCollection testPairs;
+
         string rootPath;
         string outputPath;
         string popFilesPath;
         string imagesOutputPath;
-        int maxGenerations;
-        int generationsPerTick;
-        bool showImagesInHighGuiWindow;
-        bool loadPopulationEnabled;
-        bool saveResultImages;
-        string loadPopulationPath;
-    public:
-        AppConfig():
-                populationSize(100),
-                mutation(0.70),
-                crossover(0.02),
-                elitism(0.28),
-                minDepth(2),
-                maxDepth(5),
-                maxGenerations(1),
-                generationsPerTick(1),
-                saveResultImages(false),
-                loadPopulationEnabled(false),
-                rootPath("./"),
-                outputPath("output/"),
-                popFilesPath( "output/populations/"),
-                runLogPath("output/output.log")
-        {
 
-        };
+        ImagePairCollection trainPairs;
+        ImagePairCollection testPairs;
+
+        bool loadPopulationEnabled;
+        string loadPopulationPath;
+
+        bool saveResultImages;
+
+    public:
+        AppConfig();
         void parseCommandLineArgs(int argc, char **argv);
         void loadConfigFile(const string *filepath);
-        vector<ImagePair> loadImages(const Json::Value &images);
+        void createMissingDirectories();
+        void printToStdOut();
 
 
         /**
@@ -95,9 +95,6 @@ namespace GeneticVision
         ImagePairCollection & getTrainPairs()  {
             return this->trainPairs;
         }
-        ImagePairCollection & getTestPairs()  {
-            return this->testPairs;
-        }
         const string getRunLogPath() const {
             return runLogPath;
         }
@@ -131,6 +128,13 @@ namespace GeneticVision
             return loadPopulationPath;
         }
 
+        double getTargetFitness() const {
+            return targetFitness;
+        }
+
+        bool isGuiEnabled() const {
+            return guiEnabled;
+        }
 
 
     };
