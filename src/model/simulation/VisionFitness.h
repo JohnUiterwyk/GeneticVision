@@ -37,6 +37,8 @@ class VisionFitness : public Fitness
 
     void evaluateProgram(GeneticProgram* prog);
     std::map<std::string, cv::Mat> getResultImages(GeneticProgram* prog);
+    void assignFitnessBatch(GeneticProgram *pop[], int batchStart, int batchEnd);
+
 };
 
 #endif //GENETICVISION_FITNESS_H

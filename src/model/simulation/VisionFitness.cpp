@@ -5,6 +5,9 @@
 #include "VisionFitness.h"
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
+#include <thread>
+#include <math.h>
+
 
 VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection) : Fitness(conf)
 {
@@ -19,23 +22,44 @@ void VisionFitness::initFitness()
 }
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
-    int i;
-    GeneticProgram* best = pop[0];
 
-    for(i=0; i<popSize; i++)
-    {
-        this->evaluateProgram(pop[i]);
-        if(this->isBetter(pop[i],best))
-        {
-            best = pop[i];
+    int threadCount = 2;
+    int batchStart = 0;
+    int batchSize = popSize/threadCount+1;
+    int batchEnd = 0;
+
+    int i;
+    for(i=0; i<threadCount; i++) {
+
+        if (batchStart >= popSize) {
+            cerr << "ERROR VisionFitness::assignFitness : batchStart " << batchStart << "out of range " << popSize <<
+                                                                                                           endl;
+            throw;//this shouldnt happen;
         }
+        batchEnd  = std::min(batchStart+batchSize-1, popSize-1);
+        this->assignFitnessBatch(pop,batchStart,batchEnd);
+        batchStart = batchEnd + 1;
+
     }
+
+
 
     //outputProgram(best);
 
 
 
 }
+void VisionFitness::assignFitnessBatch(GeneticProgram *pop[], int batchStart, int batchEnd)
+{
+    int i=batchStart;
+
+    for(i=batchStart; i<=batchEnd; i++)
+    {
+
+        this->evaluateProgram(pop[i]);
+    }
+}
+
 void VisionFitness::evaluateProgram(GeneticProgram* prog)
 {
     ReturnImage returnImage;
