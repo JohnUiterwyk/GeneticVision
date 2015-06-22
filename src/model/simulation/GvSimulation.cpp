@@ -88,11 +88,20 @@ namespace GeneticVision
 
         if(appConfig->isLoadPopulationEnabled())
         {
-            char pathToPop[256];
-            sprintf(pathToPop, "%s", appConfig->getLoadPopulationPath().c_str());
             try
             {
-                this->pop->readFromFile(pathToPop);
+                //convert string to required non const char *
+                std::string popPathString = appConfig->getLoadPopulationPath();
+                char * popPathCharPtr = new char[popPathString.size() + 1];
+                std::copy(popPathString.begin(), popPathString.end(), popPathCharPtr);
+                popPathCharPtr[popPathString.size()] = '\0'; // don't forget the terminating 0
+
+
+                //read the file into pop object
+                this->pop->readFromFile(popPathCharPtr);
+
+                // don't forget to free the string after finished using it
+                delete[] popPathCharPtr;
             }
             catch(const string & err)
             {
