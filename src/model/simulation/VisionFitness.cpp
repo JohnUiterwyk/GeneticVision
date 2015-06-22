@@ -86,6 +86,7 @@ std::map<std::string, cv::Mat> VisionFitness::getResultImages(GeneticProgram* pr
         resultMap.insert(std::make_pair(testPair->getFilenameKey(), cv::Mat::zeros(1,1,CV_32F)));
         ImageInput::setValue(testPair->getSourceImage());
         prog->evaluate(&returnImage);
+        //cv::absdiff(testPair->getTargetImage(),returnImage.getData(),resultMap[testPair->getFilenameKey()]);
         returnImage.getData().copyTo(resultMap[testPair->getFilenameKey()]);
     }
     return resultMap;
