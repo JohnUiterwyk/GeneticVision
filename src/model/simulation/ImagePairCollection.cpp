@@ -73,7 +73,7 @@ namespace GeneticVision
     }
 
 
-    int ImagePairCollection::loadFromDirectory(string & directoryPath)
+    int ImagePairCollection::loadFromDirectory(string directoryPath)
     {
         map<string, ImagePair> imagePairMap;
         string tempFilename;

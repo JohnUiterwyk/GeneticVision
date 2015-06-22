@@ -26,7 +26,7 @@ namespace GeneticVision
 
         int loadFromJson(const Json::Value &images, string & rootPath);
 
-        int loadFromDirectory(string &directoryPath);
+        int loadFromDirectory(string directoryPath);
 
         vector<ImagePair> &getCollection() { return collection; }
 
