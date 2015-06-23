@@ -142,11 +142,10 @@ Option argument type: _integer_
 Default: 1
 
 ### Load Configuration File
-Load settings from a JSON formatted configuration file. 
+Load settings from a JSON formatted configuration file. Please note that **all paths within a config file are relative to the config file** unless the rootPath option is set.
 
 Command line usage: `--config path/to/config`  
-Option argument type: _string_ 
-Default: 1
+Option argument type: _string_
 
 ##### Example Config File:  
 ````
@@ -174,28 +173,8 @@ If you do not set a setting via the config file, the command line option, or by 
 are the default settings set in the applicaiton:
 
 
-maxGenerations(100),  
-generationsPerTick(1),
-populationSize(100),
-mutation(0.70),
-crossover(0.02),
-elitism(0.28),
-targetFitness(0.03),
-minDepth(2),
-maxDepth(5),
-saveResultImages(false),
-loadPopulationEnabled(false),
-rootPath("./"),
-outputPath("output/"),
-popFilesPath( "output/populations/"),
-runLogPath("output/output.log"),
-runMode(AppConfig::EVOLVE),
-logFrequency(1)
-            
-
-### Config file
-
 ## Compiling 
+
 Compile this application using Cmake 2.8 or higher. This application requires that OpenCV has been installed properly. 
 This application requires that OpenCV was installed correctly.
  
@@ -203,3 +182,5 @@ To compile the application with support for an output to a window, compile with 
 need to have installed OpenCV with HighGui support enabled.
 
 ## Developer Guide
+
+The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here:
