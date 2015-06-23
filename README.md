@@ -8,6 +8,15 @@ This application utilises the following libraries:
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
+## Supported Platforms
+Linxu and OS X
+
+The application has been tested on OS X 10.10, CentOS 6.3, and Amazon Linux AMI 2015.03
+
+## Prerequisites
+OpenCV 2.4.x
+CMake 2.8+
+
 ## Using GeneticVision
 The simplest way to run GeneticVision (GV for short) is as follows:  
 ```
@@ -32,7 +41,7 @@ $ ./GeneticVision --images path/to/images --populationSize 300 --generations 100
 ```
 
 ### Tutorial
-The following is a step by step guide to getting GeneticVision compiled, images prepared, and running some evolution experiments
+The following is a step by step guide to getting OpenCV installed GeneticVision compiled, images prepared, and running some evolution experiments
 
 ####
 
@@ -69,6 +78,7 @@ This option requires that images sets be prepared using a naming convention. Tra
 > easy-square0002.png  
 > easy-square0003-mask.png  
 > ...  
+
 Be sure to include the trailing slash.
 
 Command line usage: `--images path/to/images/`  
@@ -198,8 +208,8 @@ Alternatively you can [clone the repo from github](https://github.com/JohnUiterw
 
 ## Compiling 
 
-Compile this application using Cmake 2.8 or higher. This application requires that OpenCV has been installed properly. 
-This application requires that OpenCV was installed correctly.
+Compile this application using Cmake 2.8 or higher. 
+GeneticVision requires that OpenCV has been installed correctly.
  
 To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
 need to have installed OpenCV with HighGui support enabled.
