@@ -12,6 +12,7 @@
   "guiEnabled":true,
   "outputPath":"output/",
   "saveResultImages": false,
+  "population":"output/populations/gen_000290.gen",
   "images":"images/",
   "images2":[
     {"source": "images/easy-square0001.png", "target":"images/easy-square0001-mask.png"},
