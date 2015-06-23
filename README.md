@@ -1,21 +1,21 @@
 # GeneticVision
 by John Uiterwyk
 
-GeneticVision is a machine learning application that evolves programs that use functionality from OpenCV. 
-The application is built with C++ using the following libraries:
+[GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
 
-- [RmitGP](http://goanna.cs.rmit.edu.au/~vc/rmitgp/), a genetic programming library developed at RMIT University .
-- [OpenCV](http://opencv.org) an open source computer vision library
-- [jsoncpp](https://github.com/open-source-parsers/jsoncpp) a json library
+This application utilises the following libraries:
+- [RmitGP](http://goanna.cs.rmit.edu.au/~vc/rmitgp/) - a genetic programming library developed at RMIT University .
+- [OpenCV](http://opencv.org) - an open source computer vision library
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
 ## Using GeneticVision
-The simplest way to run Genetic Vision (GV for short) is as follows:  
+The simplest way to run GeneticVision (GV for short) is as follows:  
 ```
 $ ./GeneticVision --images path/to/images
 ```
 This will  evolve a population using the images provided and with default settings.   
 
-#### Additional examples :  
+### Additional examples :  
 Load a population and continue evolving  
 ```
 $ ./GeneticVision --population path/to/population.gen --images path/to/images
@@ -31,6 +31,11 @@ Configure a run with command line options
 $ ./GeneticVision --images path/to/images --populationSize 300 --generations 1000 --targetFitness 0.1
 ```
 
+### Tutorial
+The following is a step by step guide to getting GeneticVision compiled, images prepared, and running some evolution experiments
+
+####
+
             
 ## Options:
 The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
@@ -44,12 +49,14 @@ Evolve will evolve a population of programs.
 Command line usage: `--evolve`  
 Config file usage: `"runMode":"evolve"`  
 
-##### Test 
+##### Test
+**Development to be completed**
 Test will load a population and output accuracy/error information of the best program. 
 Command line usage: `--test`  
 Config file usage: `"runMode":"test"`  
 
 ##### Run
+**Development to be completed**
 Run will execute a given program on a given set of images. 
 Command line usage: `--run`  
 Config file usage: `"runMode":"run"`  
@@ -185,7 +192,9 @@ Option argument type: _string_
         "images":"images/"  
     }
 ````
-
+## Downloading
+You can download a [zip of the the latest version of GeneticVision from github](https://github.com/JohnUiterwyk/genetic-vision/archive/master.zip)
+Alternatively you can [clone the repo from github](https://github.com/JohnUiterwyk/genetic-vision)
 
 ## Compiling 
 
@@ -198,3 +207,5 @@ need to have installed OpenCV with HighGui support enabled.
 ## Developer Guide
 
 The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here:
+
+## Project Road Map
