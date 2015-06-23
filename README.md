@@ -10,8 +10,26 @@ The application is built with C++ using the following libraries:
 
 ## Using GeneticVision
 The simplest way to run Genetic Vision (GV for short) is as follows:  
-    `$ ./GeneticVision --evolve --images path/to/images`  
-This will use the evolve a population using the images provided and with default settings.   
+```
+$ ./GeneticVision --images path/to/images
+```
+This will  evolve a population using the images provided and with default settings.   
+
+#### Additional examples :  
+Load a population and continue evolving  
+```
+$ ./GeneticVision --population path/to/population.gen --images path/to/images
+```  
+
+Load a config file
+```
+$ ./GeneticVision --config path/to/config.json
+```
+
+Configure a run with command line options
+```
+$ ./GeneticVision --images path/to/images --populationSize 300 --generations 1000 --targetFitness 0.1
+```
 
             
 ## Options:
@@ -39,10 +57,10 @@ Config file usage: `"runMode":"run"`
 ### Images
 Load a set of images for the purpose of training, testing, or running.  
 This option requires that images sets be prepared using a naming convention. Training is performed using pairs of images: a source image and a target image. The target image is what we want the evolved program to output given the source images. Target images should be have the same filename as the source images only with the string '-mask' inserted before the file extension. For example
-> easy-square0001.png
-> easy-square0001-mask.png
-> easy-square0002.png
-> easy-square0003-mask.png
+> easy-square0001.png  
+> easy-square0001-mask.png  
+> easy-square0002.png  
+> easy-square0003-mask.png  
 > ...  
 Be sure to include the trailing slash.
 
@@ -167,10 +185,6 @@ Option argument type: _string_
         "images":"images/"  
     }
 ````
-
-### Default settings:
-If you do not set a setting via the config file, the command line option, or by loading a population file, the following 
-are the default settings set in the applicaiton:
 
 
 ## Compiling 
