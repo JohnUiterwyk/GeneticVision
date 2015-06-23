@@ -13,11 +13,11 @@ The simplest way to run Genetic Vision (GV for short) is as follows:
     `$ ./GeneticVision --evolve --images path/to/images`  
 This will use the evolve a population using the images provided and with default settings.   
 
-
             
-### Options:
+## Options:
+The only required option is the images option. Without images, nothing can be done.
 
-#### Run Mode
+### Run Mode
 GV has three main modes: evolve, test, run.  
 Default: `evolve`
 
@@ -36,14 +36,96 @@ Run will execute a given program on a given set of images.
 Command line usage: `--run`  
 Config file usage: `"runMode":"run"`  
 
+### Images
+Load a set of images for the purpose of training, testing, or running.  
+This option requires that images sets be prepared using a naming convention. Training is performed using pairs of images: a source image and a target image. The target image is what we want the evolved program to output given the source images. Target images should be have the same filename as the source images only with the string '-mask' inserted before the file extension. For example
+> easy-square0001.png
+> easy-square0001-mask.png
+> easy-square0002.png
+> easy-square0003-mask.png
+> ...
 
-Command line: 
+Command line usage: `--images path/to/images`  
+Config file usage: `"images":"path/to/images"`  
+
+### Max Generations
+Maximum number of generations to evolve a population. The evolution is terminated when a program reaches the target fitness or when the maximum number of generations has been reached.
+
+Command line usage: `--generations 3000`  
+Config file usage: `"maxGenerations": 3000` 
+Option argument type: _integer_ 
+Default: 100
+
+### Population Size
+The number of programs in the population.
+
+Command line usage: `--populationSize 100`  
+Config file usage: `"populationSize": 100`  
+Option argument type: _integer_ 
+Default: 100
+
+### Mutation Rate
+The rate of mutation when producing a new generation from a population.
+
+Command line usage: `--mutation 0.70`  
+Config file usage: `"mutation": 0.70`  
+Option argument type: _float between 0 and 1_
+Default: 0.70
+
+### Crossover Rate
+The rate of crossover when producing a new generation from a population.
+
+Command line usage: `--crossover 0.28`  
+Config file usage: `"crossover": 0.28`  
+Option argument type: _float between 0 and 1_
+Default: 0.28
+
+### Elitism Rate
+The rate of elitism when producing a new generation from a population.
+
+Command line usage: `--elitism 0.02`  
+Config file usage: `"elitism": 0.02`  
+Option argument type: _float between 0 and 1_
+Default: 0.02
+
+### Min depth
+The minimum depth of a program tree.
+
+Command line usage: `--minDepth 2`  
+Config file usage: `"minDepth": 2`  
+Option argument type: _integer_ 
+Default: 0.02
+
+### Elitism Rate
+The maximum depth of a program tree. Increasing this can result in an exponential increase in run time for a generation.
+
+Command line usage: `--maxDepth 5`  
+Config file usage: `"maxDepth": 5`  
+Option argument type: _integer_ 
+Default: 5
+
+### Target Fitness
+The target fitness for the evolution run. If the best program of a population is less than this number, then the evolution run is terminated. 
+
+Command line usage: `--targetFitness 0.02`  
+Config file usage: `"targetFitness": 0.02`  
+Option argument type: _float between 0 and 1_
+Default: 0.02
+
+
+### Save Result Images
+If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. The frequency of image writing is determined by the logFrequency option.
+Command line usage: `--saveResultImages`  
+Config file usage: `"saveResultImages": true` 
+Option argument type: _true | false_ 
+Default: false
 
 ### Default settings:
-If you do set an setting via the config file, the command line option, or by loading a population file, the following 
+If you do not set a setting via the config file, the command line option, or by loading a population file, the following 
 are the default settings set in the applicaiton:
 
-maxGenerations(100),
+
+maxGenerations(100),  
 generationsPerTick(1),
 populationSize(100),
 mutation(0.70),
@@ -73,7 +155,7 @@ Here is an example config file:
         "crossover":0.70,  
         "elitism":0.02,  
         "minDepth": 2,  
-        "maxDepth":5,  
+        "maxDepth":5,  m
         "targetFitness":0.01,  
         "logFrequency":100,  
         "guiEnabled":true,  
