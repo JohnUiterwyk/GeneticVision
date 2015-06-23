@@ -23,37 +23,9 @@ void VisionFitness::initFitness()
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
 
-    int threadCount = 2;
-    int batchStart = 0;
-    int batchSize = popSize/threadCount+1;
-    int batchEnd = 0;
-
     int i;
-    for(i=0; i<threadCount; i++) {
 
-        if (batchStart >= popSize) {
-            cerr << "ERROR VisionFitness::assignFitness : batchStart " << batchStart << "out of range " << popSize <<
-                                                                                                           endl;
-            throw;//this shouldnt happen;
-        }
-        batchEnd  = std::min(batchStart+batchSize-1, popSize-1);
-        this->assignFitnessBatch(pop,batchStart,batchEnd);
-        batchStart = batchEnd + 1;
-
-    }
-
-
-
-    //outputProgram(best);
-
-
-
-}
-void VisionFitness::assignFitnessBatch(GeneticProgram *pop[], int batchStart, int batchEnd)
-{
-    int i=batchStart;
-
-    for(i=batchStart; i<=batchEnd; i++)
+    for(i=0; i<popSize; i++)
     {
 
         this->evaluateProgram(pop[i]);
