@@ -15,7 +15,7 @@ This will use the evolve a population using the images provided and with default
 
             
 ## Options:
-The only required option is the images option. Without images, nothing can be done.
+The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
 
 ### Run Mode
 GV has three main modes: evolve, test, run.  
@@ -43,10 +43,12 @@ This option requires that images sets be prepared using a naming convention. Tra
 > easy-square0001-mask.png
 > easy-square0002.png
 > easy-square0003-mask.png
-> ...
+> ...  
+Be sure to include the trailing slash.
 
-Command line usage: `--images path/to/images`  
-Config file usage: `"images":"path/to/images"`  
+Command line usage: `--images path/to/images/`  
+Config file usage: `"images":"path/to/images/"` 
+Option argument type: _string path to images directory_ 
 
 ### Max Generations
 Maximum number of generations to evolve a population. The evolution is terminated when a program reaches the target fitness or when the maximum number of generations has been reached.
@@ -115,10 +117,57 @@ Default: 0.02
 
 ### Save Result Images
 If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. The frequency of image writing is determined by the logFrequency option.
+
 Command line usage: `--saveResultImages`  
 Config file usage: `"saveResultImages": true` 
 Option argument type: _true | false_ 
 Default: false
+
+### Load Population
+Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population file will overide most population specific settings.
+
+Command line usage: `--population path/to/file.gen`  
+Config file usage: `"population": "path/to/file.gen"` 
+Option argument type: _string_
+
+### Log Frequency
+This sets how frequently logging information is outputed. This option affects the frequency of the following:
+- writing summary information for the current generation to stdout
+- writing result images to disk for the current generation
+- writing gen files to disk
+
+Command line usage: `--logFrequency 10`  
+Config file usage: `"logFrequency": 10` 
+Option argument type: _integer_ 
+Default: 1
+
+### Load Configuration File
+Load settings from a JSON formatted configuration file. 
+
+Command line usage: `--config path/to/config`  
+Option argument type: _string_ 
+Default: 1
+
+##### Example Config File:  
+````
+    {  
+        "maxGenerations":3000,  
+        "generationsPerTick":1,  
+        "populationSize": 150,  
+        "mutation":0.28,  
+        "crossover":0.70,  
+        "elitism":0.02,  
+        "minDepth": 2,  
+        "maxDepth":5,  m
+        "targetFitness":0.01,  
+        "logFrequency":100,  
+        "guiEnabled":true,  
+        "outputPath":"output/",  
+        "saveResultImages": false,  
+        "population":"output/populations/gen_000290.gen",  
+        "images":"images/"  
+    }
+````
 
 ### Default settings:
 If you do not set a setting via the config file, the command line option, or by loading a population file, the following 
@@ -145,26 +194,7 @@ logFrequency(1)
             
 
 ### Config file
-Here is an example config file:  
-````
-    {  
-        "maxGenerations":3000,  
-        "generationsPerTick":1,  
-        "populationSize": 150,  
-        "mutation":0.28,  
-        "crossover":0.70,  
-        "elitism":0.02,  
-        "minDepth": 2,  
-        "maxDepth":5,  m
-        "targetFitness":0.01,  
-        "logFrequency":100,  
-        "guiEnabled":true,  
-        "outputPath":"output/",  
-        "saveResultImages": false,  
-        "population":"output/populations/gen_000290.gen",  
-        "images":"images/"  
-    }
-````
+
 ## Compiling 
 Compile this application using Cmake 2.8 or higher. This application requires that OpenCV has been installed properly. 
 This application requires that OpenCV was installed correctly.
