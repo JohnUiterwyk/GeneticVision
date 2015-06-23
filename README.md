@@ -9,13 +9,14 @@ This application utilises the following libraries:
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
 ## Supported Platforms
-Linxu and OS X
+- Linux
+- OS X
 
 The application has been tested on OS X 10.10, CentOS 6.3, and Amazon Linux AMI 2015.03
 
 ## Prerequisites
-OpenCV 2.4.x
-CMake 2.8+
+- OpenCV 2.4.x  
+- CMake 2.8+
 
 ## Using GeneticVision
 The simplest way to run GeneticVision (GV for short) is as follows:  
