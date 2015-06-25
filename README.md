@@ -1,4 +1,4 @@
-# GeneticVision v0.1
+# GeneticVision v1.0
 by John Uiterwyk
 
 [GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
@@ -7,6 +7,16 @@ This application utilises the following libraries:
 - [RmitGP](http://goanna.cs.rmit.edu.au/~vc/rmitgp/) - a genetic programming library developed at RMIT University .
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
+
+## Table of Contents
+- [Supported Platforms](#supported-platforms)
+- [Prerequisites](#prerequisites)
+- [Downloading](#Downloading)
+- [Using GeneticVision](#using-geneticvision)
+- [Options](#options)
+- [Compiling](#compiling)
+- [Developer Guide](#developer-guide)
+- [Project Road Map](#developer-guide)
 
 ## Supported Platforms
 - Linux
@@ -29,7 +39,7 @@ $ ./GeneticVision --images path/to/images
 ```
 This will  evolve a population using the images provided and with default settings.   
 
-### Additional examples :  
+### Additional examples  
 Load a population and continue evolving  
 ```
 $ ./GeneticVision --population path/to/population.gen --images path/to/images
@@ -66,44 +76,7 @@ application will create:
 - `output/run.log` a log output of the evolution runs
 
 You can change the output directory via the `outputPath` option.
-
-
-## Compiling 
-
-Compile this application using Cmake 2.8 or higher. 
-GeneticVision requires that OpenCV has been installed correctly.
- 
-To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
-need to have installed OpenCV with HighGui support enabled.
-
-#### Overview:
-- [Install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html)
-- Clone the project from the github repo
-- Compile the project using CMake 2.8 or higher
-- Prep a directory of images with proper naming conventions.
-- Execute an evolution run using the compiled binary and the prepared images
-
-#### Step by step
-- Make the project directory `$ mkdir ~/genetic-vision/`
-- Change to the project directory `$ cd ~/genetic-vision/`
-- Clone the project from the github repo: `$ git clone https://github.com/JohnUiterwyk/genetic-vision.git .`
-- Make a directory for the compiled executable `$ mkdir ~/genetic-vision/bin`
-- Change to the build directory `$ cd ~/genetic-vision/bin`
-- Compile the project with CMake, passing the path to the parent folder `$ cmake ..` . This is performing what is known
-as an 'out of source build'. Just to keep things cleaner
-- Change to the data working directory `$ cd ~/my-test-data/`
-- create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
-described in the "Preparing Training Images" section.
-- Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
-
-## Developer Guide
-
-The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here: (TODO)
-
-## Project Road Map
-
-You can [view the project roadmap task board here](https://trello.com/b/BjXlMQlh/genetic-vision-roadmap)
-            
+      
 ## Options:
 The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
 
@@ -190,7 +163,7 @@ Config file usage: `"elitism": 0.02`
 Option argument type: _float between 0 and 1_  
 Default: 0.02
 
-### Min depth
+### Min Depth
 The minimum depth of a program tree.
 
 Command line usage: `--minDepth 2`  
@@ -198,7 +171,7 @@ Config file usage: `"minDepth": 2`
 Option argument type: _integer_  
 Default: 0.02
 
-### Elitism Rate
+### Max Depth
 The maximum depth of a program tree. Increasing this can result in an exponential increase in run time for a generation.
 
 Command line usage: `--maxDepth 5`  
@@ -267,3 +240,38 @@ Option argument type: _string_
     }
 ````
 
+## Compiling 
+
+Compile this application using Cmake 2.8 or higher. 
+GeneticVision requires that OpenCV has been installed correctly.
+ 
+To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
+need to have installed OpenCV with HighGui support enabled.
+
+#### Overview:
+- [Install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html)
+- Clone the project from the github repo
+- Compile the project using CMake 2.8 or higher
+- Prep a directory of images with proper naming conventions.
+- Execute an evolution run using the compiled binary and the prepared images
+
+#### Step by step
+- Make the project directory `$ mkdir ~/genetic-vision/`
+- Change to the project directory `$ cd ~/genetic-vision/`
+- Clone the project from the github repo: `$ git clone https://github.com/JohnUiterwyk/genetic-vision.git .`
+- Make a directory for the compiled executable `$ mkdir ~/genetic-vision/bin`
+- Change to the build directory `$ cd ~/genetic-vision/bin`
+- Compile the project with CMake, passing the path to the parent folder `$ cmake ..` . This is performing what is known
+as an 'out of source build'. Just to keep things cleaner
+- Change to the data working directory `$ cd ~/my-test-data/`
+- create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
+described in the "Preparing Training Images" section.
+- Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
+
+## Developer Guide
+
+The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here: (TODO)
+
+## Project Road Map
+
+You can [view the project roadmap task board here](https://trello.com/b/BjXlMQlh/genetic-vision-roadmap)

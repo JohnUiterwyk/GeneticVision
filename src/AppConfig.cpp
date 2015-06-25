@@ -46,15 +46,22 @@ namespace GeneticVision {
         int c;
         int option_index = 0;
         static struct option long_options[] = {
-                {"populationSize", required_argument, 0,  0 },
-                {"generations", required_argument, 0,  0 },
                 {"config", required_argument, 0,  0 },
                 {"evolve", no_argument, 0,  0 },
                 {"test", no_argument, 0,  0 },
                 {"run", no_argument, 0,  0 },
-                {"program", required_argument, 0,  0 },
                 {"images", required_argument, 0,  0 },
+                {"generations", required_argument, 0,  0 },
+                {"populationSize", required_argument, 0,  0 },
+                {"mutation", required_argument, 0,  0 },
+                {"crossover", required_argument, 0,  0 },
+                {"elitism", required_argument, 0,  0 },
+                {"minDepth", required_argument, 0,  0 },
+                {"maxDepth", required_argument, 0,  0 },
+                {"targetFitness", required_argument, 0,  0 },
+                {"saveResultImages", no_argument, 0,  0 },
                 {"population", required_argument, 0,  0 },
+                {"logFrequency", required_argument, 0,  0 },
                 {"outputPath", required_argument, 0,  0 }
 
         };
