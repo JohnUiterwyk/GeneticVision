@@ -76,14 +76,14 @@ GeneticVision requires that OpenCV has been installed correctly.
 To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
 need to have installed OpenCV with HighGui support enabled.
 
-Overview:
+#### Overview:
 - [Install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html)
 - Clone the project from the github repo
-- Compile the project using CMake
+- Compile the project using CMake 2.8 or higher
 - Prep a directory of images with proper naming conventions.
 - Execute an evolution run using the compiled binary and the prepared images
 
-Step by step
+#### Step by step
 - Make the project directory `$ mkdir ~/genetic-vision/`
 - Change to the project directory `$ cd ~/genetic-vision/`
 - Clone the project from the github repo: `$ git clone https://github.com/JohnUiterwyk/genetic-vision.git .`
@@ -98,7 +98,7 @@ described in the "Preparing Training Images" section.
 
 ## Developer Guide
 
-The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here:
+The code has been thoroughly commented and a reference has been generated using Doxygen. You can view the doxygen output here: (TODO)
 
 ## Project Road Map
 
