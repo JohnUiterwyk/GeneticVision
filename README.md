@@ -11,12 +11,32 @@ This application utilises the following libraries:
 ## Table of Contents
 - [Supported Platforms](#supported-platforms)
 - [Prerequisites](#prerequisites)
-- [Downloading](#Downloading)
+- [Downloading](#downloading)
 - [Using GeneticVision](#using-geneticvision)
+  - [Additional Examples](#additional-examples)
+  - [Preparing Training Images](#preparing-training-images)
+  - [Output](#output)
 - [Options](#options)
+  - [Run Mode](#run-mode)
+  - [Load Images](#load-images)
+  - [Maximum Generations](#maximum-generations)
+  - [Population Size](#population-size)
+  - [Mutation Rate](#mutation-rate)
+  - [Crossover Rate](#crossover-rate)
+  - [Elitism Rate](#eltism-rate)
+  - [Minimum Depth](#minimum-depth)
+  - [Maximum Depth](#maximum-depth)
+  - [Target Fitness](#target-fitness)
+  - [Log Frequency](#log-frequency)
+  - [Output Path](#output-path)
+  - [Save Result Images](#save-result-images)
+  - [Load Configuration File](#load-configuration-file)
+  - [Load Population File](#load-population-file)
 - [Compiling](#compiling)
+  - [Step By Step Guide](#step-by-step-guide)
+  - [GUI CMake Option](#gui-cmake-option)
 - [Developer Guide](#developer-guide)
-- [Project Road Map](#developer-guide)
+- [Project Road Map](#project-road-map)
 
 ## Supported Platforms
 - Linux
@@ -39,7 +59,7 @@ $ ./GeneticVision --images path/to/images
 ```
 This will  evolve a population using the images provided and with default settings.   
 
-### Additional examples  
+### Additional Examples  
 Load a population and continue evolving  
 ```
 $ ./GeneticVision --population path/to/population.gen --images path/to/images
@@ -105,7 +125,7 @@ Command line usage: `--run`
 Config file usage: `"runMode":"run"`  
 ```
 
-### Images
+### Load Images
 Load a set of images for the purpose of training, testing, or running.  This option requires that images sets be 
 prepared using a naming convention. Training is performed using pairs of images: a source image and a target image. The 
 target image is what we want the evolved program to output given the source images. Target images should be have the 
@@ -122,7 +142,7 @@ Command line usage: `--images path/to/images/`
 Config file usage: `"images":"path/to/images/"` 
 Option argument type: _string path to images directory_ 
 
-### Max Generations
+### Maximum Generations
 Maximum number of generations to evolve a population. The evolution is terminated when a program reaches the target 
 fitness or when the maximum number of generations has been reached.
 
@@ -163,7 +183,7 @@ Config file usage: `"elitism": 0.02`
 Option argument type: _float between 0 and 1_  
 Default: 0.02
 
-### Min Depth
+### Minimum Depth
 The minimum depth of a program tree.
 
 Command line usage: `--minDepth 2`  
@@ -171,7 +191,7 @@ Config file usage: `"minDepth": 2`
 Option argument type: _integer_  
 Default: 0.02
 
-### Max Depth
+### Maximum Depth
 The maximum depth of a program tree. Increasing this can result in an exponential increase in run time for a generation.
 
 Command line usage: `--maxDepth 5`  
@@ -187,22 +207,6 @@ Config file usage: `"targetFitness": 0.02`
 Option argument type: _float between 0 and 1_  
 Default: 0.02
 
-
-### Save Result Images
-If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. The frequency of image writing is determined by the logFrequency option.
-
-Command line usage: `--saveResultImages`  
-Config file usage: `"saveResultImages": true` 
-Option argument type: _true | false_   
-Default: false
-
-### Load Population
-Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population file will overide most population specific settings.
-
-Command line usage: `--population path/to/file.gen`  
-Config file usage: `"population": "path/to/file.gen"` 
-Option argument type: _string_  
-
 ### Log Frequency
 This sets how frequently logging information is outputed. This option affects the frequency of the following:
 - writing summary information for the current generation to stdout
@@ -214,8 +218,37 @@ Config file usage: `"logFrequency": 10`
 Option argument type: _integer_   
 Default: 1
 
+### Output Path
+This output path is where the run.log, gen files, and result images are written.
+
+Command line usage: `--outputPath output/`  
+Config file usage: `"outputPath":"output/"` 
+Option argument type: _string path to output directory_ 
+Default: `output/`
+
+### Save Result Images
+If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. 
+The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-1.png`. 
+Image files will be written to the `images/` directory in the output directory.
+
+Command line usage: `--saveResultImages`  
+Config file usage: `"saveResultImages": true` 
+Option argument type: _true | false_   
+Default: false
+
+### Load Population File
+Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population 
+file will overide most population specific settings.
+
+Command line usage: `--population path/to/file.gen`  
+Config file usage: `"population": "path/to/file.gen"` 
+Option argument type: _string_  
+
+
+
 ### Load Configuration File
-Load settings from a JSON formatted configuration file. Please note that **all paths within a config file are relative to the config file** unless the rootPath option is set.
+Load settings from a JSON formatted configuration file. Please note that **all paths within a config file are relative 
+to the config file** unless the rootPath option is set.
 
 Command line usage: `--config path/to/config`  
 Option argument type: _string_  
@@ -241,21 +274,15 @@ Option argument type: _string_
 ````
 
 ## Compiling 
-
-Compile this application using Cmake 2.8 or higher. 
-GeneticVision requires that OpenCV has been installed correctly.
- 
-To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
-need to have installed OpenCV with HighGui support enabled.
-
-#### Overview:
-- [Install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html)
-- Clone the project from the github repo
+The basic process for compiling GeneticVision is as follows:
+- [Install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html); GeneticVision 
+requires that OpenCV has been installed correctly.
+- Clone the GeneticVision project from the GitHub repo
 - Compile the project using CMake 2.8 or higher
 - Prep a directory of images with proper naming conventions.
 - Execute an evolution run using the compiled binary and the prepared images
 
-#### Step by step
+#### Step By Step Guide
 - Make the project directory `$ mkdir ~/genetic-vision/`
 - Change to the project directory `$ cd ~/genetic-vision/`
 - Clone the project from the github repo: `$ git clone https://github.com/JohnUiterwyk/genetic-vision.git .`
@@ -267,6 +294,11 @@ as an 'out of source build'. Just to keep things cleaner
 - create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
 described in the "Preparing Training Images" section.
 - Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
+
+#### GUI CMake Option
+
+To compile the application with support for an output to a window, compile with the Cmake option "-D GUI=ON".  You will 
+need to have installed OpenCV with HighGui support enabled.
 
 ## Developer Guide
 
