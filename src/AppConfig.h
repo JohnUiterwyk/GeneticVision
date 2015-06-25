@@ -25,7 +25,6 @@ namespace GeneticVision
         };
     private:
         RunMode runMode;
-        int generationsPerTick;
         int maxGenerations;
 
         int populationSize;
@@ -115,9 +114,6 @@ namespace GeneticVision
             return maxGenerations;
         }
 
-        int getGenerationsPerTick() const {
-            return generationsPerTick;
-        }
         bool isLoadPopulationEnabled() const {
             return loadPopulationEnabled;
         }

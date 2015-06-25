@@ -30,7 +30,7 @@ namespace GeneticVision
         RunResult runResult;
         do
         {
-            runResult = this->gvSimulation->tick(this->appConfig.getGenerationsPerTick());
+            runResult = this->gvSimulation->tick(this->appConfig.getLogFrequency());
             this->view->update(&runResult);
 
 

@@ -21,7 +21,6 @@ namespace GeneticVision {
 
     AppConfig::AppConfig() :
             maxGenerations(100),
-            generationsPerTick(1),
             populationSize(100),
             mutation(0.70),
             crossover(0.28),
@@ -34,6 +33,7 @@ namespace GeneticVision {
             rootPath("./"),
             outputPath("output/"),
             popFilesPath( "output/populations/"),
+            imagesOutputPath("output/images/"),
             runLogPath("output/output.log"),
             runMode(AppConfig::EVOLVE),
             logFrequency(1)
@@ -48,7 +48,6 @@ namespace GeneticVision {
         static struct option long_options[] = {
                 {"populationSize", required_argument, 0,  0 },
                 {"generations", required_argument, 0,  0 },
-                {"generationsPerTick", required_argument, 0,  0 },
                 {"config", required_argument, 0,  0 },
                 {"evolve", no_argument, 0,  0 },
                 {"test", no_argument, 0,  0 },
@@ -56,7 +55,7 @@ namespace GeneticVision {
                 {"program", required_argument, 0,  0 },
                 {"images", required_argument, 0,  0 },
                 {"population", required_argument, 0,  0 },
-                {"imageOutput", required_argument, 0,  0 }
+                {"outputPath", required_argument, 0,  0 }
 
         };
 
@@ -95,7 +94,6 @@ namespace GeneticVision {
                 if(longOptionName == "test") this->runMode = TEST;
 
                 if(longOptionName == "generations") argument >> this->maxGenerations;
-                if(longOptionName == "generationsPerTick") argument >> this->generationsPerTick;
 
                 if(longOptionName == "populationSize") argument >> this->populationSize;
                 if(longOptionName == "mutation") argument >> this->mutation;
@@ -183,10 +181,13 @@ namespace GeneticVision {
         }
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
 
-        this->outputPath = this->rootPath + root.get("outputPath", this->outputPath).asString();
-        this->popFilesPath = this->outputPath + "populations/";
-        this->imagesOutputPath = this->outputPath + "images/";
-        this->runLogPath = this->outputPath + "run.log";
+        if(root["outputPath"].isNull() == false)
+        {
+            this->outputPath = this->rootPath + root.get("outputPath", this->outputPath).asString();
+            this->popFilesPath = this->outputPath + "populations/";
+            this->imagesOutputPath = this->outputPath + "images/";
+            this->runLogPath = this->outputPath + "run.log";
+        }
 
         // load training set images
         Json::Value imagesJson = root["images"];
@@ -203,7 +204,7 @@ namespace GeneticVision {
         if(root["population"].isNull() == false)
         {
             this->loadPopulationEnabled = true;
-            this->loadPopulationPath = this->rootPath + root.get("loadPopulationPath", "output/populations/gen_latest.gen").asString();
+            this->loadPopulationPath = this->rootPath + root.get("population", this->loadPopulationPath).asString();
         }
 
         // fetch values from json, or use default if not present
@@ -218,7 +219,6 @@ namespace GeneticVision {
         this->minDepth = root.get("minDepth", this->minDepth).asInt();
         this->maxDepth = root.get("maxDepth", this->maxDepth).asInt();
         this->maxGenerations = root.get("maxGenerations", this->maxGenerations).asInt();
-        this->generationsPerTick = root.get("generationsPerTick", this->generationsPerTick).asInt();
         this->saveResultImages = root.get("saveResultImages",this->saveResultImages).asBool();
 
     }
