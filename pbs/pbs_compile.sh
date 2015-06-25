@@ -53,4 +53,5 @@ make
 mv GeneticVision $BIN_DIR
 rm -rf $BUILD_DIR
 cd $PBS_O_WORKDIR
+echo "Finished at $(date)"
 
