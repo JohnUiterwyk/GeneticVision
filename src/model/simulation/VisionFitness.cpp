@@ -9,8 +9,9 @@
 #include <math.h>
 
 
-VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection) : Fitness(conf)
+VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness) : Fitness(conf)
 {
+    this->targetFitness = targetFitness;
     this->imagePairs = &imagePairCollection.getCollection();
 }
 
@@ -18,7 +19,6 @@ VisionFitness::~VisionFitness() { }
 
 void VisionFitness::initFitness()
 {
-    goalValue = 0;
 }
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
@@ -91,7 +91,7 @@ bool VisionFitness::solutionFound(GeneticProgram *pop[], int popSize) {
     int i=0;
     for (; i<popSize; i++)
     {
-        if (pop[i]->getFitness() <= 0.02)
+        if (pop[i]->getFitness() <= targetFitness)
             return true;
     }
     return false;

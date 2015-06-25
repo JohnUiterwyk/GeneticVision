@@ -75,13 +75,14 @@ namespace GeneticVision
         this->pop->setMutationRate(appConfig->getMutation());
         this->pop->setCrossoverRate(appConfig->getCrossover());
         this->pop->setElitismRate(appConfig->getElitism());
+
         //Set the return type for our programs
         this->pop->setReturnType(ReturnImage::TYPENUM);
 
 
 
         //Set the fitness class to be used
-        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs());
+        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness());
 
         //Initialise the fitness
         this->runConfig->fitnessObject->initFitness();
