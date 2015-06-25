@@ -214,7 +214,7 @@ This sets how frequently logging information is outputed. This option affects th
 - writing gen files to disk
 
 Command line usage: `--logFrequency 10`  
-Config file usage: `"logFrequency": 10` 
+Config file usage: `"logFrequency": 10`  
 Option argument type: _integer_   
 Default: 1
 
@@ -222,8 +222,8 @@ Default: 1
 This output path is where the run.log, gen files, and result images are written.
 
 Command line usage: `--outputPath output/`  
-Config file usage: `"outputPath":"output/"` 
-Option argument type: _string path to output directory_ 
+Config file usage: `"outputPath":"output/"`  
+Option argument type: _string path to output directory_  
 Default: `output/`
 
 ### Save Result Images
@@ -232,7 +232,7 @@ The frequency of image writing is determined by the logFrequency option. The fil
 Image files will be written to the `images/` directory in the output directory.
 
 Command line usage: `--saveResultImages`  
-Config file usage: `"saveResultImages": true` 
+Config file usage: `"saveResultImages": true`  
 Option argument type: _true | false_   
 Default: false
 
@@ -241,7 +241,7 @@ Load a population from a *.gen file. The value for this option should be the pat
 file will overide most population specific settings.
 
 Command line usage: `--population path/to/file.gen`  
-Config file usage: `"population": "path/to/file.gen"` 
+Config file usage: `"population": "path/to/file.gen"`  
 Option argument type: _string_  
 
 
@@ -265,10 +265,8 @@ Option argument type: _string_
         "maxDepth":5,  m
         "targetFitness":0.01,  
         "logFrequency":100,  
-        "guiEnabled":true,  
         "outputPath":"output/",  
         "saveResultImages": false,  
-        "population":"output/populations/gen_000290.gen",  
         "images":"images/"  
     }
 ````
