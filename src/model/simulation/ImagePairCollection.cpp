@@ -75,7 +75,6 @@ namespace GeneticVision
 
     int ImagePairCollection::loadFromDirectory(string directoryPath)
     {
-        map<string, ImagePair> imagePairMap;
         string tempFilename;
         DIR *directory;
         struct dirent * directoryEntry;
