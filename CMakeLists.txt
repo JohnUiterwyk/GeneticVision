@@ -51,8 +51,10 @@ src/view/ViewController.cpp src/view/ViewController.h
 src/model/simulation/GvPopulation.cpp src/model/simulation/GvPopulation.h
 src/view/ImageWriter.cpp src/view/ImageWriter.h
 src/model/simulation/ImagePairCollection.cpp src/model/simulation/ImagePairCollection.h
+src/model/simulation/ProgramResult.cpp src/model/simulation/ProgramResult.h  
+src/model/simulation/ProgramStats.cpp src/model/simulation/ProgramStats.h
 )
-add_executable(GeneticVision ${SOURCE_FILES})
+add_executable(GeneticVision ${SOURCE_FILES} )
 
 # CV_HIGHGUI_ENABLED flag
 # This enables a GUI output window on systems that can support opencv highgui
