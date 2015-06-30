@@ -32,6 +32,14 @@ namespace GeneticVision
 
         }
         void writeToFile() ;
+        int getMinDepth()
+        {
+         return this->minDepth;
+        }
+        int getDepthLimit()
+        {
+            return this->depthLimit;
+        }
     };
 
 }
