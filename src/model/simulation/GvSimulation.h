@@ -24,7 +24,9 @@ namespace GeneticVision
     public:
 
         GvSimulation(GeneticVision::AppConfig * appConfig);
+
         RunResult tick(int);
+        RunResult getRunResult();
         void cleanUp();
     };
 

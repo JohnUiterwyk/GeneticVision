@@ -53,13 +53,12 @@ namespace GeneticVision
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
 
 
-        //Set the depth limit for the system
-        this->runConfig->maxDepth = appConfig->getMaxDepth();
-        this->runConfig->minDepth = appConfig->getMinDepth();
 
-        //Create the program generator
-        this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
+        //Set the fitness class to be used
+        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness());
 
+        //Initialise the fitness
+        this->runConfig->fitnessObject->initFitness();
 
 
         this->pop = new GvPopulation(
@@ -69,23 +68,9 @@ namespace GeneticVision
                 this->runConfig);
 
 
-        //Set the rates of mutation etc
-        this->pop->setMinDepth(appConfig->getMinDepth());
-        this->pop->setDepthLimit(appConfig->getMaxDepth());
-        this->pop->setMutationRate(appConfig->getMutation());
-        this->pop->setCrossoverRate(appConfig->getCrossover());
-        this->pop->setElitismRate(appConfig->getElitism());
-
-        //Set the return type for our programs
-        this->pop->setReturnType(ReturnImage::TYPENUM);
 
 
 
-        //Set the fitness class to be used
-        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness());
-
-        //Initialise the fitness
-        this->runConfig->fitnessObject->initFitness();
 
         if(appConfig->isLoadPopulationEnabled())
         {
@@ -101,6 +86,13 @@ namespace GeneticVision
                 //read the file into pop object
                 this->pop->readFromFile(popPathCharPtr);
 
+                //Set the depth limit for the system
+                this->runConfig->maxDepth = this->pop->getDepthLimit();
+                this->runConfig->minDepth = this->pop->getMinDepth();
+
+                //Create the program generator
+                this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
+
                 // don't forget to free the string after finished using it
                 delete[] popPathCharPtr;
             }
@@ -112,40 +104,62 @@ namespace GeneticVision
             }
         } else
         {
+            //Set the depth limit for the system
+            this->runConfig->maxDepth = appConfig->getMaxDepth();
+            this->runConfig->minDepth = appConfig->getMinDepth();
+
+            //Create the program generator
+            this->runConfig->programGenerator = new ProgramGenerator(this->runConfig);
+
+            //Set the rates of mutation etc
+            this->pop->setMinDepth(appConfig->getMinDepth());
+            this->pop->setDepthLimit(appConfig->getMaxDepth());
+            this->pop->setMutationRate(appConfig->getMutation());
+            this->pop->setCrossoverRate(appConfig->getCrossover());
+            this->pop->setElitismRate(appConfig->getElitism());
+
+            //Set the return type for our programs
+            this->pop->setReturnType(ReturnImage::TYPENUM);
             //init the population
             this->pop->generateInitialPopulation();
+            //pseudo disable built int logging
+            this->pop->setLogFrequency(appConfig->getLogFrequency());
         }
 
-        //pseudo disable built int logging
-        this->pop->setLogFrequency(appConfig->getLogFrequency());
-        this->pop->writeToFile();
+        if(appConfig->getRunMode() == AppConfig::EVOLVE)
+        {
+            this->pop->writeToFile();
+        }
+        else if(appConfig->getRunMode() == AppConfig::TEST)
+        {
 
+        }
     //    //clean up
     }
-
     RunResult GvSimulation::tick(int generations)
     {
         // run x generations
         bool solutionFound = this->pop->evolve(generations);
+        RunResult result = this->getRunResult();
+        result.solutionFound = solutionFound;
         if(solutionFound)
         {
             this->pop->writeToFile();
         }
-        GeneticProgram * best = this->pop->getBest();
+        return result;
+    }
+
+    RunResult GvSimulation::getRunResult()
+    {
         VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
 
         RunResult runResult;
-        runResult.solutionFound = solutionFound;
+        GeneticProgram * best = this->pop->getBest();
+        runResult.best = new GeneticProgram(*best);
         runResult.generationId = this->pop->getGenerationNumber();
-        runResult.bestProgramId = best->getProgramID();
-        runResult.bestProgramFitness = best->getFitness();
-        runResult.resultMap = fitness->getResultImages(best);
-        best->print(runResult.bestProgramString);
-
+        runResult.resultMap = fitness->getResultImages(runResult.best);
         return runResult;
     }
-
-
 
     void GvSimulation::cleanUp()
     {
