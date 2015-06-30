@@ -10,18 +10,22 @@
 #include <map>
 #include <vector>
 #include <opencv2/core/core.hpp>
+#include "../../rmitgp/GeneticProgram.h"
+#include "ProgramResult.h"
 
+using namespace std;
+using namespace cv;
 class RunResult {
 public:
+    RunResult();
     int generationId;
-    int bestProgramId;
-    double bestProgramFitness;
-    std::string bestProgramString;
-    bool solutionFound;
-    std::vector<cv::Mat> bestResultImages;
-    std::map<std::string, cv::Mat> resultMap;
+    GeneticProgram * best;
 
-    std::string toString();
+    ProgramResult * bestPerformance;
+
+    bool solutionFound;
+    map<string, Mat> resultMap;
+
 
 
 };

@@ -5,6 +5,5 @@
 #include "RunResult.h"
 #include <sstream>
 
-std::string RunResult::toString() {
-
+RunResult::RunResult() {
 }
