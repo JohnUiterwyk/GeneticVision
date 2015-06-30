@@ -23,6 +23,7 @@ namespace GeneticVision
             TEST,
             RUN
         };
+
     private:
         RunMode runMode;
         int maxGenerations;
@@ -130,6 +131,9 @@ namespace GeneticVision
 
         bool isGuiEnabled() const {
             return guiEnabled;
+        }
+        const RunMode &getRunMode() const {
+            return runMode;
         }
 
 
