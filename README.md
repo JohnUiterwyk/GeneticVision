@@ -284,11 +284,15 @@ requires that OpenCV has been installed correctly.
 - Make the project directory `$ mkdir ~/genetic-vision/`
 - Change to the project directory `$ cd ~/genetic-vision/`
 - Clone the project from the github repo: `$ git clone https://github.com/JohnUiterwyk/genetic-vision.git .`
-- Make a directory for the compiled executable `$ mkdir ~/genetic-vision/bin`
-- Change to the build directory `$ cd ~/genetic-vision/bin`
-- Compile the project with CMake, passing the path to the parent folder `$ cmake ..` . This is performing what is known
-as an 'out of source build'. Just to keep things cleaner
+- Make a directory for the build files `$ mkdir ~/genetic-vision/build`
+- Make a directory for the bin files `$ mkdir ~/genetic-vision/bin`
+- Change to the build directory `$ cd ~/genetic-vision/build`
+- Compile the project with CMake, passing the path to the parent folder `$ cmake ~/genetic-vision` . This is performing what is known
+as an 'out of source build'. It helps to keep the resulting file/folder structure clean.
+- Make the executable `$ make ..`
+- Move the executable to the bin directory `$ mv GeneticVision ~/genetic-vision/bin`
 - Change to the data working directory `$ cd ~/my-test-data/`
+- Delete the build directory `$ rm -rf ~/genetic-vision/build`
 - create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
 described in the "Preparing Training Images" section.
 - Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
