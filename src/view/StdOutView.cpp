@@ -20,11 +20,12 @@ namespace GeneticVision
         struct tm * now = localtime( & t );
         cout << "DateTime, " << this->getCurrentDateTime() << endl;
         cout << "GenerationID, " << runResult->generationId << endl;
-        cout << "Best Fitness, " << runResult->best->getFitness() << endl;
+        cout << "Best Fitness, " << runResult->bestProgram->getFitness() << endl;
 
         string bestProgramString;
-        runResult->best->print(bestProgramString);
+        runResult->bestProgram->print(bestProgramString);
         cout << "Program String, " << bestProgramString << endl;
+        runResult->statAverage.toStdOut();
         cout << endl;
 
     }

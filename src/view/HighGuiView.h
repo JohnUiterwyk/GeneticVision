@@ -19,7 +19,8 @@ namespace GeneticVision {
     public:
 
         #ifdef CV_HIGHGUI_ENABLED
-            OpenCVWindow output;
+            OpenCVWindow results;
+            OpenCVWindow performance;
         #endif //CV_HIGHGUI_ENABLED
 
         HighGuiView(GeneticVision::AppConfig * appConfig);
