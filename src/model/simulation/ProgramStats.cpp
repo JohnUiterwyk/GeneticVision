@@ -5,6 +5,14 @@
 using namespace std;
 #include "ProgramStats.h"
 
+ProgramStats::ProgramStats():
+positivePixels(0),
+negativePixels(0),
+truePositiveCount(0),
+falsePositiveCount(0),
+trueNegativeCount(0),
+falseNegativeCount(0)
+{ }
 double ProgramStats::getAccuracy() {
 
     return (truePositiveCount + trueNegativeCount) / (positivePixels + negativePixels);
@@ -31,6 +39,15 @@ double ProgramStats::getFalseNegativeRate() {
     return falseNegativeCount/(truePositiveCount+falseNegativeCount);
 }
 
+void ProgramStats::add(ProgramStats & statsToAdd)
+{
+    this->positivePixels += statsToAdd.positivePixels;
+    this->negativePixels += statsToAdd.negativePixels;
+    this->truePositiveCount += statsToAdd.truePositiveCount;
+    this->falsePositiveCount += statsToAdd.falsePositiveCount;
+    this->trueNegativeCount += statsToAdd.trueNegativeCount;
+    this->falseNegativeCount += statsToAdd.falseNegativeCount;
+}
 void ProgramStats::toStdOut()
 {
 

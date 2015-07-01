@@ -9,6 +9,7 @@
 class ProgramStats {
 
 public:
+    ProgramStats();
     double positivePixels;
     double negativePixels;
     double truePositiveCount;
@@ -23,6 +24,7 @@ public:
     double getFalsePositiveRate();
     double getFalseNegativeRate();
 
+    void add(ProgramStats & statsToAdd);
     void toStdOut();
 };
 
