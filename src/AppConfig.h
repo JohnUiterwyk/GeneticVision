@@ -16,16 +16,10 @@ namespace GeneticVision
 {
     class AppConfig
     {
-    public:
-        enum RunMode
-        {
-            EVOLVE,
-            TEST,
-            RUN
-        };
 
     private:
-        RunMode runMode;
+        bool evolveEnabled;
+        bool testEnabled;
         int maxGenerations;
 
         int populationSize;
@@ -59,8 +53,10 @@ namespace GeneticVision
         AppConfig();
         void parseCommandLineArgs(int argc, char **argv);
         void loadConfigFile(const string *filepath);
-        void createMissingDirectories();
+        void setupOutputDirectories();
+        string getTimestampString();
         void printToStdOut();
+
 
 
         /**
@@ -132,8 +128,11 @@ namespace GeneticVision
         bool isGuiEnabled() const {
             return guiEnabled;
         }
-        const RunMode &getRunMode() const {
-            return runMode;
+        bool isEvolveEnabled() const {
+            return evolveEnabled;
+        }
+        bool isTestEnabled() const {
+            return testEnabled;
         }
 
 

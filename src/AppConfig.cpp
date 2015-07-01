@@ -15,6 +15,7 @@
 #include "util/json/json.h"
 #include <map>
 #include <getopt.h>
+#include <ctime>
 
 namespace GeneticVision {
 
@@ -35,7 +36,8 @@ namespace GeneticVision {
             popFilesPath( "output/populations/"),
             imagesOutputPath("output/images/"),
             runLogPath("output/output.log"),
-            runMode(AppConfig::EVOLVE),
+            evolveEnabled(true),
+            testEnabled(false),
             logFrequency(1)
     {
 
@@ -96,9 +98,9 @@ namespace GeneticVision {
                 }
                 //cout << "handle option: " << longOptionName;
 
-                if(longOptionName == "evolve") this->runMode = EVOLVE;
-                if(longOptionName == "run") this->runMode = RUN;
-                if(longOptionName == "test") this->runMode = TEST;
+                if(longOptionName == "evolve") this->evolveEnabled = true;
+                if(longOptionName == "test") this->testEnabled = true;
+                //if(longOptionName == "run") this->runMode = RUN;
 
                 if(longOptionName == "generations") argument >> this->maxGenerations;
 
@@ -118,9 +120,6 @@ namespace GeneticVision {
                     {
                         this->outputPath.append("/");
                     }
-                    this->popFilesPath = this->outputPath + "populations/";
-                    this->imagesOutputPath = this->outputPath + "images/";
-                    this->runLogPath = this->outputPath + "run.log";
                 }
 
                 if(longOptionName == "guiEnabled") argument >> this->guiEnabled;
@@ -147,12 +146,16 @@ namespace GeneticVision {
                 cout << argv[optind++];
             cout << endl;
         }
-        this->createMissingDirectories();
+        this->setupOutputDirectories();
     }
 
-    void AppConfig::createMissingDirectories()
+    void AppConfig::setupOutputDirectories()
     {
-
+        this->outputPath = this->outputPath + "gv-run-" + this->getTimestampString()+"/";
+        this->popFilesPath = this->outputPath + "populations/";
+        this->imagesOutputPath = this->outputPath + "images/";
+        this->runLogPath = this->outputPath + "run.log";
+        
         // create output directories
         try {
             mode_t process_mask = umask(0);
@@ -227,8 +230,23 @@ namespace GeneticVision {
         this->maxDepth = root.get("maxDepth", this->maxDepth).asInt();
         this->maxGenerations = root.get("maxGenerations", this->maxGenerations).asInt();
         this->saveResultImages = root.get("saveResultImages",this->saveResultImages).asBool();
+        this->testEnabled = root.get("test",this->testEnabled).asBool();
+        this->evolveEnabled = root.get("evolve",this->evolveEnabled).asBool();
 
     }
 
 
+    string AppConfig::getTimestampString() {
+        time_t rawtime;
+        struct tm * timeinfo;
+        char buffer[256];
+
+        time (&rawtime);
+        timeinfo = localtime(&rawtime);
+
+        strftime(buffer,256,"%Y-%m-%d-%I-%M-%S",timeinfo);
+        std::string str(buffer);
+
+        return str;
+    }
 }
