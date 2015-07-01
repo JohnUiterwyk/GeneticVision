@@ -11,7 +11,8 @@
 #include <vector>
 #include <opencv2/core/core.hpp>
 #include "../../rmitgp/GeneticProgram.h"
-#include "ProgramResult.h"
+#include "ProgramStats.h"
+#include "../ImagePair.h"
 
 using namespace std;
 using namespace cv;
@@ -19,13 +20,15 @@ class RunResult {
 public:
     RunResult();
     int generationId;
-    GeneticProgram * best;
-
-    ProgramResult * bestPerformance;
+    ProgramStats statAverage;
+    GeneticProgram * bestProgram;
+    std::map<std::string, cv::Mat> resultImagesMap;
+    std::map<std::string, cv::Mat> performanceImagesMap;
 
     bool solutionFound;
-    map<string, Mat> resultMap;
 
+    void testPerformance(std::vector<ImagePair> &imagePairs );
+    void testImage(cv::Mat &target, cv::Mat &test, string filenameKey);
 
 
 };
