@@ -5,10 +5,10 @@
 #include "GvPopulation.h"
 namespace GeneticVision {
     void GvPopulation::writeToFile() {
-        char filename[50];
+        char filename[512];
         ofstream outputFile;
 
-        sprintf(filename, "%sgen_%06d.gen", outputDir.c_str(), generationNumber);
+        sprintf(filename, "%sgen-%06d.gen", outputDir.c_str(), generationNumber);
         outputFile.open(filename);
 
         if (outputFile.good())
@@ -21,7 +21,7 @@ namespace GeneticVision {
         if (useCompression)
             compressFile(filename);
 
-        sprintf(filename, "%sgen_latest.gen", outputDir.c_str());
+        sprintf(filename, "%sgen-latest.gen", outputDir.c_str());
         outputFile.open(filename);
 
         if (outputFile.good())
