@@ -28,13 +28,26 @@ namespace GeneticVision
 
 
         RunResult runResult;
-        do
+        if(this->appConfig.isEvolveEnabled())
         {
-            runResult = this->gvSimulation->tick(this->appConfig.getLogFrequency());
+            do
+            {
+                runResult = this->gvSimulation->tick(this->appConfig.getLogFrequency());
+                if (this->appConfig.isTestEnabled()) {
+                    runResult = this->gvSimulation->testBest();
+                }
+                this->view->update(&runResult);
+            }while(runResult.solutionFound == false && runResult.generationId < this->appConfig.getMaxGenerations());
+        }
+        else if (this->appConfig.isTestEnabled())
+        {
+            runResult = this->gvSimulation->testBest();
             this->view->update(&runResult);
 
-
-        }while(runResult.solutionFound == false && runResult.generationId < this->appConfig.getMaxGenerations());
+            #ifdef CV_HIGHGUI_ENABLED
+            cv::waitKey(0);
+            #endif //CV_HIGHGUI_ENABLED
+        }
     }
 
     GeneticVisionApp::~GeneticVisionApp() {

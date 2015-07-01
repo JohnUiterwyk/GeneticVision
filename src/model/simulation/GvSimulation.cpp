@@ -126,13 +126,9 @@ namespace GeneticVision
             this->pop->setLogFrequency(appConfig->getLogFrequency());
         }
 
-        if(appConfig->getRunMode() == AppConfig::EVOLVE)
+        if(appConfig->isEvolveEnabled())
         {
             this->pop->writeToFile();
-        }
-        else if(appConfig->getRunMode() == AppConfig::TEST)
-        {
-
         }
     //    //clean up
     }
@@ -154,11 +150,17 @@ namespace GeneticVision
         VisionFitness * fitness = dynamic_cast<VisionFitness*>(this->runConfig->fitnessObject);
 
         RunResult runResult;
-        GeneticProgram * best = this->pop->getBest();
-        runResult.best = new GeneticProgram(*best);
+        runResult.bestProgram = this->pop->getBest();
         runResult.generationId = this->pop->getGenerationNumber();
-        runResult.resultMap = fitness->getResultImages(runResult.best);
+        runResult.resultImagesMap = fitness->getResultImages(runResult.bestProgram);
         return runResult;
+    }
+
+    RunResult GvSimulation::testBest()
+    {
+        RunResult result = this->getRunResult();
+        result.testPerformance(appConfig->getTrainPairs().getCollection());
+        return result;
     }
 
     void GvSimulation::cleanUp()

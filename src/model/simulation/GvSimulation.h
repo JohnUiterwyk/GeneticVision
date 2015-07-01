@@ -27,6 +27,7 @@ namespace GeneticVision
 
         RunResult tick(int);
         RunResult getRunResult();
+        RunResult testBest();
         void cleanUp();
     };
 
