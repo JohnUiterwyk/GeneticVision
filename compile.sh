@@ -1,5 +1,5 @@
-
-mkdir -p build
+$BUILD_DIR=build/$(uuidgen)
+mkdir -p $BUILD_DIR
 mkdir -p bin
 
 # Set output file
@@ -9,11 +9,11 @@ mkdir -p bin
 
 
 # Perform out of source build using build folder
-cd build
-cmake ..
+cd $BUILD_DIR
+cmake ../..
 make
-cd ..
-mv build/GeneticVision bin
-rm -rf build
+cd ../..
+mv $BUILD_DIR/GeneticVision bin
+rm -rf $BUILD_DIR
 echo "Finished at $(date)"
 
