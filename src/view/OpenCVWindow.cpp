@@ -37,7 +37,7 @@ void OpenCVWindow::showImage(_InputArray const &inputArray) {
 
 void OpenCVWindow::showImages(std::vector<Mat> & imageVector) {
 
-    cv::Mat buffer = this->makeCanvas(imageVector,300,3);
+    cv::Mat buffer = this->makeCanvas(imageVector,400,2);
     imshow(this->window_name,buffer);
     cv::Size size = buffer.size();
     this->setSize(size.width,size.height);
@@ -47,6 +47,7 @@ void OpenCVWindow::showImages(std::vector<Mat> & imageVector) {
 
 cv::Mat OpenCVWindow::makeCanvas(std::vector<cv::Mat>& vecMat, int windowHeight, int nRows) {
     int N = vecMat.size();
+    if(N > 10) N = 10; //set a max number to show
     nRows  = nRows > N ? N : nRows;
     int edgeThickness = 10;
     int imagesPerRow = (int) ceil(double(N) / nRows);
@@ -83,8 +84,12 @@ cv::Mat OpenCVWindow::makeCanvas(std::vector<cv::Mat>& vecMat, int windowHeight,
                 if (vecMat[k].channels() == 1) {
                     cv::cvtColor(vecMat[k], target_ROI, CV_GRAY2BGR);
                 }
+            } else
+            {
+                vecMat[k].copyTo(target_ROI);
             }
             cv::resize(target_ROI, target_ROI, s);
+
             if (target_ROI.type() != canvasImage.type()) {
                 target_ROI.convertTo(target_ROI, canvasImage.type());
             }
