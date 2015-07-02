@@ -23,8 +23,7 @@
 #PBS -m abe
 #PBS -j oe
 #PBS -o pbs.log
-cd $PBS_O_WORKDIR
-cd ..
+cd $PBS_O_WORKDIR/../
 
 # Load the environment variables for cmake and gcc
 module load gcc/5.1.0
@@ -32,5 +31,5 @@ module load cmake/3.2.3
 
 # Merging Standard Output
 
-compile.sh 2>&1 | tee -a compile.log
+./compile.sh 2>&1 | tee -a ./compile.log
 

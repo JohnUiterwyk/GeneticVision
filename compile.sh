@@ -1,10 +1,6 @@
 
-ROOT_DIR=./
-BUILD_DIR=./build
-BIN_DIR=./bin
-
-mkdir -p $BUILD_DIR
-mkdir -p $BIN_DIR
+mkdir -p build
+mkdir -p bin
 
 # Set output file
 
@@ -13,10 +9,11 @@ mkdir -p $BIN_DIR
 
 
 # Perform out of source build using build folder
-cd $BUILD_DIR
-cmake $ROOT_DIR
+cd build
+cmake ..
 make
-mv GeneticVision $BIN_DIR
-rm -rf $BUILD_DIR
+cd ..
+mv build/GeneticVision bin
+rm -rf build
 echo "Finished at $(date)"
 
