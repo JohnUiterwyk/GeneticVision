@@ -1,4 +1,4 @@
-# GeneticVision v1.0
+# GeneticVision v1.1
 by John Uiterwyk
 
 [GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
@@ -65,6 +65,11 @@ Load a population and continue evolving
 $ ./GeneticVision --population path/to/population.gen --images path/to/images
 ```  
 
+Load a population and test it with a set of images, saving color annotated result images
+```
+$ ./GeneticVision --test --population path/to/population.gen --images path/to/images --saveResultImages
+```  
+
 Load a config file
 ```
 $ ./GeneticVision --config path/to/config.json
@@ -100,30 +105,47 @@ You can change the output directory via the `outputPath` option.
 ## Options:
 The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
 
-### Run Mode
-GV has three main modes: evolve, test, run.  
-Default: `evolve`
 
 ##### Evolve
 Evolve will evolve a population of programs.  
 Command line usage: `--evolve`  
-Config file usage: `"runMode":"evolve"`  
+Config file usage: `"evolve":"true"`
+Option argument type: _bool_ 
+Default: true   
 
 ##### Test
-**Development to be completed**
-```
-Test will load a population and output accuracy/error information of the best program. 
-Command line usage: `--test`  
-Config file usage: `"runMode":"test"`  
-```
+Test output averaged accuracy/error information of the best program.  
+-If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
+-If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
 
-##### Run
-**Development to be completed**
-```
-Run will execute a given program on a given set of images. 
-Command line usage: `--run`  
-Config file usage: `"runMode":"run"`  
-```
+The test flag is used to assess the performance of producing a given black and white target mask. Black is considered a
+positive, and white is considered a negative.
+
+This will output the following stats to stdout:
+- Accuracy
+- Error rate
+- True positive rate
+- False positive rate
+- True negative rate
+- False negative rate
+
+This will write images to disk with true/false positive/negative coloration. 
+Performance assesment images use the following color coding:
+- Black: true positive
+- White: true negative
+- Green: false positive
+- Red: false negative
+
+This will output a window of true/false positive/negative colored result image using OpenCV HighGui (if enabled).  
+
+Command line usage: `--test`  
+Config file usage: `"test":"true"`  
+Option argument type: _bool_ 
+Default: false  
+
+Example: Load a population, test the best program, and save the resulting predicted images with performance coloration:
+
+
 
 ### Load Images
 Load a set of images for the purpose of training, testing, or running.  This option requires that images sets be 
@@ -219,7 +241,8 @@ Option argument type: _integer_
 Default: 1
 
 ### Output Path
-This output path is where the run.log, gen files, and result images are written.
+Each run creates a timestamped directory in the output directory. Each timestamped run directory incldues run.log, gen files, and result images.
+The timestamped directory uses the pattern `gv-run-yyyy-mm-dd-hh-mm-ss`.  For example `output/gv-run-2015-07-02-14-45-41`.
 
 Command line usage: `--outputPath output/`  
 Config file usage: `"outputPath":"output/"`  
@@ -229,7 +252,8 @@ Default: `output/`
 ### Save Result Images
 If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. 
 The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-1.png`. 
-Image files will be written to the `images/` directory in the output directory.
+Image files will be written to the `images/` directory in the output directory. If the `--test` flag is used images images
+will include the performance coloration.
 
 Command line usage: `--saveResultImages`  
 Config file usage: `"saveResultImages": true`  
@@ -309,3 +333,10 @@ The code has been thoroughly commented and a reference has been generated using 
 ## Project Road Map
 
 You can [view the project roadmap task board here](https://trello.com/b/BjXlMQlh/genetic-vision-roadmap)
+
+## Release Log
+- 1.1
+  - Added test flag which enables preformance stats and color annotated result images
+  - Runs now create a timestamped directory in the output folder
+  - Bug fixes
+- 1.0 
