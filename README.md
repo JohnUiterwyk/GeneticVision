@@ -9,8 +9,8 @@ This application utilises the following libraries:
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
 Version 1.1 Release Notes  
-- Added test flag which enables performance stats and color annotated result images
-- Runs now create a timestamped directory in the output folder
+- Added [test flag](#test) flag which enables performance stats and color annotated result images
+- Runs now create a timestamped directory in the [output folder](#output)
 - Bug fixes and other minor improvements
 
 ## Table of Contents
@@ -124,8 +124,8 @@ Default: true
 
 ### Test
 Test output averaged accuracy/error information of the best program.  
--If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
--If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
+- If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
+- If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
 
 The test flag is used to assess the performance of producing a given black and white target mask. Black is considered a
 positive, and white is considered a negative.
@@ -153,7 +153,9 @@ Option argument type: _bool_
 Default: false  
 
 Example: Load a population, test the best program, and save the resulting predicted images with performance coloration:
-
+```
+$ ./GeneticVision --test --population path/to/population.gen --images path/to/images --saveResultImages
+```  
 
 
 ### Load Images
@@ -322,11 +324,11 @@ requires that OpenCV has been installed correctly.
 - Change to the build directory `$ cd ~/genetic-vision/build`
 - Compile the project with CMake, passing the path to the parent folder `$ cmake ~/genetic-vision` . This is performing what is known
 as an 'out of source build'. It helps to keep the resulting file/folder structure clean.
-- Make the executable `$ make ..`
+- Make the executable `$ make`
 - Move the executable to the bin directory `$ mv GeneticVision ~/genetic-vision/bin`
-- Change to the data working directory `$ cd ~/my-test-data/`
 - Delete the build directory `$ rm -rf ~/genetic-vision/build`
-- create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
+- Change to the data working directory `$ cd ~/my-test-data/`
+- Create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
 described in the "Preparing Training Images" section.
 - Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
 
