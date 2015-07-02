@@ -157,17 +157,18 @@ namespace GeneticVision {
 
     void AppConfig::setupOutputDirectories()
     {
-        this->outputPath = this->outputPath + "gv-run-" + this->getTimestampString()+"/";
-        this->popFilesPath = this->outputPath + "populations/";
-        this->imagesOutputPath = this->outputPath + "images/";
-        this->runLogPath = this->outputPath + "run.log";
+        this->runOutputPath = this->outputPath + "gv-run-" + this->getTimestampString()+"/";
+        this->popFilesPath = this->runOutputPath + "populations/";
+        this->imagesOutputPath = this->runOutputPath + "images/";
+        this->runLogPath = this->runOutputPath + "run.log";
         
         // create output directories
         try {
             mode_t process_mask = umask(0);
             int result_code1 = mkdir(this->outputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
-            int result_code2 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
-            int result_code3 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            int result_code2 = mkdir(this->runOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            int result_code3 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            int result_code4 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
             umask(process_mask);
         }
         catch(int e)
