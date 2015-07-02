@@ -23,7 +23,8 @@ Version 1.1 Release Notes
   - [Preparing Training Images](#preparing-training-images)
   - [Output](#output)
 - [Options](#options)
-  - [Run Mode](#run-mode)
+  - [Evolve](#evolve)
+  - [Test](#test)
   - [Load Images](#load-images)
   - [Maximum Generations](#maximum-generations)
   - [Population Size](#population-size)
@@ -114,14 +115,14 @@ You can change the output directory via the `outputPath` option.
 The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
 
 
-##### Evolve
+### Evolve
 Evolve will evolve a population of programs.  
 Command line usage: `--evolve`  
 Config file usage: `"evolve":"true"`
 Option argument type: _bool_ 
 Default: true   
 
-##### Test
+### Test
 Test output averaged accuracy/error information of the best program.  
 -If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
 -If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
@@ -280,7 +281,7 @@ Option argument type: _string_
 
 ### Load Configuration File
 Load settings from a JSON formatted configuration file. Please note that **image and population paths within a config file 
-are relative to the config file containing directory** unless the rootPath option is set.
+are relative to the config file containing directory** unless the cat Path option is set.
 
 Command line usage: `--config path/to/config`  
 Option argument type: _string_  
