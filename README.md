@@ -1,4 +1,5 @@
-# GeneticVision v1.1
+# GeneticVision
+Version 1.1
 by John Uiterwyk
 
 [GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
@@ -8,7 +9,13 @@ This application utilises the following libraries:
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
+Version 1.1 Release Notes  
+- Added test flag which enables performance stats and color annotated result images
+- Runs now create a timestamped directory in the output folder
+- Bug fixes and other minor improvements
+
 ## Table of Contents
+- [Overview](#geneticvision)
 - [Supported Platforms](#supported-platforms)
 - [Prerequisites](#prerequisites)
 - [Downloading](#downloading)
@@ -37,6 +44,7 @@ This application utilises the following libraries:
   - [GUI CMake Option](#gui-cmake-option)
 - [Developer Guide](#developer-guide)
 - [Project Road Map](#project-road-map)
+- [Release Log](#release-log)
 
 ## Supported Platforms
 - Linux
@@ -338,5 +346,6 @@ You can [view the project roadmap task board here](https://trello.com/b/BjXlMQlh
 - 1.1
   - Added test flag which enables preformance stats and color annotated result images
   - Runs now create a timestamped directory in the output folder
-  - Bug fixes
+  - Bug fixes and other minor improvements
 - 1.0 
+  - Initial release
