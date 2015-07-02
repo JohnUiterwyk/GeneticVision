@@ -19,7 +19,8 @@ namespace GeneticVision
         // getCurrentDateTime is adapted from StackOverflow answer posted by TrungTN:
         // http://stackoverflow.com/a/10467633
         const std::string getCurrentDateTime();
-
+    private:
+        AppConfig * appConfig;
     };
 }
 

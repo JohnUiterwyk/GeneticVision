@@ -36,7 +36,7 @@ namespace GeneticVision {
             popFilesPath( "output/populations/"),
             imagesOutputPath("output/images/"),
             runLogPath("output/output.log"),
-            evolveEnabled(true),
+            evolveEnabled(false),
             testEnabled(false),
             logFrequency(1)
     {
@@ -147,6 +147,12 @@ namespace GeneticVision {
             cout << endl;
         }
         this->setupOutputDirectories();
+
+        //if evolve and test are not provide, assume evolve
+        if(this->evolveEnabled == false && this->testEnabled == false)
+        {
+            this->evolveEnabled = true;
+        }
     }
 
     void AppConfig::setupOutputDirectories()

@@ -26,7 +26,7 @@ namespace GeneticVision
                 resultVector.push_back(it->second);
 
             }
-            results.showImages(resultVector);
+             results.showImages(resultVector);
 
 
             vector<cv::Mat> perfVector;

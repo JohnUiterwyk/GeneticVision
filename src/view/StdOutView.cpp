@@ -9,7 +9,7 @@ namespace GeneticVision
 
     StdOutView::StdOutView(AppConfig *appConfig)
     {
-
+        this->appConfig = appConfig;
     }
 
     void StdOutView::update(RunResult *runResult)
@@ -18,14 +18,21 @@ namespace GeneticVision
         //Print date and time
         time_t t = time(0);   // get time now
         struct tm * now = localtime( & t );
-        cout << "DateTime, " << this->getCurrentDateTime() << endl;
-        cout << "GenerationID, " << runResult->generationId << endl;
-        cout << "Best Fitness, " << runResult->bestProgram->getFitness() << endl;
+        cout << "################################################" << endl;
+        cout << "Timestamp: " << this->getCurrentDateTime() << endl;
+        cout << "GenerationID: " << runResult->generationId << endl;
+        cout << "################################################" << endl;
+        cout << "Best Program Details" << endl;
+        cout << "Fitness: " << runResult->bestProgram->getFitness() << endl;
 
         string bestProgramString;
         runResult->bestProgram->print(bestProgramString);
-        cout << "Program String, " << bestProgramString << endl;
-        runResult->statAverage.toStdOut();
+        cout << "Program String: " << bestProgramString << endl;
+        if(this->appConfig->isTestEnabled())
+        {
+            cout << runResult->statAverage.toString();
+        }
+        cout << "################################################" << endl;
         cout << endl;
 
     }
@@ -37,7 +44,7 @@ namespace GeneticVision
         tstruct = *localtime(&now);
         // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
         // for more information about date/time format
-        strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tstruct);
+        strftime(buf, sizeof(buf), "%Y-%m-%d-%I-%M-%S", &tstruct);
 
         return buf;
     }

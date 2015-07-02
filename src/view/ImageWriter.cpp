@@ -23,18 +23,24 @@ namespace GeneticVision
     {
         if(this->enabled)
         {
-            for ( std::map<string,cv::Mat>::iterator it=runResult->resultImagesMap.begin() ; it != runResult->resultImagesMap.end(); ++it )
+            if(runResult->performanceImagesMap.size() > 0)
             {
-                std::stringstream writePath;
-                writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << "-result.png";
-                cv::imwrite(writePath.str(),it->second);
-            }
 
-            for ( std::map<string,cv::Mat>::iterator it=runResult->performanceImagesMap.begin() ; it != runResult->performanceImagesMap.end(); ++it )
+                for ( std::map<string,cv::Mat>::iterator it=runResult->performanceImagesMap.begin() ; it != runResult->performanceImagesMap.end(); ++it )
+                {
+                    std::stringstream writePath;
+                    writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << ".png";
+                    cv::imwrite(writePath.str(),it->second);
+                }
+
+            }else
             {
-                std::stringstream writePath;
-                writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << "-perf.png";
-                cv::imwrite(writePath.str(),it->second);
+                for ( std::map<string,cv::Mat>::iterator it=runResult->resultImagesMap.begin() ; it != runResult->resultImagesMap.end(); ++it )
+                {
+                    std::stringstream writePath;
+                    writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << ".png";
+                    cv::imwrite(writePath.str(),it->second);
+                }
             }
         }
 

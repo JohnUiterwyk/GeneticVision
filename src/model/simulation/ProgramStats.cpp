@@ -2,6 +2,8 @@
 // Created by John Uiterwyk on 6/30/15.
 //
 #include <iostream>
+#include <sstream>
+
 using namespace std;
 #include "ProgramStats.h"
 
@@ -48,23 +50,14 @@ void ProgramStats::add(ProgramStats & statsToAdd)
     this->trueNegativeCount += statsToAdd.trueNegativeCount;
     this->falseNegativeCount += statsToAdd.falseNegativeCount;
 }
-void ProgramStats::toStdOut()
+string ProgramStats::toString()
 {
-
-    cout << "Postive Pixels: " << positivePixels << endl;
-    cout << "Negative Pixels: " << negativePixels << endl << endl;
-
-    cout << "True Positive Count: " << truePositiveCount << endl;
-    cout << "False Positive Count: " << falsePositiveCount << endl;
-    cout << "True Negative Count: " << trueNegativeCount << endl;
-    cout << "False Negative Count: " << falseNegativeCount << endl << endl;
-
-    cout << "True Positive Rate: " << getTruePositiveRate() << endl;
-    cout << "False Positive Rate: " << getFalsePositiveRate() << endl;
-    cout << "True Negative Rate: " << getTrueNegativeRate() << endl;
-    cout << "False Negative Rate: " << getFalseNegativeRate() << endl << endl;
-
-
-    cout << "Accuracy: " << getAccuracy() << endl;
-    cout << "Misclassification Rate: " << getErrorRate() << endl;
+    std::stringstream stringstream;
+    stringstream << "Accuracy: " << getAccuracy() << endl;
+    stringstream << "Error Rate: " << getErrorRate() << endl;
+    stringstream << "True Positive Rate: " << getTruePositiveRate() << endl;
+    stringstream << "False Positive Rate: " << getFalsePositiveRate() << endl;
+    stringstream << "True Negative Rate: " << getTrueNegativeRate() << endl;
+    stringstream << "False Negative Rate: " << getFalseNegativeRate() << endl;
+    return stringstream.str();
 }

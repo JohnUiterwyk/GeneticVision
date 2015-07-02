@@ -25,7 +25,7 @@ public:
     double getFalseNegativeRate();
 
     void add(ProgramStats & statsToAdd);
-    void toStdOut();
+    string toString();
 };
 
 

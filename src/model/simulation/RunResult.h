@@ -22,6 +22,7 @@ public:
     int generationId;
     ProgramStats statAverage;
     GeneticProgram * bestProgram;
+    std::map<std::string, ProgramStats> stats;
     std::map<std::string, cv::Mat> resultImagesMap;
     std::map<std::string, cv::Mat> performanceImagesMap;
 
