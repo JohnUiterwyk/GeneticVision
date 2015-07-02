@@ -5,7 +5,6 @@
 #include "VisionFitness.h"
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
-#include <thread>
 #include <math.h>
 
 
