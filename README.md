@@ -1,5 +1,4 @@
 # GeneticVision
-Version 1.1
 by John Uiterwyk
 
 [GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
