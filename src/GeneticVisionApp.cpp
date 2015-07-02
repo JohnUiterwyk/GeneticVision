@@ -27,6 +27,7 @@ namespace GeneticVision
         this->view = new ViewController(&this->appConfig);
 
 
+
         RunResult runResult;
         if(this->appConfig.isEvolveEnabled())
         {
@@ -37,6 +38,12 @@ namespace GeneticVision
                     runResult = this->gvSimulation->testBest();
                 }
                 this->view->update(&runResult);
+
+                cout << "solutionFound:" << runResult.solutionFound << endl;
+                cout << "generationId:" << runResult.generationId  << endl;
+                cout << "getMaxGenerations:" << this->appConfig.getMaxGenerations() << endl;
+                cout << "isEvolveEnabled:" << this->appConfig.isEvolveEnabled() << endl;
+                cout << "isTestEnabled:" << this->appConfig.isTestEnabled() << endl;
             }while(runResult.solutionFound == false && runResult.generationId < this->appConfig.getMaxGenerations());
         }
         else if (this->appConfig.isTestEnabled())
