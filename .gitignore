@@ -8,3 +8,4 @@ bin
 output.log
 test.txt
 data/easy-square/output
+data/blur/output

@@ -12,8 +12,6 @@ mkdir -p $BIN_DIR
 
 cd $ROOT_DIR
 
-# make the directories just in case
-
 
 # Perform out of source build using build folder
 cd $BUILD_DIR
