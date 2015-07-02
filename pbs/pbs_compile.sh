@@ -26,7 +26,7 @@
 cd $PBS_O_WORKDIR/../
 
 # Load the environment variables for cmake and gcc
-module load gcc/5.1.0
+module load gcc/4.9.3
 module load cmake/3.2.3
 
 # Merging Standard Output
