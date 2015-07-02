@@ -10,7 +10,6 @@ mkdir -p $BIN_DIR
 
 # Changes directory to your execution directory (Leave as is)
 
-cd $ROOT_DIR
 
 
 # Perform out of source build using build folder
