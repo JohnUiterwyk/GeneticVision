@@ -1,5 +1,6 @@
-$UUID=$(uuidgen)
-$BUILD_DIR=build/$UUID
+UUID=$(uuidgen)
+BUILD_DIR=build/$UUID
+
 mkdir -p $BUILD_DIR
 mkdir -p bin
 
