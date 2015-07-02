@@ -12,9 +12,9 @@ mkdir -p bin
 
 # Perform out of source build using build folder
 cd $BUILD_DIR
-cmake ../..
+cmake ..
 make
-cd ../..
+cd ..
 mv $BUILD_DIR/GeneticVision bin
 echo "Moved GeneticVision to $(pwd)/bin"
 rm -rf $BUILD_DIR
