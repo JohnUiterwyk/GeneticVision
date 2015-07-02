@@ -245,7 +245,7 @@ This sets how frequently logging information is outputed. This option affects th
 Command line usage: `--logFrequency 10`  
 Config file usage: `"logFrequency": 10`  
 Option argument type: _integer_   
-Default: 1
+Default: 20
 
 ### Output Path
 Each run creates a timestamped directory in the output directory. Each timestamped run directory incldues run.log, gen files, and result images.

@@ -38,7 +38,7 @@ namespace GeneticVision {
             runLogPath("output/output.log"),
             evolveEnabled(false),
             testEnabled(false),
-            logFrequency(1)
+            logFrequency(20)
     {
 
     }
@@ -62,6 +62,7 @@ namespace GeneticVision {
                 {"maxDepth", required_argument, 0,  0 },
                 {"targetFitness", required_argument, 0,  0 },
                 {"saveResultImages", no_argument, 0,  0 },
+                {"guiEnabled", no_argument, 0,  0 },
                 {"population", required_argument, 0,  0 },
                 {"logFrequency", required_argument, 0,  0 },
                 {"outputPath", required_argument, 0,  0 }
@@ -122,9 +123,9 @@ namespace GeneticVision {
                     }
                 }
 
-                if(longOptionName == "guiEnabled") argument >> this->guiEnabled;
+                if(longOptionName == "guiEnabled") this->guiEnabled = true;
 
-                if(longOptionName == "saveResultImages") argument >> this->saveResultImages;
+                if(longOptionName == "saveResultImages") this->saveResultImages = true;
 
                 if(longOptionName == "population") // load population file
                 {
