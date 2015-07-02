@@ -169,7 +169,9 @@ namespace GeneticVision {
             int result_code1 = mkdir(this->outputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
             int result_code2 = mkdir(this->runOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
             int result_code3 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
-            int result_code4 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            if(this->isSaveResultImagesEnabled()) {
+                int result_code4 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            }
             umask(process_mask);
         }
         catch(int e)
@@ -188,6 +190,11 @@ namespace GeneticVision {
         Json::Value root;
         config_json >> root;
 
+        if(root["outputPath"].isNull() == false)
+        {
+            this->outputPath = root.get("outputPath", this->outputPath).asString();
+        }
+
         // set default root directory
         string configFileDirectory = "./";
         // if the config file path has a slash in it
@@ -199,13 +206,6 @@ namespace GeneticVision {
         }
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
 
-        if(root["outputPath"].isNull() == false)
-        {
-            this->outputPath = this->rootPath + root.get("outputPath", this->outputPath).asString();
-            this->popFilesPath = this->outputPath + "populations/";
-            this->imagesOutputPath = this->outputPath + "images/";
-            this->runLogPath = this->outputPath + "run.log";
-        }
 
         // load training set images
         Json::Value imagesJson = root["images"];

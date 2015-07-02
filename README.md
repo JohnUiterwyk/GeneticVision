@@ -100,12 +100,13 @@ following file types:
 
 
 ### Output
-When you run GeneticVision, it will create a folder in the current directory names `output/` . In this folder, the
-application will create:
+When you run GeneticVision, it will create a folder in the current directory names `output/` . Each run creates a 
+timestamped directory in the output directory. Each timestamped run directory incldues run.log, gen files, and result 
+images. The timestamped directory uses the pattern `gv-run-yyyy-mm-dd-hh-mm-ss`.  For example `output/gv-run-2015-07-02-14-45-41`.:
 
-- `output/populations`  where it will write population files
-- `output/images` directory where result image will be written. 
-- `output/run.log` a log output of the evolution runs
+- `output/gv-run-2015-07-02-14-45-41/populations`  where it will write population files
+- `output/gv-run-2015-07-02-14-45-41/images` directory where result image will be written. 
+- `output/gv-run-2015-07-02-14-45-41/run.log` a log output of the evolution runs
 
 You can change the output directory via the `outputPath` option.
       
@@ -167,8 +168,8 @@ same filename as the source images only with the string '-mask' inserted before 
 
 Be sure to include the trailing slash.
 
-Command line usage: `--images path/to/images/`  
-Config file usage: `"images":"path/to/images/"` 
+Command line usage: `--images path/to/images/`  (path relative to working directory) 
+Config file usage: `"images":"path/to/images/"` (path relative to config file) 
 Option argument type: _string path to images directory_ 
 
 ### Maximum Generations
@@ -271,15 +272,15 @@ Default: false
 Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population 
 file will overide most population specific settings.
 
-Command line usage: `--population path/to/file.gen`  
-Config file usage: `"population": "path/to/file.gen"`  
+Command line usage: `--population path/to/file.gen`  (path relative to working directory) 
+Config file usage: `"population": "path/to/file.gen"`  (path relative to config file)
 Option argument type: _string_  
 
 
 
 ### Load Configuration File
-Load settings from a JSON formatted configuration file. Please note that **all paths within a config file are relative 
-to the config file** unless the rootPath option is set.
+Load settings from a JSON formatted configuration file. Please note that **image and population paths within a config file 
+are relative to the config file containing directory** unless the rootPath option is set.
 
 Command line usage: `--config path/to/config`  
 Option argument type: _string_  
