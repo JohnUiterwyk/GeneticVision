@@ -116,7 +116,7 @@ namespace GeneticVision {
 
                 if(longOptionName == "outputPath"){
                     argument >> this->outputPath;
-                    if(this->outputPath.back() != '/')
+                    if(this->outputPath.substr(this->outputPath.length()-1) != "/")
                     {
                         this->outputPath.append("/");
                     }
