@@ -250,7 +250,7 @@ namespace GeneticVision {
         time (&rawtime);
         timeinfo = localtime(&rawtime);
 
-        strftime(buffer,256,"%Y-%m-%d-%I-%M-%S",timeinfo);
+        strftime(buffer,256,"%Y-%m-%d-%H-%M-%S",timeinfo);
         std::string str(buffer);
 
         return str;
