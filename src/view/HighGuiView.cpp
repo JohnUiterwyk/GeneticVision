@@ -35,7 +35,7 @@ namespace GeneticVision
                 perfVector.push_back(it2->second);
 
             }
-            performance.showImages(perfVector);
+            //performance.showImages(perfVector);
         //some issue with grid viewer
         #endif //CV_HIGHGUI_ENABLED
     }
