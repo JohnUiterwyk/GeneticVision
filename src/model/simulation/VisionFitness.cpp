@@ -61,7 +61,7 @@ void VisionFitness::scoreCurrentImage(GeneticProgram *pop[], int batchStart, int
 
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
-    int threadCount = 4;
+    int threadCount = 16;
     int batchSize = popSize/threadCount;
     double weight = 1/(double)this->imagePairs->size();
 
