@@ -29,6 +29,10 @@ namespace GeneticVision
 
 
         RunResult runResult;
+        runResult = this->gvSimulation->getRunResult();
+        runResult.testPerformance(this->appConfig.getTrainPairs().getCollection());
+        this->view->update(&runResult);
+        
         if(this->appConfig.isEvolveEnabled())
         {
             do
