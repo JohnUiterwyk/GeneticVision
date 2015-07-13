@@ -20,59 +20,36 @@ VisionFitness::~VisionFitness() { }
 void VisionFitness::initFitness()
 {
 }
-void VisionFitness::scoreCurrentImage(GeneticProgram *pop[], int batchStart, int batchEnd, double weight, cv::Mat targetImage)
-{
-    for(int i=batchStart; i<=batchEnd; i++)
-    {
-
-        GeneticProgram * prog = pop[i];
-        ReturnImage returnImage;
-        double score = 0;
-        int totalPixelCount = targetImage.cols * targetImage.rows;
-            prog->evaluate(&returnImage);
-
-            // measure difference between result image and truth
-            cv::Mat diff_mat;
-            cv::compare(targetImage, returnImage.getData(), diff_mat, cv::CMP_EQ);
-            double equalPixelCount = cv::countNonZero(diff_mat);
-
-            // this is the number correct pixels divided by total number of pixels
-            // added to the total score so far
-            score = 100* (totalPixelCount - equalPixelCount)/totalPixelCount * weight;
-        prog->setFitness(prog->getFitness()+score);
-
-    }
-}
-
-
 
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
     int threadCount = 16;
     int batchSize = popSize/threadCount;
-    double weight = 1/(double)this->imagePairs->size();
-
-    if(popSize % threadCount != 0)
-    {
+    if(popSize % threadCount != 0){
         batchSize +=1;
     }
 
+    double weight = 1/(double)this->imagePairs->size();
 
     // reset fitness
-    for(int i=0; i<popSize; i++) {
+    for(int i=0; i<popSize; i++)
+    {
         pop[i]->setFitness(0);
     }
 
-    std::vector<std::thread> threads;
     ImagePair * testPair;
+    std::vector<std::thread> threads;
+
     for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
     {
         int batchStart = 0;
         int batchEnd = 0;
 
+        //setup the image to test
         testPair = &(this->imagePairs->at(i));
         ImageInput::setValue(testPair->getSourceImage());
         cv::Mat targetImage = testPair->getTargetImage();
+
         for(int j=0; j<threadCount; j++) {
 
             if (batchStart >= popSize) {
@@ -80,10 +57,11 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
             }
             batchEnd  = std::min(batchStart+batchSize-1, popSize-1);
 
+            // create a thread to evaluate a batch of the population using the current image
+            // this uses a lambda function approach
             threads.push_back(std::thread([pop, batchStart, batchEnd, weight, targetImage](){
                 for(int k=batchStart; k<=batchEnd; k++)
                 {
-
                     GeneticProgram * prog = pop[k];
                     ReturnImage returnImage;
                     double score = 0;
