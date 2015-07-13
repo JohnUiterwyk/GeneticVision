@@ -240,6 +240,7 @@ namespace GeneticVision {
         this->saveResultImages = root.get("saveResultImages",this->saveResultImages).asBool();
         this->testEnabled = root.get("test",this->testEnabled).asBool();
         this->evolveEnabled = root.get("evolve",this->evolveEnabled).asBool();
+        this->targetFitness = root.get("targetFitness",this->targetFitness).asDouble();
 
     }
 
