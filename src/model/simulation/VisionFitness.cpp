@@ -41,23 +41,10 @@ void VisionFitness::scoreCurrentImage(GeneticProgram *pop[], int batchStart, int
             score = 100* (totalPixelCount - equalPixelCount)/totalPixelCount * weight;
         prog->setFitness(prog->getFitness()+score);
 
-        // Idea for improving fitness:
-        // use an ensemble for fitness from best X of past generations;  add Mats , then use threshold of n/2
-        // also use boosting: keep a running weight for each image.
-        // decrease  weight of correctly classified examples.
-        // Then use that weight when calculating fitness of next generation
-        // Also, make this a setting in the config for fitness function
-        //
-        // current approach:
-        // average the score from all result images
     }
 }
 
 
-// this wont work since ImageInput::setValue is a global static.
-// this means that we have to set ImageInput, and then split up the population
-// evaluate all programs on one image in parallel, keep a running tally of fitness
-// update ImageInput, and reassess again. To avoid overhead, we should create a thread pool and signal
 
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
@@ -113,15 +100,6 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
                     score = (100* (totalPixelCount - equalPixelCount)/totalPixelCount) * weight;
                     prog->setFitness(prog->getFitness()+score);
 
-                    // Idea for improving fitness:
-                    // use an ensemble for fitness from best X of past generations;  add Mats , then use threshold of n/2
-                    // also use boosting: keep a running weight for each image.
-                    // decrease  weight of correctly classified examples.
-                    // Then use that weight when calculating fitness of next generation
-                    // Also, make this a setting in the config for fitness function
-                    //
-                    // current approach:
-                    // average the score from all result images
                 }
             }));
             batchStart = batchEnd + 1;
@@ -138,43 +116,6 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
 }
 
-void VisionFitness::evaluateProgram(GeneticProgram* prog)
-{
-    ReturnImage returnImage;
-    ImagePair * testPair;
-    double score = 0;
-    int size = this->imagePairs->at(0).getSourceImage().cols * this->imagePairs->at(0).getSourceImage().rows;
-
-
-    prog->setFitness(0.0);
-    for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
-    {
-        testPair = &(this->imagePairs->at(i));
-        ImageInput::setValue(testPair->getSourceImage());
-        prog->evaluate(&returnImage);
-
-        // measure difference between result image and truth
-        cv::Mat diff_mat;
-        cv::compare(testPair->getTargetImage(), returnImage.getData(), diff_mat, cv::CMP_EQ);
-        int nonzero = cv::countNonZero(diff_mat);
-
-        // this is the number correct pixels divided by total number of pixels
-        // added to the total score so far
-        score += 100* (size - (double)nonzero)/size;
-    }
-
-    // Idea for improving fitness:
-    // use an ensemble for fitness from best X of past generations;  add Mats , then use threshold of n/2
-    // also use boosting: keep a running weight for each image.
-    // decrease  weight of correctly classified examples.
-    // Then use that weight when calculating fitness of next generation
-    // Also, make this a setting in the config for fitness function
-    //
-    // current approach:
-    // average the score from all result images
-    prog->setFitness((double)(score/(double)(this->imagePairs->size())));
-
-}
 
 std::map<std::string, cv::Mat> VisionFitness::getResultImages(GeneticProgram* prog)
 {
