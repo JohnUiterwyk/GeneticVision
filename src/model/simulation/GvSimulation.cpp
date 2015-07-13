@@ -123,11 +123,11 @@ namespace GeneticVision
             //init the population
             this->pop->generateInitialPopulation();
             //pseudo disable built int logging
-            this->pop->setLogFrequency(appConfig->getLogFrequency());
         }
 
         if(appConfig->isEvolveEnabled())
         {
+            this->pop->setLogFrequency(appConfig->getLogFrequency());
             this->pop->writeToFile();
         }
     //    //clean up
