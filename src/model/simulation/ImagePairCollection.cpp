@@ -50,7 +50,6 @@ namespace GeneticVision
     {
         vector<ImagePair> result;
 
-            // if size > 0, images is a json object
             result.resize(images.size());
 
             for (int index = 0; index < images.size(); ++index)
@@ -83,6 +82,7 @@ namespace GeneticVision
         directory = opendir (directoryPath.c_str());
         if (directory != NULL)
         {
+            // loop through entries
             while ((directoryEntry = readdir (directory)))
             {
                 // get the filename
