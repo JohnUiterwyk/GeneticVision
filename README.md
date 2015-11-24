@@ -8,6 +8,9 @@ This application utilises the following libraries:
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
+Version 1.2 Release Notes
+- Added multi-threading
+
 Version 1.1 Release Notes  
 - Added [test flag](#test) flag which enables performance stats and color annotated result images
 - Runs now create a timestamped directory in the [output folder](#output)
