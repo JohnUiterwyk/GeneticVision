@@ -1,5 +1,4 @@
 # GeneticVision
-Version 1.1
 by John Uiterwyk
 
 [GeneticVision](https://github.com/JohnUiterwyk/genetic-vision) is a C++ machine learning application that evolves computer vision programs.  
@@ -9,9 +8,12 @@ This application utilises the following libraries:
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
+Version 1.2 Release Notes
+- Added multi-threading
+
 Version 1.1 Release Notes  
-- Added test flag which enables performance stats and color annotated result images
-- Runs now create a timestamped directory in the output folder
+- Added [test flag](#test) flag which enables performance stats and color annotated result images
+- Runs now create a timestamped directory in the [output folder](#output)
 - Bug fixes and other minor improvements
 
 ## Table of Contents
@@ -24,7 +26,8 @@ Version 1.1 Release Notes
   - [Preparing Training Images](#preparing-training-images)
   - [Output](#output)
 - [Options](#options)
-  - [Run Mode](#run-mode)
+  - [Evolve](#evolve)
+  - [Test](#test)
   - [Load Images](#load-images)
   - [Maximum Generations](#maximum-generations)
   - [Population Size](#population-size)
@@ -101,12 +104,13 @@ following file types:
 
 
 ### Output
-When you run GeneticVision, it will create a folder in the current directory names `output/` . In this folder, the
-application will create:
+When you run GeneticVision, it will create a folder in the current directory names `output/` . Each run creates a 
+timestamped directory in the output directory. Each timestamped run directory incldues run.log, gen files, and result 
+images. The timestamped directory uses the pattern `gv-run-yyyy-mm-dd-hh-mm-ss`.  For example `output/gv-run-2015-07-02-14-45-41`.:
 
-- `output/populations`  where it will write population files
-- `output/images` directory where result image will be written. 
-- `output/run.log` a log output of the evolution runs
+- `output/gv-run-2015-07-02-14-45-41/populations`  where it will write population files
+- `output/gv-run-2015-07-02-14-45-41/images` directory where result image will be written. 
+- `output/gv-run-2015-07-02-14-45-41/run.log` a log output of the evolution runs
 
 You can change the output directory via the `outputPath` option.
       
@@ -114,17 +118,17 @@ You can change the output directory via the `outputPath` option.
 The only required option is the images option. Without images, nothing can be done. Options can be set via config file or via command line option. Command line options will override config file settings. Loading a population file will override both command line and config file settings.
 
 
-##### Evolve
+### Evolve
 Evolve will evolve a population of programs.  
 Command line usage: `--evolve`  
 Config file usage: `"evolve":"true"`
 Option argument type: _bool_ 
 Default: true   
 
-##### Test
+### Test
 Test output averaged accuracy/error information of the best program.  
--If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
--If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
+- If evolve is false, this will just test the starting population. This is intended to be used to test a population file.
+- If evolve is true, this test will be performed every X generations where X is the logFrequency.  Note: Evolve defaults to false when the test flag is included, you must explicitly include the evolve flag when using the test flag.
 
 The test flag is used to assess the performance of producing a given black and white target mask. Black is considered a
 positive, and white is considered a negative.
@@ -152,7 +156,9 @@ Option argument type: _bool_
 Default: false  
 
 Example: Load a population, test the best program, and save the resulting predicted images with performance coloration:
-
+```
+$ ./GeneticVision --test --population path/to/population.gen --images path/to/images --saveResultImages
+```  
 
 
 ### Load Images
@@ -168,8 +174,8 @@ same filename as the source images only with the string '-mask' inserted before 
 
 Be sure to include the trailing slash.
 
-Command line usage: `--images path/to/images/`  
-Config file usage: `"images":"path/to/images/"` 
+Command line usage: `--images path/to/images/`  (path relative to working directory) 
+Config file usage: `"images":"path/to/images/"` (path relative to config file) 
 Option argument type: _string path to images directory_ 
 
 ### Maximum Generations
@@ -246,7 +252,7 @@ This sets how frequently logging information is outputed. This option affects th
 Command line usage: `--logFrequency 10`  
 Config file usage: `"logFrequency": 10`  
 Option argument type: _integer_   
-Default: 1
+Default: 20
 
 ### Output Path
 Each run creates a timestamped directory in the output directory. Each timestamped run directory incldues run.log, gen files, and result images.
@@ -272,15 +278,15 @@ Default: false
 Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population 
 file will overide most population specific settings.
 
-Command line usage: `--population path/to/file.gen`  
-Config file usage: `"population": "path/to/file.gen"`  
+Command line usage: `--population path/to/file.gen`  (path relative to working directory) 
+Config file usage: `"population": "path/to/file.gen"`  (path relative to config file)
 Option argument type: _string_  
 
 
 
 ### Load Configuration File
-Load settings from a JSON formatted configuration file. Please note that **all paths within a config file are relative 
-to the config file** unless the rootPath option is set.
+Load settings from a JSON formatted configuration file. Please note that **image and population paths within a config file 
+are relative to the config file containing directory** unless the cat Path option is set.
 
 Command line usage: `--config path/to/config`  
 Option argument type: _string_  
@@ -321,11 +327,11 @@ requires that OpenCV has been installed correctly.
 - Change to the build directory `$ cd ~/genetic-vision/build`
 - Compile the project with CMake, passing the path to the parent folder `$ cmake ~/genetic-vision` . This is performing what is known
 as an 'out of source build'. It helps to keep the resulting file/folder structure clean.
-- Make the executable `$ make ..`
+- Make the executable `$ make`
 - Move the executable to the bin directory `$ mv GeneticVision ~/genetic-vision/bin`
-- Change to the data working directory `$ cd ~/my-test-data/`
 - Delete the build directory `$ rm -rf ~/genetic-vision/build`
-- create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
+- Change to the data working directory `$ cd ~/my-test-data/`
+- Create a folder for the images `$ mkdir training-images/` and add source/target pairs of images using the convention 
 described in the "Preparing Training Images" section.
 - Run GV with the images directory `$ ~/genetic-vision/bin/GeneticVision --evolve --images ./training-images`
 

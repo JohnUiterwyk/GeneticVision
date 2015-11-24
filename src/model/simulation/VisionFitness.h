@@ -38,6 +38,7 @@ class VisionFitness : public Fitness
     void evaluateProgram(GeneticProgram* prog);
     std::map<std::string, cv::Mat> getResultImages(GeneticProgram* prog);
     void setTargetFitness(double target);
+    void scoreCurrentImage(GeneticProgram *pop[], int batchStart, int batchEnd, double weight, cv::Mat targetImage);
 };
 
 #endif //GENETICVISION_FITNESS_H

@@ -22,36 +22,14 @@
 #
 #PBS -m abe
 #PBS -j oe
-#PBS -o pbs_gv_compile.log
-cd $PBS_O_WORKDIR
+#PBS -o pbs.log
+cd $PBS_O_WORKDIR/../
+
+# Load the environment variables for cmake and gcc
+module load gcc/4.9.3
+module load cmake/3.2.3
 
 # Merging Standard Output
 
-ROOT_DIR=$PBS_O_WORKDIR/..
-BUILD_DIR=$PBS_O_WORKDIR/../build
-BIN_DIR=$PBS_O_WORKDIR/../bin
-
-mkdir -p $BUILD_DIR
-mkdir -p $BIN_DIR
-
-# Set output file
-
-# Changes directory to your execution directory (Leave as is)
-
-cd $ROOT_DIR
-
-# make the directories just in case
-
-# Load the environment variables for cmake and gcc
-module load gcc/4.9.2
-module load cmake/3.0.1
-
-# The command to actually run the job
-cd $BUILD_DIR
-cmake $ROOT_DIR
-make
-mv GeneticVision $BIN_DIR
-rm -rf $BUILD_DIR
-cd $PBS_O_WORKDIR
-echo "Finished at $(date)"
+./compile.sh 2>&1 | tee -a ./compile.log
 

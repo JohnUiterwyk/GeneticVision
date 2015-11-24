@@ -38,6 +38,7 @@ namespace GeneticVision
 
         string rootPath;
         string outputPath;
+        string runOutputPath;
         string popFilesPath;
         string imagesOutputPath;
 
@@ -99,6 +100,9 @@ namespace GeneticVision
         }
         const string getOutputPath() const {
             return outputPath;
+        }
+        const string getRunOutputPath() const {
+            return runOutputPath;
         }
         const string getImagesOutputPath() const {
             return imagesOutputPath;

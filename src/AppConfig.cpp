@@ -38,7 +38,7 @@ namespace GeneticVision {
             runLogPath("output/output.log"),
             evolveEnabled(false),
             testEnabled(false),
-            logFrequency(1)
+            logFrequency(20)
     {
 
     }
@@ -62,6 +62,7 @@ namespace GeneticVision {
                 {"maxDepth", required_argument, 0,  0 },
                 {"targetFitness", required_argument, 0,  0 },
                 {"saveResultImages", no_argument, 0,  0 },
+                {"guiEnabled", no_argument, 0,  0 },
                 {"population", required_argument, 0,  0 },
                 {"logFrequency", required_argument, 0,  0 },
                 {"outputPath", required_argument, 0,  0 }
@@ -116,15 +117,15 @@ namespace GeneticVision {
 
                 if(longOptionName == "outputPath"){
                     argument >> this->outputPath;
-                    if(this->outputPath.back() != '/')
+                    if(this->outputPath.substr(this->outputPath.length()-1) != "/")
                     {
                         this->outputPath.append("/");
                     }
                 }
 
-                if(longOptionName == "guiEnabled") argument >> this->guiEnabled;
+                if(longOptionName == "guiEnabled") this->guiEnabled = true;
 
-                if(longOptionName == "saveResultImages") argument >> this->saveResultImages;
+                if(longOptionName == "saveResultImages") this->saveResultImages = true;
 
                 if(longOptionName == "population") // load population file
                 {
@@ -157,17 +158,20 @@ namespace GeneticVision {
 
     void AppConfig::setupOutputDirectories()
     {
-        this->outputPath = this->outputPath + "gv-run-" + this->getTimestampString()+"/";
-        this->popFilesPath = this->outputPath + "populations/";
-        this->imagesOutputPath = this->outputPath + "images/";
-        this->runLogPath = this->outputPath + "run.log";
+        this->runOutputPath = this->outputPath + "gv-run-" + this->getTimestampString()+"/";
+        this->popFilesPath = this->runOutputPath + "populations/";
+        this->imagesOutputPath = this->runOutputPath + "images/";
+        this->runLogPath = this->runOutputPath + "run.log";
         
         // create output directories
         try {
             mode_t process_mask = umask(0);
             int result_code1 = mkdir(this->outputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
-            int result_code2 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
-            int result_code3 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            int result_code2 = mkdir(this->runOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            int result_code3 = mkdir(this->popFilesPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            if(this->isSaveResultImagesEnabled()) {
+                int result_code4 = mkdir(this->imagesOutputPath.c_str(), S_IRWXU | S_IREAD | S_IWRITE);
+            }
             umask(process_mask);
         }
         catch(int e)
@@ -186,6 +190,11 @@ namespace GeneticVision {
         Json::Value root;
         config_json >> root;
 
+        if(root["outputPath"].isNull() == false)
+        {
+            this->outputPath = root.get("outputPath", this->outputPath).asString();
+        }
+
         // set default root directory
         string configFileDirectory = "./";
         // if the config file path has a slash in it
@@ -197,13 +206,6 @@ namespace GeneticVision {
         }
         this->rootPath = root.get("rootPath", configFileDirectory).asString();
 
-        if(root["outputPath"].isNull() == false)
-        {
-            this->outputPath = this->rootPath + root.get("outputPath", this->outputPath).asString();
-            this->popFilesPath = this->outputPath + "populations/";
-            this->imagesOutputPath = this->outputPath + "images/";
-            this->runLogPath = this->outputPath + "run.log";
-        }
 
         // load training set images
         Json::Value imagesJson = root["images"];
@@ -238,6 +240,7 @@ namespace GeneticVision {
         this->saveResultImages = root.get("saveResultImages",this->saveResultImages).asBool();
         this->testEnabled = root.get("test",this->testEnabled).asBool();
         this->evolveEnabled = root.get("evolve",this->evolveEnabled).asBool();
+        this->targetFitness = root.get("targetFitness",this->targetFitness).asDouble();
 
     }
 
