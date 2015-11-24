@@ -6,7 +6,7 @@ find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 set (GeneticVision_VERSION_MAJOR 1)
-set (GeneticVision_VERSION_MINOR 1)
+set (GeneticVision_VERSION_MINOR 2)
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
