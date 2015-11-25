@@ -10,6 +10,7 @@ This application utilises the following libraries:
 
 Version 1.2 Release Notes
 - Added multi-threading
+- Updated to C++11 (n.b. gcc 4.9+ and Cmake 3.1+ are required now)
 
 Version 1.1 Release Notes  
 - Added [test flag](#test) flag which enables performance stats and color annotated result images
@@ -57,7 +58,8 @@ The application has been tested on OS X 10.10, CentOS 6.3, and Amazon Linux AMI 
 
 ## Prerequisites
 - OpenCV 2.4.x  
-- CMake 2.8+
+- CMake 3.1+
+- GCC 4.9+
 
 ## Downloading
 You can download a [zip of the the latest version of GeneticVision from github](https://github.com/JohnUiterwyk/genetic-vision/archive/master.zip)
@@ -315,6 +317,7 @@ The basic process for compiling GeneticVision is as follows:
 requires that OpenCV has been installed correctly.
 - Clone the GeneticVision project from the GitHub repo
 - Compile the project using CMake 2.8 or higher
+- Optional: You may need to set the path to a newer version of gcc if you are having issues compiling. You can do this by `$ export CXX=path/to/g++`
 - Prep a directory of images with proper naming conventions.
 - Execute an evolution run using the compiled binary and the prepared images
 
