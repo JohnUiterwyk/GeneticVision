@@ -267,7 +267,7 @@ Default: `output/`
 
 ### Save Result Images
 If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. 
-The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-1.png`. 
+The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-000001.png`.
 Image files will be written to the `images/` directory in the output directory. If the `--test` flag is used images images
 will include the performance coloration.
 
