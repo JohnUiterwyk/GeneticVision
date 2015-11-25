@@ -14,7 +14,13 @@ mkdir -p bin
 # Change to build directory
 cd $BUILD_DIR
 
+# hook up gcc correctly
+
+
 # Perform out of source build using build folder
+export CC=$(which gcc)
+export CXX=$(which g++)
+
 cmake ..
 make
 
