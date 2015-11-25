@@ -258,4 +258,8 @@ namespace GeneticVision {
 
         return str;
     }
+
+    void AppConfig::printToStdOut() {
+
+    }
 }
