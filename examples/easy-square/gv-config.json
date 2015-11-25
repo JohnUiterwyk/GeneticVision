@@ -7,7 +7,7 @@
   "minDepth": 2,
   "maxDepth":5,
   "targetFitness":0.01,
-  "logFrequency":1,
+  "logFrequency":10,
   "guiEnabled":true,
   "outputPath":"output/",
   "images":"images/",
