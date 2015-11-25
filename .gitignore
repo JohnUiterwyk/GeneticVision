@@ -13,3 +13,5 @@ output
 data
 examples/cancer-cells
 examples/segmentation
+examples/local-gv-config-list-images.json
+examples/local-gv-config.json
