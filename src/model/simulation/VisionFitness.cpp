@@ -59,7 +59,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 
             // create a thread to evaluate a batch of the population using the current image
             // this uses a lambda function approach
-            threads.push_back(std::thread([pop, batchStart, batchEnd, weight, targetImage](){
+            auto evalBatch = [pop, batchStart, batchEnd, weight, targetImage](){
                 for(int k=batchStart; k<=batchEnd; k++)
                 {
                     GeneticProgram * prog = pop[k];
@@ -79,7 +79,8 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
                     prog->setFitness(prog->getFitness()+score);
 
                 }
-            }));
+            };
+            threads.push_back(std::thread(evalBatch));
             batchStart = batchEnd + 1;
 
         }
