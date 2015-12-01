@@ -23,7 +23,7 @@ namespace GeneticVision {
 
     AppConfig::AppConfig() :
             maxGenerations(100),
-            numOfThreads(16),
+            numOfThreads(1),
             populationSize(100),
             mutation(0.70),
             crossover(0.28),
