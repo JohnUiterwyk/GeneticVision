@@ -42,7 +42,7 @@ namespace GeneticVision {
             testEnabled(false),
             logFrequency(20)
     {
-        numOfThreads = std::thread::hardware_concurrency();
+        numOfThreads = std::thread::hardware_concurrency() * 2;
         if(numOfThreads < 1) numOfThreads = 1;
     }
 
