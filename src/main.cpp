@@ -22,7 +22,7 @@ int main( int argc, char** argv )
     std::cout << endl;
 
     unsigned int n = std::thread::hardware_concurrency();
-    std::cout << n << " concurrent threads are supported.\n";
+    std::cout << "This hardware supports " << n << " concurrent threads.\n";
 
     /// check for some arguments
     if(argc == 1)
