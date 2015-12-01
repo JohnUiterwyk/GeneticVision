@@ -21,6 +21,7 @@ namespace GeneticVision
         bool evolveEnabled;
         bool testEnabled;
         int maxGenerations;
+        int numOfThreads;
 
         int populationSize;
         double mutation;
@@ -140,6 +141,9 @@ namespace GeneticVision
         }
 
 
+         int getNumOfThreads() const {
+            return numOfThreads;
+        }
     };
 
 }

@@ -9,10 +9,11 @@
 #include <thread>
 
 
-VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness) : Fitness(conf)
+VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness, int numOfThreads) : Fitness(conf)
 {
-    this->targetFitness = targetFitness;
     this->imagePairs = &imagePairCollection.getCollection();
+    this->targetFitness = targetFitness;
+    this->numOfThreads = numOfThreads;
 }
 
 VisionFitness::~VisionFitness() { }
@@ -23,9 +24,8 @@ void VisionFitness::initFitness()
 
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
-    int threadCount = 16;
-    int batchSize = popSize/threadCount;
-    if(popSize % threadCount != 0){
+    int batchSize = popSize/this->numOfThreads;
+    if(popSize % this->numOfThreads != 0){
         batchSize +=1;
     }
 
@@ -50,7 +50,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
         ImageInput::setValue(testPair->getSourceImage());
         cv::Mat targetImage = testPair->getTargetImage();
 
-        for(int j=0; j<threadCount; j++) {
+        for(int j=0; j<this->numOfThreads; j++) {
 
             if (batchStart >= popSize) {
                 break;//this shouldnt happen;

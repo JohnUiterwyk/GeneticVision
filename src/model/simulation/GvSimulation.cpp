@@ -55,7 +55,7 @@ namespace GeneticVision
 
 
         //Set the fitness class to be used
-        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness());
+        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness(), appConfig->getNumOfThreads());
 
         //Initialise the fitness
         this->runConfig->fitnessObject->initFitness();

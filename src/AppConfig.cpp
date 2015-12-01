@@ -16,12 +16,14 @@
 #include <map>
 #include <getopt.h>
 #include <ctime>
+#include <thread>
 
 namespace GeneticVision {
 
 
     AppConfig::AppConfig() :
             maxGenerations(100),
+            numOfThreads(16),
             populationSize(100),
             mutation(0.70),
             crossover(0.28),
@@ -40,7 +42,8 @@ namespace GeneticVision {
             testEnabled(false),
             logFrequency(20)
     {
-
+        numOfThreads = std::thread::hardware_concurrency();
+        if(numOfThreads < 1) numOfThreads = 1;
     }
 
     void AppConfig::parseCommandLineArgs(int argc, char **argv) {
@@ -65,7 +68,8 @@ namespace GeneticVision {
                 {"guiEnabled", no_argument, 0,  0 },
                 {"population", required_argument, 0,  0 },
                 {"logFrequency", required_argument, 0,  0 },
-                {"outputPath", required_argument, 0,  0 }
+                {"outputPath", required_argument, 0,  0 },
+                {"numOfThreads", required_argument, 0,  0 }
 
         };
 
@@ -104,6 +108,7 @@ namespace GeneticVision {
                 //if(longOptionName == "run") this->runMode = RUN;
 
                 if(longOptionName == "generations") argument >> this->maxGenerations;
+                if(longOptionName == "numOfThreads") argument >> this->numOfThreads;
 
                 if(longOptionName == "populationSize") argument >> this->populationSize;
                 if(longOptionName == "mutation") argument >> this->mutation;
@@ -237,6 +242,7 @@ namespace GeneticVision {
         this->minDepth = root.get("minDepth", this->minDepth).asInt();
         this->maxDepth = root.get("maxDepth", this->maxDepth).asInt();
         this->maxGenerations = root.get("maxGenerations", this->maxGenerations).asInt();
+        this->numOfThreads = root.get("numOfThreads", this->numOfThreads).asInt();
         this->saveResultImages = root.get("saveResultImages",this->saveResultImages).asBool();
         this->testEnabled = root.get("test",this->testEnabled).asBool();
         this->evolveEnabled = root.get("evolve",this->evolveEnabled).asBool();
@@ -259,7 +265,9 @@ namespace GeneticVision {
         return str;
     }
 
+
     void AppConfig::printToStdOut() {
 
     }
+
 }
