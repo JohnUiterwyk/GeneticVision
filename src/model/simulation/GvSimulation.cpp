@@ -25,6 +25,7 @@
 #include "../../rmitgp/GPConfig.h"
 #include "../../rmitgp/Population.h"
 #include "../../rmitgp/ProgramGenerator.h"
+#include "functions/ImageFilter2D.h"
 
 namespace GeneticVision
 {
@@ -48,6 +49,7 @@ namespace GeneticVision
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageInvert::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageErode::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageSobel::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageFilter2D::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
