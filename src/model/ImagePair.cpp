@@ -20,7 +20,7 @@ void ImagePair::loadTargetImage(const std::string &imagePath)
 {
     this->targetImagePath = imagePath;
     this->targetImage = cv::imread(imagePath, CV_LOAD_IMAGE_GRAYSCALE );
-    this->targetImage = this->targetImage > 127; // force all pixels to be 0 or 255,
+    //this->targetImage = this->targetImage > 127; // force all pixels to be 0 or 255,
 }
 void ImagePair::setResultImage(cv::Mat & mat) {
     this->resultImage = mat;
