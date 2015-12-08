@@ -1,9 +1,9 @@
 {
   "maxGenerations":3000,
-  "populationSize": 300,
+  "populationSize": 100,
   "mutation":0.3,
   "crossover":0.69,
-  "elitism":0.001,
+  "elitism":0.01,
   "minDepth": 2,
   "maxDepth":5,
   "targetFitness":0.01,

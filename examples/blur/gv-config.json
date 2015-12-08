@@ -9,8 +9,8 @@
   "targetFitness":0.01,
   "logFrequency":10,
   "outputPath":"output/",
-  "saveResultImages": true,
+  "saveResultImages": false,
   "images":"./",
-  "test":true,
+  "test":false,
   "evolve":true
 }
