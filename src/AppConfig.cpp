@@ -35,6 +35,7 @@ namespace GeneticVision {
             loadPopulationEnabled(false),
             rootPath("./"),
             outputPath("output/"),
+            runOutputPath("output/current-run"),
             popFilesPath( "output/populations/"),
             imagesOutputPath("output/images/"),
             runLogPath("output/output.log"),
@@ -270,6 +271,9 @@ namespace GeneticVision {
 
 
     void AppConfig::printToStdOut() {
+
+    }
+    void AppConfig::saveToFile(string filename) {
 
     }
 

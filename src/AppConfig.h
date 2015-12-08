@@ -61,6 +61,8 @@ namespace GeneticVision
         void setupOutputDirectories();
         string getTimestampString();
         void printToStdOut();
+        void saveToFile(string filename);
+
 
 
 
@@ -95,6 +97,9 @@ namespace GeneticVision
         }
         ImagePairCollection & getTrainPairs()  {
             return this->trainPairs;
+        }
+        ImagePairCollection & getTestPairs()  {
+            return this->testPairs;
         }
         const string getRunLogPath() const {
             return runLogPath;
