@@ -31,6 +31,9 @@ namespace GeneticVision
         int maxDepth;
         double targetFitness;
 
+        double trainTestSplit;
+        double trainTestSeed;
+
         string runLogPath;
 
         int logFrequency;
@@ -143,6 +146,13 @@ namespace GeneticVision
 
          int getNumOfThreads() const {
             return numOfThreads;
+        }
+        double  getTrainTestSplit() const{
+            return trainTestSplit;
+        }
+
+        int getTrainTestSeed() const{
+            return trainTestSeed;
         }
     };
 
