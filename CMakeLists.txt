@@ -37,6 +37,9 @@ set(SOURCE_FILES
         src/model/simulation/terminals/RandDouble.cpp src/model/simulation/terminals/RandDouble.h
         src/model/simulation/terminals/ImageInput.cpp src/model/simulation/terminals/ImageInput.h
         src/model/simulation/functions/PlusDouble.cpp src/model/simulation/functions/PlusDouble.h
+        src/model/simulation/functions/MinusDouble.cpp src/model/simulation/functions/MinusDouble.h
+        src/model/simulation/functions/DivideDouble.cpp src/model/simulation/functions/DivideDouble.h
+        src/model/simulation/functions/MultDouble.cpp src/model/simulation/functions/MultDouble.h
         src/model/simulation/VisionFitness.cpp src/model/simulation/VisionFitness.h
         src/model/simulation/functions/ImageGaussianBlur.cpp src/model/simulation/functions/ImageGaussianBlur.h
         src/model/simulation/functions/TFunction.h
