@@ -4,7 +4,9 @@
 
 #include <iostream>
 #include <dirent.h>
+#include <random>
 #include "ImagePairCollection.h"
+#include <chrono>
 
 using namespace std;
 namespace GeneticVision
@@ -135,5 +137,46 @@ namespace GeneticVision
         cout << "Loaded " << count << " image pairs from the directory: " << directoryPath << endl;
         return (int)count;
 
+    }
+
+
+    int ImagePairCollection::getTrainTestSplit(vector<ImagePair> &trainVector,
+                                               vector<ImagePair> &testVector, double split, int seed) {
+
+        vector<ImagePair> fullVector = this->collection;
+
+        auto engine = std::default_random_engine{};
+        if(seed == -1)
+        {
+            seed = std::chrono::system_clock::now().time_since_epoch().count();
+        }
+        engine.seed(seed);
+        std::shuffle(std::begin(fullVector), std::end(fullVector), engine);
+
+        int splitIndex = (int) ((double) fullVector.size() * split);
+
+        ImagePair testPair;
+        for (std::vector<ImagePair>::size_type i = 0; i != fullVector.size(); i++)
+        {
+
+            if (i < splitIndex) {
+                trainVector.push_back(fullVector.at(i));
+
+            } else {
+                testVector.push_back(fullVector.at(i));
+            }
+        }
+        cout << "Train (" << trainVector.size() << "): ";
+        for (std::vector<ImagePair>::size_type i = 0; i != trainVector.size(); i++) {
+            cout << trainVector.at(i).getFilenameKey() << ", ";
+        }
+        cout << endl;
+        cout << "Test (" << testVector.size() << "): ";
+        for (std::vector<ImagePair>::size_type i = 0; i != testVector.size(); i++)
+        {
+            cout << testVector.at(i).getFilenameKey() << ", ";
+        }
+        cout << endl;
+        return 0;
     }
 }

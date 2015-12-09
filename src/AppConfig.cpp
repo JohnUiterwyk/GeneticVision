@@ -43,7 +43,7 @@ namespace GeneticVision {
             testEnabled(false),
             logFrequency(20),
             trainTestSplit(0.8),
-            trainTestSeed(0)
+            trainTestSeed(-1)
     {
         numOfThreads = std::thread::hardware_concurrency() * 2;
         if(numOfThreads < 1) numOfThreads = 1;
@@ -250,7 +250,7 @@ namespace GeneticVision {
         this->evolveEnabled = root.get("evolve",this->evolveEnabled).asBool();
         this->targetFitness = root.get("targetFitness",this->targetFitness).asDouble();
         this->trainTestSplit = root.get("trainTestSplit",this->trainTestSplit).asDouble();
-        this->trainTestSeed = root.get("trainTestSeed",this->trainTestSeed).asDouble();
+        this->trainTestSeed = root.get("trainTestSeed",this->trainTestSeed).asInt();
 
     }
 

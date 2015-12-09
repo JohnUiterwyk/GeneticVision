@@ -32,7 +32,7 @@ namespace GeneticVision
         double targetFitness;
 
         double trainTestSplit;
-        double trainTestSeed;
+        int trainTestSeed;
 
         string runLogPath;
 

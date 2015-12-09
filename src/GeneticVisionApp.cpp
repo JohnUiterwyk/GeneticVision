@@ -23,6 +23,9 @@ namespace GeneticVision
             exit(1);
         }
 
+//        vector<ImagePair> testVector, trainVector;
+//        this->appConfig.getTrainPairs().getTrainTestSplit(testVector,trainVector,this->appConfig.getTrainTestSplit(),this->appConfig.getTrainTestSeed());
+
         this->gvSimulation = new GvSimulation(&this->appConfig);
         this->view = new ViewController(&this->appConfig);
 
