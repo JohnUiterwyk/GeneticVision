@@ -9,8 +9,11 @@ This application utilises the following libraries:
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
 Version 1.2 Release Notes
-- Added multi-threading
+- Added multi-threading and --numOfThreads option
 - Updated to C++11 (n.b. gcc 4.9+ and Cmake 3.1+ are required now)
+- Filename of outputted images now zero fills the generation id portion of the file name
+- Bug fixes and other minor improvements
+- Added more examples
 
 Version 1.1 Release Notes  
 - Added [test flag](#test) flag which enables performance stats and color annotated result images
@@ -271,10 +274,13 @@ The frequency of image writing is determined by the logFrequency option. The fil
 Image files will be written to the `images/` directory in the output directory. If the `--test` flag is used images images
 will include the performance coloration.
 
-Command line usage: `--saveResultImages`  
-Config file usage: `"saveResultImages": true`  
-Option argument type: _true | false_   
-Default: false
+### Number of threads
+GeneticVision supports multithreading.
+
+Command line usage: `--numOfThreads`
+Config file usage: `"numOfThreads": 16`
+Option argument type: _integer_
+Default: 2 x number reported by std::thread::hardware_concurrency.
 
 ### Load Population File
 Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population 
