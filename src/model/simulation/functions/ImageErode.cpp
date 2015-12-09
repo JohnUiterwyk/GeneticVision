@@ -34,8 +34,8 @@ void ImageErode::evaluate_impl(ReturnData *out)
     cv::Mat element;
     cv::Mat result;
     cv::Mat input = arg0.getData();
-    int erosion_size = (int)(arg1.getData()*21)%21+1;
-    int erosion_type = (int)(arg2.getData()*3)%3;
+    int erosion_size = abs((int)(arg1.getData()*21)%21+1);
+    int erosion_type = abs((int)(arg2.getData()*3)%3);
     if( erosion_type == 0){ erosion_type = cv::MORPH_RECT; }
     else if( erosion_type == 1 ){ erosion_type = cv::MORPH_CROSS; }
     else if( erosion_type == 2) { erosion_type = cv::MORPH_ELLIPSE; }

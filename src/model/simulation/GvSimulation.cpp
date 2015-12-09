@@ -56,6 +56,7 @@ namespace GeneticVision
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, MinusDouble::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, DivideDouble::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, MultDouble::generate);
 
