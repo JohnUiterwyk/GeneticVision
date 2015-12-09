@@ -33,8 +33,8 @@ void ImageSobel::evaluate_impl(ReturnData *out)
 
     cv::Mat result;
     cv::Mat input = arg0.getData();
-    int x = (int)(arg1.getData()*2) % 2+1;
-    int y = (int)(arg2.getData()*2) % 2+1;
+    int x = abs((int)(arg1.getData()*2) % 2)+1;
+    int y = abs((int)(arg2.getData()*2) % 2)+1;
 
     cv::Sobel(input, result, CV_8U, x, y);
 

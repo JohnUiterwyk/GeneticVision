@@ -23,19 +23,26 @@ namespace GeneticVision
             exit(1);
         }
 
+//        vector<ImagePair> testVector, trainVector;
+//        this->appConfig.getTrainPairs().getTrainTestSplit(testVector,trainVector,this->appConfig.getTrainTestSplit(),this->appConfig.getTrainTestSeed());
+
         this->gvSimulation = new GvSimulation(&this->appConfig);
         this->view = new ViewController(&this->appConfig);
 
 
 
         RunResult runResult;
+        runResult = this->gvSimulation->getRunResult();
+        runResult.testPerformance(this->appConfig.getTrainPairs().getVector());
+        this->view->update(&runResult);
+        
         if(this->appConfig.isEvolveEnabled())
         {
             do
             {
                 runResult = this->gvSimulation->tick(this->appConfig.getLogFrequency());
                 if (this->appConfig.isTestEnabled()) {
-                    runResult.testPerformance(this->appConfig.getTrainPairs().getCollection());
+                    runResult.testPerformance(this->appConfig.getTrainPairs().getVector());
                 }
                 this->view->update(&runResult);
 
@@ -49,7 +56,7 @@ namespace GeneticVision
         else if (this->appConfig.isTestEnabled())
         {
             runResult = this->gvSimulation->getRunResult();
-            runResult.testPerformance(this->appConfig.getTrainPairs().getCollection());
+            runResult.testPerformance(this->appConfig.getTrainPairs().getVector());
             this->view->update(&runResult);
 
             #ifdef CV_HIGHGUI_ENABLED

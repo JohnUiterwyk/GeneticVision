@@ -3,6 +3,7 @@
 //
 
 #include <opencv2/highgui/highgui.hpp>
+#include <iomanip>
 #include "ImageWriter.h"
 namespace GeneticVision
 {
@@ -29,7 +30,7 @@ namespace GeneticVision
                 for ( std::map<string,cv::Mat>::iterator it=runResult->performanceImagesMap.begin() ; it != runResult->performanceImagesMap.end(); ++it )
                 {
                     std::stringstream writePath;
-                    writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << ".png";
+                    writePath << this->outputDirectory << it->first << "-gen-" << setfill('0') << setw(6) << runResult->generationId << ".png";
                     cv::imwrite(writePath.str(),it->second);
                 }
 
@@ -38,7 +39,7 @@ namespace GeneticVision
                 for ( std::map<string,cv::Mat>::iterator it=runResult->resultImagesMap.begin() ; it != runResult->resultImagesMap.end(); ++it )
                 {
                     std::stringstream writePath;
-                    writePath << this->outputDirectory << it->first << "-gen-" << runResult->generationId << ".png";
+                    writePath << this->outputDirectory << it->first << "-gen-" << setfill('0') << setw(6) << runResult->generationId << ".png";
                     cv::imwrite(writePath.str(),it->second);
                 }
             }

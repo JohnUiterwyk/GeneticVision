@@ -6,12 +6,14 @@
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
 #include <math.h>
+#include <thread>
 
 
-VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness) : Fitness(conf)
+VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness, int numOfThreads) : Fitness(conf)
 {
+    this->imagePairs = &imagePairCollection.getVector();
     this->targetFitness = targetFitness;
-    this->imagePairs = &imagePairCollection.getCollection();
+    this->numOfThreads = numOfThreads;
 }
 
 VisionFitness::~VisionFitness() { }
@@ -19,55 +21,80 @@ VisionFitness::~VisionFitness() { }
 void VisionFitness::initFitness()
 {
 }
+
 void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
 {
-
-    int i;
-
-    for(i=0; i<popSize; i++)
-    {
-
-        this->evaluateProgram(pop[i]);
+    int batchSize = popSize/this->numOfThreads;
+    if(popSize % this->numOfThreads != 0){
+        batchSize +=1;
     }
-}
 
-void VisionFitness::evaluateProgram(GeneticProgram* prog)
-{
-    ReturnImage returnImage;
+    double weight = 1/(double)this->imagePairs->size();
+
+    // reset fitness
+    for(int i=0; i<popSize; i++)
+    {
+        pop[i]->setFitness(0);
+    }
+
     ImagePair * testPair;
-    double score = 0;
-    int size = this->imagePairs->at(0).getSourceImage().cols * this->imagePairs->at(0).getSourceImage().rows;
+    std::vector<std::thread> threads;
 
-
-    prog->setFitness(0.0);
     for(std::vector<ImagePair>::size_type i = 0; i != this->imagePairs->size(); i++)
     {
+        int batchStart = 0;
+        int batchEnd = 0;
+
+        //setup the image to test
         testPair = &(this->imagePairs->at(i));
         ImageInput::setValue(testPair->getSourceImage());
-        prog->evaluate(&returnImage);
+        cv::Mat targetImage = testPair->getTargetImage();
 
-        // measure difference between result image and truth
-        cv::Mat diff_mat;
-        cv::compare(testPair->getTargetImage(), returnImage.getData(), diff_mat, cv::CMP_EQ);
-        int nonzero = cv::countNonZero(diff_mat);
+        for(int j=0; j<this->numOfThreads; j++) {
 
-        // this is the number correct pixels divided by total number of pixels
-        // added to the total score so far
-        score += 100* (size - (double)nonzero)/size;
+            if (batchStart >= popSize) {
+                break;//this shouldnt happen;
+            }
+            batchEnd  = std::min(batchStart+batchSize-1, popSize-1);
+
+            // create a thread to evaluate a batch of the population using the current image
+            // this uses a lambda function approach
+            auto evalBatch = [pop, batchStart, batchEnd, weight, targetImage](){
+                for(int k=batchStart; k<=batchEnd; k++)
+                {
+                    GeneticProgram * prog = pop[k];
+                    ReturnImage returnImage;
+                    double score = 0;
+                    int totalPixelCount = targetImage.cols * targetImage.rows;
+                    prog->evaluate(&returnImage);
+
+                    // measure difference between result image and truth
+                    cv::Mat diff_mat;
+                    cv::compare(targetImage, returnImage.getData(), diff_mat, cv::CMP_EQ);
+                    double equalPixelCount = cv::countNonZero(diff_mat);
+
+                    // this is the number correct pixels divided by total number of pixels
+                    // added to the total score so far
+                    score = (100* (totalPixelCount - equalPixelCount)/totalPixelCount) * weight;
+                    prog->setFitness(prog->getFitness()+score);
+
+                }
+            };
+            threads.push_back(std::thread(evalBatch));
+            batchStart = batchEnd + 1;
+
+        }
+
+        for(std::vector<std::thread>::size_type i = 0; i != threads.size(); i++)
+        {
+            threads.at(i).join();
+        }
+        threads.clear();
+
     }
 
-    // Idea for improving fitness:
-    // use an ensemble for fitness from best X of past generations;  add Mats , then use threshold of n/2
-    // also use boosting: keep a running weight for each image.
-    // decrease  weight of correctly classified examples.
-    // Then use that weight when calculating fitness of next generation
-    // Also, make this a setting in the config for fitness function
-    //
-    // current approach:
-    // average the score from all result images
-    prog->setFitness((double)(score/(double)(this->imagePairs->size())));
-
 }
+
 
 std::map<std::string, cv::Mat> VisionFitness::getResultImages(GeneticProgram* prog)
 {

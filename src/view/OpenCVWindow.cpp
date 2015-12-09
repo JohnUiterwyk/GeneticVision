@@ -37,7 +37,7 @@ void OpenCVWindow::showImage(_InputArray const &inputArray) {
 
 void OpenCVWindow::showImages(std::vector<Mat> & imageVector) {
 
-    cv::Mat buffer = this->makeCanvas(imageVector,400,2);
+    cv::Mat buffer = this->makeCanvas(imageVector,600,5);
     imshow(this->window_name,buffer);
     cv::Size size = buffer.size();
     this->setSize(size.width,size.height);
@@ -47,7 +47,7 @@ void OpenCVWindow::showImages(std::vector<Mat> & imageVector) {
 
 cv::Mat OpenCVWindow::makeCanvas(std::vector<cv::Mat>& vecMat, int windowHeight, int nRows) {
     int N = vecMat.size();
-    if(N > 10) N = 10; //set a max number to show
+    //if(N > 10) N = 10; //set a max number to show
     nRows  = nRows > N ? N : nRows;
     int edgeThickness = 10;
     int imagesPerRow = (int) ceil(double(N) / nRows);

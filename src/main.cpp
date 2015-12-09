@@ -1,4 +1,9 @@
+//
+// Created by John Uiterwyk on 6/4/15.
+//
+
 #include <iostream>
+#include <thread>
 #include "GeneticVisionApp.h"
 
 using namespace std;
@@ -9,7 +14,17 @@ int main( int argc, char** argv )
 //    double readTime = (double)getTickCount();
 //    readTime = ((double)getTickCount() - readTime)/getTickFrequency();
 
-    /// Load the source image
+
+    std::cout << endl;
+    std::cout << "################################################" << endl;
+    std::cout << "#                GENENTIC VISION               #" << endl;
+    std::cout << "################################################" << endl;
+    std::cout << endl;
+
+    unsigned int n = std::thread::hardware_concurrency();
+    std::cout << "This hardware supports " << n << " concurrent threads.\n";
+
+    /// check for some arguments
     if(argc == 1)
     {
         cerr << "Error: No config file or options specified" << endl;

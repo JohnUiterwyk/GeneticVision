@@ -1,0 +1,16 @@
+{
+  "maxGenerations":3000,
+  "populationSize": 100,
+  "mutation":0.28,
+  "crossover":0.70,
+  "elitism":0.02,
+  "minDepth": 2,
+  "maxDepth":5,
+  "targetFitness":0.01,
+  "logFrequency":10,
+  "outputPath":"output/",
+  "saveResultImages": false,
+  "images":"./",
+  "test":false,
+  "evolve":true
+}

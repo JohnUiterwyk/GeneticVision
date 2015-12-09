@@ -16,6 +16,9 @@
 #include "functions/ImageErode.h"
 #include "functions/ImageSobel.h"
 #include "functions/PlusDouble.h"
+#include "functions/MinusDouble.h"
+#include "functions/DivideDouble.h"
+#include "functions/MultDouble.h"
 #include "functions/Mean.h"
 #include "functions/StdDev.h"
 
@@ -25,6 +28,7 @@
 #include "../../rmitgp/GPConfig.h"
 #include "../../rmitgp/Population.h"
 #include "../../rmitgp/ProgramGenerator.h"
+#include "functions/ImageFilter2D.h"
 
 namespace GeneticVision
 {
@@ -48,14 +52,18 @@ namespace GeneticVision
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageInvert::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageErode::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageSobel::generate);
+//        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageFilter2D::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
+//        this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, MinusDouble::generate);
+//        this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, DivideDouble::generate);
+//        this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, MultDouble::generate);
 
 
 
         //Set the fitness class to be used
-        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness());
+        this->runConfig->fitnessObject = new VisionFitness(this->runConfig, appConfig->getTrainPairs(), appConfig->getTargetFitness(), appConfig->getNumOfThreads());
 
         //Initialise the fitness
         this->runConfig->fitnessObject->initFitness();
@@ -123,11 +131,11 @@ namespace GeneticVision
             //init the population
             this->pop->generateInitialPopulation();
             //pseudo disable built int logging
-            this->pop->setLogFrequency(appConfig->getLogFrequency());
         }
 
         if(appConfig->isEvolveEnabled())
         {
+            this->pop->setLogFrequency(appConfig->getLogFrequency());
             this->pop->writeToFile();
         }
     //    //clean up
@@ -159,7 +167,7 @@ namespace GeneticVision
     RunResult GvSimulation::testBest()
     {
         RunResult result = this->getRunResult();
-        result.testPerformance(appConfig->getTrainPairs().getCollection());
+        result.testPerformance(appConfig->getTrainPairs().getVector());
         return result;
     }
 

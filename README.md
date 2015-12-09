@@ -8,6 +8,13 @@ This application utilises the following libraries:
 - [OpenCV](http://opencv.org) - an open source computer vision library
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - a json library
 
+Version 1.2 Release Notes
+- Added multi-threading and --numOfThreads option
+- Updated to C++11 (n.b. gcc 4.9+ and Cmake 3.1+ are required now)
+- Filename of outputted images now zero fills the generation id portion of the file name
+- Bug fixes and other minor improvements
+- Added more examples
+
 Version 1.1 Release Notes  
 - Added [test flag](#test) flag which enables performance stats and color annotated result images
 - Runs now create a timestamped directory in the [output folder](#output)
@@ -54,7 +61,8 @@ The application has been tested on OS X 10.10, CentOS 6.3, and Amazon Linux AMI 
 
 ## Prerequisites
 - OpenCV 2.4.x  
-- CMake 2.8+
+- CMake 3.1+
+- GCC 4.9+
 
 ## Downloading
 You can download a [zip of the the latest version of GeneticVision from github](https://github.com/JohnUiterwyk/genetic-vision/archive/master.zip)
@@ -262,14 +270,17 @@ Default: `output/`
 
 ### Save Result Images
 If this option is enabled, every X generations, an image will be written to disk for each image pair in the training set. 
-The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-1.png`. 
+The frequency of image writing is determined by the logFrequency option. The file pattern will be `filenamekey-gen-000001.png`.
 Image files will be written to the `images/` directory in the output directory. If the `--test` flag is used images images
 will include the performance coloration.
 
-Command line usage: `--saveResultImages`  
-Config file usage: `"saveResultImages": true`  
-Option argument type: _true | false_   
-Default: false
+### Number of threads
+GeneticVision supports multithreading.
+
+Command line usage: `--numOfThreads`
+Config file usage: `"numOfThreads": 16`
+Option argument type: _integer_
+Default: 2 x number reported by std::thread::hardware_concurrency.
 
 ### Load Population File
 Load a population from a *.gen file. The value for this option should be the path to the gen file. Loading a population 
@@ -312,6 +323,7 @@ The basic process for compiling GeneticVision is as follows:
 requires that OpenCV has been installed correctly.
 - Clone the GeneticVision project from the GitHub repo
 - Compile the project using CMake 2.8 or higher
+- Optional: You may need to set the path to a newer version of gcc if you are having issues compiling. You can do this by `$ export CXX=path/to/g++`
 - Prep a directory of images with proper naming conventions.
 - Execute an evolution run using the compiled binary and the prepared images
 

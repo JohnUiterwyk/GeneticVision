@@ -21,6 +21,7 @@ namespace GeneticVision
         bool evolveEnabled;
         bool testEnabled;
         int maxGenerations;
+        int numOfThreads;
 
         int populationSize;
         double mutation;
@@ -29,6 +30,9 @@ namespace GeneticVision
         int minDepth;
         int maxDepth;
         double targetFitness;
+
+        double trainTestSplit;
+        int trainTestSeed;
 
         string runLogPath;
 
@@ -57,6 +61,8 @@ namespace GeneticVision
         void setupOutputDirectories();
         string getTimestampString();
         void printToStdOut();
+        void saveToFile(string filename);
+
 
 
 
@@ -91,6 +97,9 @@ namespace GeneticVision
         }
         ImagePairCollection & getTrainPairs()  {
             return this->trainPairs;
+        }
+        ImagePairCollection & getTestPairs()  {
+            return this->testPairs;
         }
         const string getRunLogPath() const {
             return runLogPath;
@@ -140,6 +149,16 @@ namespace GeneticVision
         }
 
 
+         int getNumOfThreads() const {
+            return numOfThreads;
+        }
+        double  getTrainTestSplit() const{
+            return trainTestSplit;
+        }
+
+        int getTrainTestSeed() const{
+            return trainTestSeed;
+        }
     };
 
 }

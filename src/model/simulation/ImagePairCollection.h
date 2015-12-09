@@ -24,14 +24,17 @@ namespace GeneticVision
 
         string getImagKey(string &filename);
 
+        int getTrainTestSplit(vector<ImagePair> &trainVector, vector<ImagePair> &testVector, double split, int seed);
+        void addPair(ImagePair pair);
         int loadFromJson(const Json::Value &images, string & rootPath);
 
         int loadFromDirectory(string directoryPath);
 
-        vector<ImagePair> &getCollection() { return collection; }
+        vector<ImagePair> &getVector() { return collection; }
         map<string, ImagePair> &getMap() { return imagePairMap; }
 
         unsigned long size(){ return collection.size(); }
+
 
     private:
         vector<ImagePair > collection;

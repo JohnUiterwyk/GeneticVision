@@ -17,13 +17,14 @@ class VisionFitness : public Fitness
 {
     private:
     double targetFitness;
+    int numOfThreads;
     vector<ImagePair> * imagePairs;
 
 
     public:
 
     //Constructor
-    VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness );
+    VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness, int numOfThreads );
     virtual ~VisionFitness();
     virtual void initFitness();
     virtual void assignFitness(GeneticProgram* pop[], int popSize);
@@ -38,6 +39,7 @@ class VisionFitness : public Fitness
     void evaluateProgram(GeneticProgram* prog);
     std::map<std::string, cv::Mat> getResultImages(GeneticProgram* prog);
     void setTargetFitness(double target);
+    void scoreCurrentImage(GeneticProgram *pop[], int batchStart, int batchEnd, double weight, cv::Mat targetImage);
 };
 
 #endif //GENETICVISION_FITNESS_H
