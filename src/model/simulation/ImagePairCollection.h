@@ -28,10 +28,11 @@ namespace GeneticVision
 
         int loadFromDirectory(string directoryPath);
 
-        vector<ImagePair> &getCollection() { return collection; }
+        vector<ImagePair> &getVector() { return collection; }
         map<string, ImagePair> &getMap() { return imagePairMap; }
 
         unsigned long size(){ return collection.size(); }
+
 
     private:
         vector<ImagePair > collection;

@@ -161,7 +161,7 @@ namespace GeneticVision
     RunResult GvSimulation::testBest()
     {
         RunResult result = this->getRunResult();
-        result.testPerformance(appConfig->getTrainPairs().getCollection());
+        result.testPerformance(appConfig->getTrainPairs().getVector());
         return result;
     }
 

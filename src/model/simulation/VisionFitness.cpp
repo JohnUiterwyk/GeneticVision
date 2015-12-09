@@ -11,7 +11,7 @@
 
 VisionFitness::VisionFitness(GPConfig *conf, GeneticVision::ImagePairCollection & imagePairCollection, double targetFitness, int numOfThreads) : Fitness(conf)
 {
-    this->imagePairs = &imagePairCollection.getCollection();
+    this->imagePairs = &imagePairCollection.getVector();
     this->targetFitness = targetFitness;
     this->numOfThreads = numOfThreads;
 }
