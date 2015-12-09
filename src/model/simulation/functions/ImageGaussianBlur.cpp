@@ -65,8 +65,8 @@ void ImageGaussianBlur::evaluate(ReturnData *out)
 
     //and now do some MAGIC!!
 
-    int x = (int)(returnDouble1.getData()*100) % 100 * 2+ 1;
-    int y = (int)(returnDouble2.getData()*100) % 100 * 2+ 1;
+    int x = abs((int)(returnDouble1.getData()*100) % 100 * 2+ 1);
+    int y = abs((int)(returnDouble2.getData()*100) % 100 * 2+ 1);
     cv::Mat result;
     cv::GaussianBlur(returnImage.getData(), result, cv::Size(x, y), 0, 0);
 
