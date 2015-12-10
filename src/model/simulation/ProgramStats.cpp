@@ -15,13 +15,13 @@ falsePositiveCount(0),
 trueNegativeCount(0),
 falseNegativeCount(0)
 { }
-double ProgramStats::getAccuracy(float truePositiveWeight , float trueNegativeWeight ) {
+double ProgramStats::getAccuracy(double truePositiveWeight , double trueNegativeWeight ) {
 
     return (truePositiveCount*truePositiveWeight + trueNegativeCount* trueNegativeWeight) / (positivePixels* truePositiveWeight + negativePixels* trueNegativeWeight);
 }
 
 
-double ProgramStats::getErrorRate(float truePositiveWeight, float trueNegativeWeight) {
+double ProgramStats::getErrorRate(double truePositiveWeight, double trueNegativeWeight) {
     return 1 - getAccuracy(truePositiveWeight,trueNegativeWeight);
 }
 
@@ -47,7 +47,7 @@ double ProgramStats::getFalseNegativeRate() {
 double ProgramStats::getTotalPixelCount() {
     return (positivePixels + negativePixels);
 }
-void ProgramStats::add(ProgramStats & statsToAdd, float weight)
+void ProgramStats::add(ProgramStats & statsToAdd, double weight)
 {
     this->positivePixels += statsToAdd.positivePixels * weight;
     this->negativePixels += statsToAdd.negativePixels* weight;
@@ -61,6 +61,7 @@ string ProgramStats::toString()
     std::stringstream stringstream;
     stringstream << "Accuracy: " << getAccuracy() << endl;
     stringstream << "Error Rate: " << getErrorRate() << endl;
+    stringstream << "Normalised Error Rate: " << getNormalisedErrorRate() << endl;
     stringstream << "True Positive Rate: " << getTruePositiveRate() << endl;
     stringstream << "False Positive Rate: " << getFalsePositiveRate() << endl;
     stringstream << "True Negative Rate: " << getTrueNegativeRate() << endl;

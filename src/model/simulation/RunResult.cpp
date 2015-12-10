@@ -4,6 +4,7 @@
 
 #include "RunResult.h"
 #include <sstream>
+#include <iostream>
 
 RunResult::RunResult()
 {
@@ -60,10 +61,12 @@ void RunResult::testPerformance(std::vector<ImagePair> &imagePairs )
                         stats.negativePixels  = cv::countNonZero(targetImage);
 
                         stats.truePositiveCount = cv::countNonZero(truePos);
-                        stats.falsePositiveCount = cv::countNonZero(falsePos);
                         stats.trueNegativeCount = cv::countNonZero(trueNeg);
+                        stats.falsePositiveCount = cv::countNonZero(falsePos);
                         stats.falseNegativeCount = cv::countNonZero(falseNeg);
-                        statAverage.add(stats);
+                        statAverage.add(stats, 1/(double)imagePairs.size());
+                } else{
+                        std::cout << "Couldnt find key" << endl;
                 }
         }
 };

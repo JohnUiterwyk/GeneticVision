@@ -17,8 +17,8 @@ public:
     double trueNegativeCount;
     double falseNegativeCount;
 
-    double getAccuracy(float truePositiveWeight = 1, float trueNegativeWeight = 1);
-    double getErrorRate(float truePositiveWeight = 1, float trueNegativeWeight = 1);
+    double getAccuracy(double truePositiveWeight = 1, double trueNegativeWeight = 1);
+    double getErrorRate(double truePositiveWeight = 1, double trueNegativeWeight = 1);
     double getTruePositiveRate();
     double getTrueNegativeRate();
     double getFalsePositiveRate();
@@ -27,7 +27,7 @@ public:
     double getTotalPixelCount();
 
 
-    void add(ProgramStats & statsToAdd, float weight = 1);
+    void add(ProgramStats & statsToAdd, double weight = 1);
     string toString();
 };
 
