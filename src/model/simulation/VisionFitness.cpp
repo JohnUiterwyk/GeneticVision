@@ -5,6 +5,7 @@
 #include "VisionFitness.h"
 #include "types/ReturnImage.h"
 #include "terminals/ImageInput.h"
+#include "ProgramStats.h"
 #include <math.h>
 #include <thread>
 
@@ -68,15 +69,28 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
                     int totalPixelCount = targetImage.cols * targetImage.rows;
                     prog->evaluate(&returnImage);
 
-                    // measure difference between result image and truth
-                    cv::Mat diff_mat;
-                    cv::compare(targetImage, returnImage.getData(), diff_mat, cv::CMP_EQ);
-                    double equalPixelCount = cv::countNonZero(diff_mat);
+                    cv::Mat  trueNeg,  truePos, correct;
+                    cv::compare(targetImage, returnImage.getData(), correct, cv::CMP_EQ);
+
+                    //apply mask of negative pixels
+                    cv::bitwise_and(correct,targetImage,trueNeg);
+
+                    // we use the inverse of
+                    cv::bitwise_and(correct,255 - targetImage,truePos);
+
+                    ProgramStats stats;
+                    stats.positivePixels  = cv::countNonZero(255- targetImage);
+                    stats.negativePixels  = cv::countNonZero(targetImage);
+
+                    stats.truePositiveCount = cv::countNonZero(truePos);
+                    stats.trueNegativeCount = cv::countNonZero(trueNeg);
+                    stats.falsePositiveCount = stats.positivePixels - stats.truePositiveCount;
+                    stats.falseNegativeCount = stats.negativePixels - stats.trueNegativeCount;
+
 
                     // this is the number correct pixels divided by total number of pixels
                     // added to the total score so far
-                    score = (100* (totalPixelCount - equalPixelCount)/totalPixelCount) * weight;
-                    prog->setFitness(prog->getFitness()+score);
+                    prog->setFitness(prog->getFitness()+stats.getNormalisedErrorRate()* weight);
 
                 }
             };
@@ -144,3 +158,5 @@ double VisionFitness::best() {
 double VisionFitness::worst() {
     return DBL_MAX;
 }
+
+

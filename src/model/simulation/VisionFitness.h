@@ -11,6 +11,7 @@
 #include "../ImagePair.h"
 #include "../../view/OpenCVWindow.h"
 #include "ImagePairCollection.h"
+#include "ProgramStats.h"
 #include <map>
 
 class VisionFitness : public Fitness
@@ -40,6 +41,7 @@ class VisionFitness : public Fitness
     std::map<std::string, cv::Mat> getResultImages(GeneticProgram* prog);
     void setTargetFitness(double target);
     void scoreCurrentImage(GeneticProgram *pop[], int batchStart, int batchEnd, double weight, cv::Mat targetImage);
+
 };
 
 #endif //GENETICVISION_FITNESS_H

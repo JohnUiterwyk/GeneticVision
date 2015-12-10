@@ -15,40 +15,46 @@ falsePositiveCount(0),
 trueNegativeCount(0),
 falseNegativeCount(0)
 { }
-double ProgramStats::getAccuracy() {
+double ProgramStats::getAccuracy(float truePositiveWeight , float trueNegativeWeight ) {
 
-    return (truePositiveCount + trueNegativeCount) / (positivePixels + negativePixels);
+    return (truePositiveCount*truePositiveWeight + trueNegativeCount* trueNegativeWeight) / (positivePixels* truePositiveWeight + negativePixels* trueNegativeWeight);
 }
 
 
-double ProgramStats::getErrorRate() {
-    return (falsePositiveCount + falseNegativeCount)/(positivePixels + negativePixels);
+double ProgramStats::getErrorRate(float truePositiveWeight, float trueNegativeWeight) {
+    return 1 - getAccuracy(truePositiveWeight,trueNegativeWeight);
 }
 
+double ProgramStats::getNormalisedErrorRate()
+{
+    return 1 - (getTruePositiveRate() * 0.5 + getTrueNegativeRate() * 0.5);
+}
 double ProgramStats::getTruePositiveRate() {
-    return truePositiveCount/(truePositiveCount+falseNegativeCount);
+    return truePositiveCount/positivePixels;
 }
 
 double ProgramStats::getTrueNegativeRate() {
-    return trueNegativeCount/(trueNegativeCount+falsePositiveCount);
+    return trueNegativeCount/negativePixels;
 }
 
 double ProgramStats::getFalsePositiveRate() {
-    return falsePositiveCount/(falsePositiveCount+trueNegativeCount);
+    return falsePositiveCount/negativePixels;
 }
 
 double ProgramStats::getFalseNegativeRate() {
-    return falseNegativeCount/(truePositiveCount+falseNegativeCount);
+    return falseNegativeCount/positivePixels;
 }
-
-void ProgramStats::add(ProgramStats & statsToAdd)
+double ProgramStats::getTotalPixelCount() {
+    return (positivePixels + negativePixels);
+}
+void ProgramStats::add(ProgramStats & statsToAdd, float weight)
 {
-    this->positivePixels += statsToAdd.positivePixels;
-    this->negativePixels += statsToAdd.negativePixels;
-    this->truePositiveCount += statsToAdd.truePositiveCount;
-    this->falsePositiveCount += statsToAdd.falsePositiveCount;
-    this->trueNegativeCount += statsToAdd.trueNegativeCount;
-    this->falseNegativeCount += statsToAdd.falseNegativeCount;
+    this->positivePixels += statsToAdd.positivePixels * weight;
+    this->negativePixels += statsToAdd.negativePixels* weight;
+    this->truePositiveCount += statsToAdd.truePositiveCount* weight;
+    this->falsePositiveCount += statsToAdd.falsePositiveCount* weight;
+    this->trueNegativeCount += statsToAdd.trueNegativeCount* weight;
+    this->falseNegativeCount += statsToAdd.falseNegativeCount* weight;
 }
 string ProgramStats::toString()
 {

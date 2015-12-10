@@ -17,14 +17,17 @@ public:
     double trueNegativeCount;
     double falseNegativeCount;
 
-    double getAccuracy();
-    double getErrorRate();
+    double getAccuracy(float truePositiveWeight = 1, float trueNegativeWeight = 1);
+    double getErrorRate(float truePositiveWeight = 1, float trueNegativeWeight = 1);
     double getTruePositiveRate();
     double getTrueNegativeRate();
     double getFalsePositiveRate();
     double getFalseNegativeRate();
+    double getNormalisedErrorRate();
+    double getTotalPixelCount();
 
-    void add(ProgramStats & statsToAdd);
+
+    void add(ProgramStats & statsToAdd, float weight = 1);
     string toString();
 };
 
