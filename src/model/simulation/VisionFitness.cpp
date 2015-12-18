@@ -88,7 +88,7 @@ void VisionFitness::assignFitness(GeneticProgram *pop[], int popSize)
                     stats.falseNegativeCount = stats.negativePixels - stats.trueNegativeCount;
 
 
-                    // this is the number correct pixels divided by total number of pixels
+                    // this add the weighted image error rate
                     // added to the total score so far
                     prog->setFitness(prog->getFitness()+stats.getNormalisedErrorRate()* weight);
 

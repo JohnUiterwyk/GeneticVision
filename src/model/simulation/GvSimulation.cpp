@@ -21,6 +21,10 @@
 #include "functions/MultDouble.h"
 #include "functions/Mean.h"
 #include "functions/StdDev.h"
+#include "functions/CvMatrixAdd.h"
+#include "functions/CvMatrixSubtract.h"
+#include "functions/CvMatrixMultiplyScalar.h"
+#include "functions/CvMatrixDivideScalar.h"
 
 #include "terminals/RandDouble.h"
 #include "terminals/ImageInput.h"
@@ -55,6 +59,12 @@ namespace GeneticVision
         this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, ImageFilter2D::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, Mean::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, StdDev::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, CvMatrixAdd::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, CvMatrixSubtract::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, CvMatrixMultiplyScalar::generate);
+        this->runConfig->funcSet.addNodeToSet(ReturnImage::TYPENUM, CvMatrixDivideScalar::generate);
+
+
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, PlusDouble::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, MinusDouble::generate);
         this->runConfig->funcSet.addNodeToSet(ReturnDouble::TYPENUM, DivideDouble::generate);
