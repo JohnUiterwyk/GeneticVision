@@ -62,7 +62,7 @@ set(SOURCE_FILES
         src/model/simulation/functions/ImageFilter2D.cpp src/model/simulation/functions/ImageFilter2D.h
         src/model/simulation/functions/CvMatrixSubtract.cpp src/model/simulation/functions/CvMatrixSubtract.h
         src/model/simulation/functions/CvMatrixAdd.cpp src/model/simulation/functions/CvMatrixAdd.h
-        src/model/simulation/functions/CvMatrixMultiplyScalar.cpp src/model/simulation/functions/CvMatrixMultiplyScalar.h)
+        src/model/simulation/functions/CvMatrixMultiplyScalar.cpp src/model/simulation/functions/CvMatrixMultiplyScalar.h src/model/simulation/functions/CvMatrixDivideScalar.cpp src/model/simulation/functions/CvMatrixDivideScalar.h)
 add_executable(GeneticVision ${SOURCE_FILES} )
 
 # CV_HIGHGUI_ENABLED flag
